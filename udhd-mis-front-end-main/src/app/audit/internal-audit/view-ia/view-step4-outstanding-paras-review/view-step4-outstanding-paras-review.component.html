@@ -1,0 +1,126 @@
+<mat-card class="container-fluid" *ngIf="step4ObsReport$ | async as obs">
+  <div class="row header-row">
+    <span class="col-md">
+      <h3 class="header-info-view">Step 4 Audit Observations</h3>
+    </span>
+    <span class="col-md" style="text-align: right">
+      <!-- <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']" [disabled]="obs.active==false"
+              mat-stroked-button class="child-route-button" color="warn" (click)="confirmDelete()">
+                  <mat-icon>delete</mat-icon>
+              </button> -->
+
+    </span>
+    <hr>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <th>Id</th>
+      <th>Ia Id</th>
+      <th>Particulars of audit and date of report</th>
+      <th>Total no.of audit paras</th>
+      <th>Total no. of audit paras where necessary improvement/corrective measures required</th>
+      <th>Total no.of audit paras where recovery of cash is proposed</th>
+      <th>Total no. of audit paras where recovery has been made</th>
+      <th>Total amount of Recovery</th>
+      <th>Total no.of O/s para where no action has been taken</th>
+      <th>No. & date of compliance report</th>
+    </thead>
+    <tbody *ngFor="let auditObs of obs; let i=index">
+      <tr>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="auditObs.id" [disabled]="'true'">
+        </td>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="auditObs.iaId">
+        </td>
+        <td>
+          <textarea [disabled]="'true'" [value]="auditObs.auditParticularsWithDate" class="form-control" style="display: block;"></textarea>
+        </td>
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.totalNosOfAuditParas" name="totalNoOfAuditpara">
+        </td>
+
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.totalAuditParasWithCorrectiveActionReq">
+        </td>
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.totalAuditParasWithCashRecProposed">
+        </td>
+        <td>
+          <input [disabled]="'true'" id="totalNoOfAuditParaWhereRecoveryMade" [value]="auditObs.totalAuditParasWithCashRecMade">
+        </td>
+        <td>
+          <input [disabled]="'true'" id="totalNoOfRecovery" [value]="auditObs.totalAmtOfRecovery">
+        </td>
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.totalNosOfParasWithNoAction">
+        </td>
+        <td>
+          <textarea class="form-control" style="display: block;" [disabled]="'true'" type="text" [value]="auditObs.nosAndDateOfComplianceReport"></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>
+
+
+
+<mat-card class="container-fluid" *ngIf="step4ParaReport$ | async as auditPara">
+  <div class="row header-row">
+    <span class="col-md">
+      <h3 class="header-info-view">Step 4 Audit Para Report</h3>
+    </span>
+    <hr>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <th>Id</th>
+      <th>Ia Id</th>
+      <th>Audit Para No.</th>
+      <th>Heading of the audit para</th>
+      <th>Amount involved</th>
+      <th>Recovery proposed</th>
+      <th>Recovery Completed</th>
+      <th>Action Taken or Not</th>
+      <th>Attachment</th>
+    </thead>
+    <tbody *ngFor="let para of auditPara; let i=index">
+      <tr>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="para.id" [disabled]="'true'">
+        </td>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="para.iaId">
+        </td>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="para.auditParaNo" placeholder="Enter audit para number" class="form-control"
+            name="auditParaNo">
+        </td>
+        <td> <textarea [disabled]="'true'" type="text" name="description" id="auditParaPartDescription" class="form-control" style="display: block"
+            [value]="para.auditParaHeading" placeholder="Enter Description">
+</textarea>
+        </td>
+        <td>
+          <input [disabled]="'true'" type="number" [value]="para.amountInvolved" placeholder="Enter amount involved" class="form-control"
+            name="amountInvolved">
+        </td>
+        <td>
+          <input [disabled]="'true'" type="number" [value]="para.recoveryProposed" placeholder="Enter recovery proposed"
+            class="form-control" name="recoveryProposed">
+        </td>
+        <td>
+          <input [disabled]="'true'" type="number" [value]="para.recoveryCompleted" placeholder="Enter recovery completed"
+            class="form-control" name="recoveryCompleted">
+        </td>
+        <td>
+          <input [disabled]="'true'" class="form-control" name="action" [value]="para.actionStatus">
+        </td>
+        <td *ngIf="para.fileId" (click)="downloadFile(para.id)">
+          <mat-icon color="primary" style="cursor: pointer;">
+            download_for_offline</mat-icon>
+         <span *ngIf="!para.fileId">File Not Available</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>

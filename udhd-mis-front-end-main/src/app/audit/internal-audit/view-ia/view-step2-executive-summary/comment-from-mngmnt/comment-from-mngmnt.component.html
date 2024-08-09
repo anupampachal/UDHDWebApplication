@@ -1,0 +1,20 @@
+<form [formGroup]="commentMngmntForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend"> Comment From Management :</legend>
+    <div style="padding-left: 0; float: right;">
+      <span style="padding: 0">
+        <button (click)="downloadFile()" class="btn btn-primary btn-file pull-left">
+          <mat-icon>file_download</mat-icon>
+        </button>
+      </span>
+
+    </div>
+    <div class="form-group">
+      <label for="comment">
+      </label>
+      <textarea class="form-control" formControlName="comment" id="comment"></textarea>
+    </div>
+
+
+  </fieldset>
+</form>

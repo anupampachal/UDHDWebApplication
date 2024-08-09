@@ -1,0 +1,62 @@
+<form [formGroup]="acknowledgementForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+      <legend class="hm-legend">Opinion:</legend>
+
+      <div class="form-group">
+          <label for="opinion">
+              <h4> Overall Opinion of the Audit Team about the functioning of the Municipality :</h4>
+          </label><span class="danger">*</span>
+          <textarea class="form-control" name="opinion" formControlName="acknowledgement" id="opinion"></textarea>
+          <p class="danger">Maximum 10,000 characters. </p>
+      </div>
+      <div class="col-md-12" align="right">
+      <button class="btn btn-primary" type="button" *ngIf="acknowledgementForm.disabled" (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+
+          <button type="button" class="btn btn-primary create-btn" [disabled]="!acknowledgementForm.valid"
+              (click)="onSubmit()">
+              Save</button>
+
+      </div>
+  </fieldset>
+</form>
+
+
+
+
+
+
+<!--
+
+
+<h4>Opinion :</h4>
+Overall Opinion of the Audit Team about the functioning of the Municipality :
+*
+
+<mat-card class="mat-card-data">
+  <form [formGroup]="acknowledgementForm" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <textarea matInput formControlName="acknowledgement"> </textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!acknowledgementForm.valid">
+        Submit
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card> -->

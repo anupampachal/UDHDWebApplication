@@ -1,0 +1,31 @@
+<div class="col-lg-12 col-md-12 table-responsive">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Srl No.</th>
+        <th scope="col">District </th>
+      <th scope="col">As On Current</th>
+      <th scope="col">As On Previous</th>
+      <th scope="col">Latest Assets</th>
+      <th scope="col">Latest Liabilities</th>
+      <th scope="col">Previous Assets</th>
+      <th scope="col">Previous Liabilities</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="dataToDisplay">
+      <tr *ngFor="let data of dataToDisplay; let i = index">
+        <td> {{ i+1 }} </td>
+        <td (click)="goToDistrict(data.id, data.particulars)">
+          <span class="link"> {{ data.particulars }}</span>
+        </td>
+        <td> {{ data.asCurrentOn | formatDate }} </td>
+        <td> {{ data.asPreviousOn | formatDate }} </td>
+        <td> {{ data.latestAssets | formatAmount }} </td>
+        <td> {{ data.latestLiabilities | formatAmount }} </td>
+        <td> {{ data.previousAssets | formatAmount }} </td>
+        <td> {{ data.previousLiabilities | formatAmount }} </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

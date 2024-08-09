@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+  <thead>
+    <!-- <caption>
+      <h5>Income</h5>
+    </caption> -->
+    <tr>
+      <th>Srl no.</th>
+      <!-- <th scope="col">Account Code</th> -->
+      <th scope="col">Particulars </th>
+      <th scope="col">Opening Balance</th>
+      <th scope="col">Debit Amount</th>
+      <th scope="col">Credit Amount</th>
+      <th scope="col">Closing Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <!-- <td> {{ dataToDisplay.accountCode }} </td> -->
+      <td> {{ dataToDisplay.particulars }} </td>
+      <td> {{ dataToDisplay.openingBalance | formatAmount }} </td>
+      <td> {{ dataToDisplay.debitAmt | formatAmount }} </td>
+      <td> {{ dataToDisplay.creditAmt | formatAmount }} </td>
+      <td> {{ dataToDisplay.closingBalance | formatAmount }} </td>
+    </tr>
+  </tbody>
+</table>
+

@@ -1,0 +1,34 @@
+<nav  aria-label="breadcrumb" style="display: flex;">
+  <ol class="breadcrumb">
+    <li  [routerLinkActive]="'active'" [routerLink]="breadcrumbItem.route" class="breadcrumb-item " *ngFor="let breadcrumbItem of breadcrumbItems; last as isLast"
+    ><a  >{{breadcrumbItem.label}}</a></li>
+  </ol>
+
+  <div class="col-md">
+    <div class="example-button-container">
+      <button mat-stroked-button (click)="ulbFilter()" color="primary" class="child-route-button"
+        aria-label="Example icon button with a plus one icon">
+        <span>
+          <mat-icon>public</mat-icon>
+        </span>
+      </button>
+    </div>
+    <div class="example-button-container">
+      <button mat-stroked-button (click)="dateFilter()" color="primary" class="child-route-button"
+        aria-label="Example icon button with a plus one icon">
+        <mat-icon>date_range</mat-icon>
+      </button>
+    </div>
+  </div>
+</nav>
+<mat-card *ngIf="displayDateFilter || displayUlbFilter">
+  <div class="row " *ngIf="displayDateFilter">
+    <app-date-filter (dateRangeValue)="getDateRangeValue($event)"></app-date-filter>
+  </div>
+
+  <div class="row " *ngIf="displayUlbFilter">
+    <app-ulb-filter (clearDataEvent)="clearDataEvent($event)" (filteredData)="filteredDataEvent($event)"
+      (searchByDivision)="filterByDivision($event)" >
+    </app-ulb-filter>
+  </div>
+</mat-card>

@@ -1,0 +1,121 @@
+<form [formGroup]="grantUtilizationFormModel">
+
+  <div class="col-md-12" align="right">
+      <button type="button" class="btn btn-default btn-sm" title="Add New Row" (click)="pushNewForm()">
+          <i class="fa fa-plus"></i>
+      </button>
+
+  </div>
+
+  <div class="col-md-12 table-responsive" formArrayName="utilizations">
+      <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>S.No.</th>
+                  <th>Scheme/Project Name</th>
+                  <th>Fund Received</th>
+                  <th>Expenses (Amount utilized)</th>
+                  <th>Balance in PLA</th>
+                  <th>Pending Ulitization Certificate against Expenses</th>
+                  <th>Submitted Ulitization Certificate against Expenses</th>
+                  <th>Letter No. & Date</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of utilizationsControl.controls; let i=index;"
+                  [formGroupName]="i">
+                  <td>{{i+1}}</td>
+
+                  <td>
+                      <input type="hidden" formControlName="id">
+                      <input class="form-control" id="schemeName" formControlName="schemeName"></td>
+
+                  <td>
+                      <input type="number" class="form-control" id="fundReceived" formControlName="fundReceived"
+                          (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" id="expenses" formControlName="expenses"
+                          (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td>
+                      <input class="form-control" id="balanceInPLA" [disabled]=true formControlName="balanceInPLA"
+                          (keyup)="getTotalAmount(i, item)"
+                          [value]="item.value.fundReceived -item.value.expenses">
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" id="pendingUtilizationCertificate"
+                          formControlName="pendingUC" (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" id="submittedUtilizationCertificate"
+                          formControlName="submittedUC" (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td> <input class="form-control" id="letterNoNDate" formControlName="letterNoNDate">
+                  </td>
+                  <!-- actions -->
+                  <td>
+                        <button type="button" title="Save" name="save" class="btn btn-default btn-sm"
+                          (click)="save(i)" [disabled]="item.invalid">
+                          <i class="fa fa-save"></i></button>
+
+                      <button type="button" name="edit" class="btn btn-default btn-sm"
+                        *ngIf="item.disabled" (click)="enableControl(i)"
+                      >
+                          <i class="fa fa-pencil"></i></button>
+
+                      <button type="button" name="delete" id="del{{i}}"
+                          class="btn btn-default btn-sm" (click)="remove(i)">
+                          <i class="fa fa-trash"></i></button>
+                  </td>
+              </tr>
+              <!-- <tr>
+                  <td colspan="2">Total</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td colspan="2"></td>
+              </tr> -->
+          </tbody>
+          <tfoot>
+              <tr>
+                  <td colspan="2">Total</td>
+                  <td>{{totalAmount}}</td>
+                  <td>{{totalExpenseAmount}}</td>
+                  <td>{{totalPLAAmount}}</td>
+                  <td>{{totalPendingAmount}}</td>
+                  <td>{{totalSubmittedAmount}}</td>
+                  <td colspan="2"></td>
+                  <!-- <td colspan="4"></td>
+                  <td>
+                      <div style="text-align:center;font-weight:bold">Total :{{totalAmount}} </div>
+                  </td>
+                  <td colspan="3"></td> -->
+              <tr>
+          </tfoot>
+
+      </table>
+  </div>
+  <section class="form-group">
+      <p *ngIf="showFileError" class="danger">{{showFileError}}</p>
+      <label class="col-md-4" for="upload">Attach File</label>
+      <div style="padding-left: 0" class="col-md-8">
+          <span style="padding: 0">
+              <input type="file" (change)="onSelected($event)" class="btn btn-default btn-file pull-left">
+          </span>
+          <button mat-button color="primary" [disabled]="!isFile || iconDis" (click)="uploadFile()">
+            <mat-icon>file_upload</mat-icon><span>Upload</span>
+          </button>
+          <button mat-button color="primary" *ngIf="iconDis" (click)="iconDis = false;">Edit File</button>
+
+      </div>
+
+  </section>
+  <!-- <div class="col-md-12" align="right">
+      <button type="button" class="btn btn-primary"
+          [disabled]="grantUtilizationFormModel.invalid"> Save</button>
+  </div> -->
+</form>

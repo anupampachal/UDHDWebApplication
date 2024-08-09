@@ -1,0 +1,1608 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" />
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style type="text/css">
+.text-center {
+	text-align: center;
+}
+
+.intro {
+	margin-top: 100px;
+}
+
+.background-color {
+	background-color: #cdcdcd !important;
+	color: #fff;
+}
+
+table.speaker-list {
+	table-layout: fixed;
+}
+
+.exec-summary {
+	text-align: center;
+	border: 1px black solid;
+	background: #cdcdcd !important;
+	color: #000;
+	margin-bottom: 0px;
+}
+
+.srl-no {
+	width: 80px;
+	border-right: 1px black solid;
+	padding: 5px;
+	display: inline;
+}
+
+.audit-title {
+	padding: 5px;
+	width: 90%;
+	text-align: center;
+	display: inline;
+}
+
+.textjustified {
+	text-align: justified;
+	padding: 10px;
+}
+
+h4 {
+	display: inline;
+}
+
+table {
+	page-break-inside: auto
+}
+
+table.table-bordered {
+	border: 1px solid black !important;
+}
+
+table.table-bordered>thead>tr>th, table.table-bordered>thead>tr>td {
+	border: 1px solid black !important;
+}
+
+table.table-bordered>tbody>tr>td {
+	border: 1px solid black !important;
+}
+
+.border {
+	border: 1px black solid;
+}
+
+table tbody tr td:before, table tbody tr td:after {
+	content: "";
+	height: 4px;
+	display: block;
+	page-break-inside: avoid;
+}
+
+.padding5 {
+	padding: 5px !important;
+}
+</style>
+</head>
+<body>
+	<section class="container-fluid intro">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+
+				<h1 class="h1" th:text="${nameOfMunicipality}">Name of
+					municipality</h1>
+				<h3 class="h3">Internal Audit Report</h3>
+				<h3 class="h3">Govt. of Bihar.</h3>
+				<h3 class="h3">
+					Audit Period: <span th:text="${auditStartDate}"></span> - <span
+						th:text="${auditEndDate}"></span>
+				</h3>
+
+			</div>
+		</div>
+	</section>
+	<div style="display: block; clear: both; page-break-after: always;"></div>
+
+	<section id="executive-summary-1" class="container-fluid border">
+		<div class="row border">
+			<div class="col-xs-12">
+				<h2 class="text-center background-color ">Executive Summary</h2>
+			</div>
+		</div>
+		<div class="row border">
+			<div class="col-xs-12">
+				<table class="table table-bordered table-condensed">
+					<thead class="border">
+						<tr class="border">
+							<td colspan="1" class="border padding5"><h4>S.No.</h4></td>
+							<td colspan="3" class="border padding5 background-color"><h4>Area
+									of audit observation</h4></td>
+						</tr>
+
+					</thead>
+					<tbody class="border">
+						<tr>
+							<td rowspan="4" class="border padding5"><h4>1</h4></td>
+							<td colspan="3" class="border padding5"><h4>Introduction</h4></td>
+						</tr>
+						<tr>
+							<td class="padding5">a</td>
+							<td class="padding5">Name of municipality</td>
+							<td class="padding5" th:text="${nameOfMunicipality}"><p>Municipality
+									name</p></td>
+						</tr>
+						<tr>
+							<td class="padding5">b</td>
+							<td class="padding5">Period covered under current audit:
+								from</td>
+							<td class="padding5" th:text="${periodUnderCurrentAudit}">Current
+								audit Period</td>
+						</tr>
+						<tr>
+							<td class="padding5">c</td>
+							<td class="padding5">Name of municipal officer:</td>
+							<td class="padding5" th:text="${nameOfMunicipalOfficer}">Name
+								of Municipal Officer</td>
+						</tr>
+						<tr>
+							<td rowspan="5" class="border padding5"><h4>2</h4></td>
+							<td colspan="3" class="border padding5 background-color"><h4>Results
+									and Findings</h4></td>
+						</tr>
+						<tr th:if="${stengthObservedDuringAudit}">
+							<td class="padding5" rowspan="2">a</td>
+							<td class="padding5" colspan="2">Strength observed during
+								audit engagement</td>
+						</tr>
+						<tr th:if="${stengthObservedDuringAudit}">
+							<td class="padding5" colspan="2">
+								<table class="table-bordered" style="margin: 5px;">
+									<tr th:each="strength,iterator : ${stengthObservedDuringAudit}">
+										<td class="padding5" th:text="${iterator.index} +1"></td>
+										<td class="padding5 background-color"
+											th:text="${strength.data}">Strength</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr th:if="${weaknessObservedDuringAudit}">
+							<td class="padding5" rowspan="2">b</td>
+							<td class="padding5 background-color" colspan="2">Weakness
+								observed during audit engagement</td>
+						</tr>
+						<tr th:if="${weaknessObservedDuringAudit}">
+							<td colspan="2">
+								<table class="table table-bordered table-condensed">
+									<tr
+										th:each="weakness,iterator : ${weaknessObservedDuringAudit}">
+										<td class="padding5" th:text="${iterator.index} +1"></td>
+										<td class="padding5" th:text="${weakness.data}">Weakness</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr th:if="${overallOpinionOfAuditTeamAboutFunctionality}"
+							class="border">
+							<td rowspan="3" class="border padding5"><h4>3</h4></td>
+							<td colspan="3" class="border padding5 background-color"><h4>Opinion</h4></td>
+						</tr>
+						<tr th:if="${overallOpinionOfAuditTeamAboutFunctionality}"
+							class="border">
+							<td rowspan="2" class="padding5">a</td>
+							<td colspan="2" class="padding5 background-color">Overall
+								Opinion of the Audit Team about the functioning of the
+								Municipality :</td>
+						</tr>
+						<tr th:if="${overallOpinionOfAuditTeamAboutFunctionality}">
+							<td colspan="2" class="padding5"
+								th:text="${overallOpinionOfAuditTeamAboutFunctionality}"><p>Overall
+									opinion of audit team</p></td>
+						</tr>
+
+						<tr th:if="${auditRecommendations}">
+							<td rowspan="3" class="border padding5"><h4>4</h4></td>
+							<td colspan="3" class="border padding5"><h4>Audit
+									Recommendations</h4></td>
+						</tr>
+						<tr th:if="${auditRecommendations}">
+							<td rowspan="2" class="padding5"></td>
+							<td colspan="2" class="padding5">The recommendation of Audit
+								Team on the observed weakness are as follows:</td>
+						</tr>
+						<tr th:if="${auditRecommendations}">
+							<td colspan="2" class="padding5">
+								<table class="table table-bordered table-condensed"
+									style="margin: 5px;">
+									<tr th:each="recommendation,iterator : ${auditRecommendations}">
+										<td class="padding5" th:text="${iterator.index} +1"></td>
+										<td class="padding5" th:text="${recommendation.data}">Recommendations</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr th:if="${commentsFromManagement}">
+							<td rowspan="2" class="border padding5"><h4>5</h4></td>
+							<td colspan="3" class="border padding5"><h4>Comments
+									from management</h4></td>
+						</tr>
+						<tr th:if="${commentsFromManagement}">
+							<td colspan="3" class="border padding5"
+								th:text="${commentsFromManagement} ">Comments from
+								Management</td>
+						</tr>
+						<tr th:if="${acknowledgement}">
+							<td rowspan="2" class="border padding5"><h4>6</h4></td>
+							<td colspan="3" class="border padding5"><h4>Acknowledgement</h4></td>
+						</tr>
+						<tr th:if="${acknowledgement}">
+							<td colspan="3" class="border padding5"
+								th:text="${acknowledgement} ">Acknowledgement</td>
+						</tr>
+
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<div style="display: block; clear: both; page-break-after: always;"></div>
+
+
+	<section id="detailed-audit-report" class="container-fluid border">
+		<div class="row border text-center">
+			<div class="col-xs-12">
+				<h2 class="text-center background-color">Detailed Audit Report</h2>
+			</div>
+		</div>
+		<div class="row border">
+			<div class="col-xs-12">
+				<table class="table table-bordered print-friendly table-condensed ">
+					<thead class="border">
+						<tr class="border">
+							<td colspan="1"><h4>S. No.</h4></td>
+							<td colspan="11"><h4>Area of Observation</h4></td>
+						</tr>
+					</thead>
+					<tbody class="border">
+						<!-- Part 1 Introduction start -->
+						<tr>
+							<td>1</td>
+							<td colspan="3">
+								<table
+									class="table table-bordered print-friendly table-condensed ">
+									<tr>
+										<td colspan="3"><h5>Introduction</h5></td>
+									</tr>
+									<tr>
+										<td>a</td>
+										<td>Name of Urban Local Body</td>
+										<td th:text="${nameOfMunicipality}">Name of ULB</td>
+									</tr>
+									<tr>
+										<td>b</td>
+										<td>Period covered under current audit:</td>
+										<td th:text="${periodUnderCurrentAudit}">Period</td>
+									</tr>
+									<tr>
+										<td>c</td>
+										<td>Audit Team</td>
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tr>
+													<td>Team Leaders</td>
+													<td><table class=" table-bordered table-condensed">
+															<tr
+																th:each="teamLeader,iterator : ${administration.teamleaders}">
+																<td class="padding5" th:text="${iterator.index} +1"></td>
+																<td class="padding5" th:text="${teamLeader.name}">Team
+																	Leader</td>
+															</tr>
+														</table></td>
+												</tr>
+												<tr>
+													<td>Municipal Audit Experts</td>
+													<td><table
+															class="table table-bordered table-condensed">
+															<tr
+																th:each="municipalAuditExpert,iterator : ${administration.municipalExperts}">
+																<td class="padding5" th:text="${iterator.index} +1"></td>
+																<td class="padding5"
+																	th:text="${municipalAuditExpert.name}">Municipal
+																	Audit expert</td>
+															</tr>
+														</table></td>
+												</tr>
+												<tr>
+													<td>Municipal Audit Assistants</td>
+													<td><table
+															class="table table-bordered table-condensed">
+															<tr
+																th:each="municipalAuditAssistant,iterator : ${administration.municipalAssistants}">
+																<td class="padding5" th:text="${iterator.index} +1"></td>
+																<td class="padding5"
+																	th:text="${municipalAuditAssistant.name}">Municipal
+																	Audit Assistants</td>
+															</tr>
+														</table></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+
+						<!-- Part 1 Introduction end -->
+						<!-- Part 2 Administration start -->
+						<tr>
+							<td>2</td>
+							<td>
+								<table
+									class="table table-bordered print-friendly table-condensed ">
+									<tr>
+										<td colspan="4"><h5>Administration</h5></td>
+									</tr>
+									<tr>
+										<td colspan="4">The incumbency in the key administrative
+											and executive positions was as under :</td>
+									</tr>
+									<tr>
+										<td rowspan="2">a</td>
+										<td>i</td>
+										<td>Name of Chairman/Mayor</td>
+										<td th:text="${administration.nameOfChairmanMayor}">Chairman</td>
+
+									</tr>
+									<tr>
+										<td>ii</td>
+										<td>Period of service</td>
+										<td th:text="${administration.periodOfServiceChairman}">Period
+											of Service</td>
+
+									</tr>
+									<tr>
+										<td rowspan="2">b</td>
+										<td>i</td>
+										<td>Name of Chief Municipal Officer</td>
+										<td th:text="${administration.nameOfCMO}">nameOfCMO</td>
+
+									</tr>
+									<tr>
+										<td>ii</td>
+										<td>Period of service</td>
+										<td th:text="${administration.periodOfServiceCMO}">periodOfServiceCMO</td>
+
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+						<!-- Part 2 Administration end -->
+						<!-- Part 3 Review of outstanding paras start -->
+						<tr>
+							<td>3</td>
+							<td>
+								<table
+									class="table table-bordered print-friendly table-condensed ">
+									<tr>
+										<td colspan="2"><h5>Review of Outstanding audit
+												paras :</h5></td>
+									</tr>
+									<tr>
+										<td rowspan="2">i</td>
+										<td>Status of audit observation :</td>
+									</tr>
+									<tr>
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tr>
+													<td>Particulars of audit and date of report</td>
+													<td>Total no. of audit para's</td>
+													<td>Improvement/corrective measures required(Nos. of
+														paras)</td>
+													<td>Recovery of cash is proposed(Nos. of paras)</td>
+													<td>Recovery has been made(Nos. of paras)</td>
+													<td>Total amount of recovery</td>
+													<td>No action has been taken</td>
+													<td>No. and date of compliance report</td>
+												</tr>
+												<tr th:each="status,iterator : ${details.auditStatuses}">
+													<td th:text="${status.auditParticularsWithDate}">Particulars
+														of audit and date of report</td>
+													<td th:text="${status.totalNosOfAuditParas}">Total no.
+														of audit para's</td>
+													<td
+														th:text="${status.totalAuditParasWithCorrectiveActionReq}">Improvement/corrective
+														measures required(Nos. of paras)</td>
+													<td th:text="${status.totalAuditParasWithCashRecProposed}">Recovery
+														of cash is proposed(Nos. of paras)</td>
+													<td th:text="${status.totalAuditParasWithCashRecMade}">Recovery
+														has been made(Nos. of paras)</td>
+													<td th:text="${status.totalAmtOfRecovery}">Total
+														amount of recovery</td>
+													<td th:text="${status.totalNosOfParasWithNoAction}">No
+														action has been taken</td>
+													<td th:text="${status.nosAndDateOfComplianceReport}">No.
+														and date of compliance report</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td rowspan="2">ii</td>
+										<td>Details of total number of audit paras:</td>
+									</tr>
+									<tr>
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tr>
+													<td>Audit para no.</td>
+													<td>Heading</td>
+													<td>Amount involved</td>
+													<td>Recovery proposed</td>
+													<td>Recovery completed</td>
+												</tr>
+
+												<tr
+													th:each="auditParaDetail,iterator : ${details.auditParaInfos}">
+													<td th:text="${auditParaDetail.auditParaNo}">Audit
+														para no</td>
+													<td th:text="${auditParaDetail.auditParaHeading}">Heading</td>
+													<td th:text="${auditParaDetail.amountInvolved}">Amount
+														involved</td>
+													<td th:text="${auditParaDetail.recoveryProposed}">Recovery
+														proposed</td>
+													<td th:text="${auditParaDetail.recoveryCompleted}">Recovery
+														completed</td>
+
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+
+							</td>
+						</tr>
+						<!-- Part 4 Finance Details start -->
+						<tr th:if="${finance!=null and finance.budgetaryProvisions!=null}">
+							<td>4</td>
+							<td>
+								<table
+									class="table table-bordered print-friendly table-condensed ">
+									<tr>
+										<td colspan="2">Finance</td>
+									</tr>
+									<!-- part 4.1 Budgetary Provisions starts-->
+									<tr>
+										<td rowspan="2">i</td>
+										<td>Budgetary provisions and expenditures for the last
+											three years</td>
+									</tr>
+									<tr>
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tr>
+													<td rowspan="2">Period</td>
+													<td>F.Y</td>
+													<td>F.Y</td>
+													<td>F.Y</td>
+												</tr>
+												<tr>
+													<td th:text="${finance.budgetaryProvisions.fy1}">Finance
+														year 1</td>
+													<td th:text="${finance.budgetaryProvisions.fy1}">Finance
+														year 2</td>
+													<td th:text="${finance.budgetaryProvisions.fy1}">Finance
+														year 3</td>
+												</tr>
+												<tr>
+													<td>Final/Revised Budget Data</td>
+													<td
+														th:text="${#numbers.formatCurrency(finance.budgetaryProvisions.finalBudgetData.fy1)}">Budget
+														data fy 1</td>
+													<td
+														th:text="${finance.budgetaryProvisions.finalBudgetData.fy2}">Budget
+														data fy 2</td>
+													<td
+														th:text="${finance.budgetaryProvisions.finalBudgetData.fy3}">Budget
+														data fy 3</td>
+												</tr>
+												<tr>
+													<td>Actual Expenditure Data</td>
+													<td
+														th:text="${#numbers.formatCurrency(finance.budgetaryProvisions.actualExpenditureData.fy1)}">Budget
+														data fy 1</td>
+													<td
+														th:text="${finance.budgetaryProvisions.actualExpenditureData.fy2}">Budget
+														data fy 2</td>
+													<td
+														th:text="${finance.budgetaryProvisions.actualExpenditureData.fy3}">Budget
+														data fy 3</td>
+												</tr>
+												<tr>
+													<td>Savings (+)/Excess (-)</td>
+													<td
+														th:text="${finance.budgetaryProvisions.finalBudgetData.fy1}+'-'+${finance.budgetaryProvisions.actualExpenditureData.fy1}">Budget
+														data fy 1</td>
+													<td
+														th:text="${finance.budgetaryProvisions.finalBudgetData.fy2}+'-'+${finance.budgetaryProvisions.actualExpenditureData.fy2}">Budget
+														data fy 2</td>
+													<td
+														th:text="${finance.budgetaryProvisions.finalBudgetData.fy3}+'-'+${finance.budgetaryProvisions.actualExpenditureData.fy3}">Budget
+														data fy 3</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<!-- part 4.1 Budgetary Provisions ends-->
+									<!-- part 4.2 Volume of transactions starts-->
+									<tr>
+										<td rowspan="2">ii</td>
+										<td>Volume of transactions</td>
+									</tr>
+									<tr>
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tr>
+													<td rowspan="2">Period</td>
+													<td>Budget FY</td>
+													<td>Previous Year F.Y.</td>
+													<td>Corresponding Prev F.Y.</td>
+													<td>Current F.Y.</td>
+													<td>Cumulative</td>
+												</tr>
+												<tr>
+													<td th:text="${finance.volumeOfTransactions.budgetFY}">Budgeted
+														for FY</td>
+													<td
+														th:text="${finance.volumeOfTransactions.previousYearFY}">
+														Previous year FY</td>
+													<td
+														th:text="${finance.volumeOfTransactions.correspondingPrevYearFY}">Corresponding
+														period previous year</td>
+													<td th:text="${finance.volumeOfTransactions.currentYearFY}">Current
+														period</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Opening balance</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.budgetFY}">Opening
+														Balance for budget fy</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.previousYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.correspondingPrevYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.currentYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.cumulativeForCurrentPeriod}">Cumulative
+														for the current period</td>
+												</tr>
+												<tr>
+													<td>Receipts</td>
+													<td
+														th:text="${finance.volumeOfTransactions.receipts.budgetFY}">Opening
+														Balance for budget fy</td>
+													<td
+														th:text="${finance.volumeOfTransactions.receipts.previousYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.receipts.correspondingPrevYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.receipts.currentYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.receipts.cumulativeForCurrentPeriod}">Cumulative
+														for the current period</td>
+												</tr>
+												<tr>
+													<td>Total</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.budgetFY+finance.volumeOfTransactions.receipts.budgetFY}">Opening
+														Balance for budget fy</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.previousYearFY+finance.volumeOfTransactions.receipts.previousYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.correspondingPrevYearFY+finance.volumeOfTransactions.receipts.correspondingPrevYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.currentYearFY+finance.volumeOfTransactions.receipts.currentYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.cumulativeForCurrentPeriod+finance.volumeOfTransactions.receipts.cumulativeForCurrentPeriod}">Cumulative
+														for the current period</td>
+												</tr>
+												<tr>
+													<td>Net Expenditure</td>
+													<td
+														th:text="${finance.volumeOfTransactions.netExpenditure.budgetFY}">Opening
+														Balance for budget fy</td>
+													<td
+														th:text="${finance.volumeOfTransactions.netExpenditure.previousYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.netExpenditure.correspondingPrevYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.netExpenditure.currentYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.netExpenditure.cumulativeForCurrentPeriod}">Cumulative
+														for the current period</td>
+												</tr>
+												<tr>
+													<td>Closing Balance</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.budgetFY+finance.volumeOfTransactions.receipts.budgetFY-finance.volumeOfTransactions.netExpenditure.budgetFY}">Opening
+														Balance for budget fy</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.previousYearFY+finance.volumeOfTransactions.receipts.previousYearFY-finance.volumeOfTransactions.netExpenditure.previousYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.correspondingPrevYearFY+finance.volumeOfTransactions.receipts.correspondingPrevYearFY-finance.volumeOfTransactions.netExpenditure.correspondingPrevYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.currentYearFY+finance.volumeOfTransactions.receipts.currentYearFY-finance.volumeOfTransactions.netExpenditure.currentYearFY}">Actual
+														for the</td>
+													<td
+														th:text="${finance.volumeOfTransactions.openingBalance.cumulativeForCurrentPeriod+finance.volumeOfTransactions.receipts.cumulativeForCurrentPeriod-finance.volumeOfTransactions.netExpenditure.cumulativeForCurrentPeriod}">Cumulative
+														for the current period</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<!-- part 4.2 Volume of transactions ends-->
+									<!-- part 4.3 Bank Reconciliation starts -->
+									<tr>
+										<td rowspan="2">iii</td>
+										<td>Bank reconciliation</td>
+									</tr>
+									<tr>
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tr>
+													<td>Bank name</td>
+													<td>Project name</td>
+													<td>Account no.</td>
+													<td>Bank Balance as per PassBook(A)</td>
+													<td>Cash Balance as per CashBook(B)</td>
+													<td>Difference(A-B)</td>
+													<td>Reconciled</td>
+												</tr>
+												<tr
+													th:each="bank,iterator :${finance.bankReconciliation.bankReconciliationLineItem}">
+													<td th:text="${bank.bankName}">Bank name</td>
+													<td th:text="${bank.projectSchemeName}">Project/Scheme</td>
+													<td th:text="${bank.accountNumber}">Account no.</td>
+													<td th:text="${bank.bankBalancePerPassbook}">Bank
+														Balance as per PassBook(A)</td>
+													<td th:text="${bank.cashBalancePerCashbook}">Cash
+														Balance as per CashBook(B)</td>
+													<td
+														th:text="${bank.bankBalancePerPassbook-bank.cashBalancePerCashbook}">Difference(A-B)</td>
+													<td th:text="${bank.BRSStatus}">Amount Reconciled/
+														Un-reconciled</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+
+									<!-- part 4.3 Bank Reconciliation ends -->
+									<!-- part 4.4 Revenue and Capital Receipts starts -->
+									<tr>
+										<td rowspan="2">iv</td>
+										<td>Revenue and Capital Receipts Information:</td>
+									</tr>
+									<tr th:if="${finance.revenueNCapitalReceipts}">
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tbody>
+													<tr>
+														<td rowspan="3">Srl #</td>
+														<td rowspan="3">Details</td>
+														<td colspan="2"
+															th:text="${finance.revenueNCapitalReceipts.fy1L}"></td>
+														<td colspan="2"
+															th:text="${finance.revenueNCapitalReceipts.fy2L}"></td>
+														<td colspan="2"
+															th:text="${finance.revenueNCapitalReceipts.fy3L}"></td>
+													</tr>
+													<tr>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+													</tr>
+
+													<tr th:if="${finance.revenueNCapitalReceipts.details}">
+														<td
+															th:text="${finance.revenueNCapitalReceipts.details.fy1}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.details.fy2}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.details.fy3}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.details.fy4}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.details.fy5}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.details.fy6}">Finance
+															Year</td>
+													</tr>
+													<tr>
+														<td></td>
+														<td>Total Receipts(A+B)</td>
+														<td th:text="${totalReceipts.fy1Amt}">FY1 Amt</td>
+														<td th:text="${totalReceipts.fy2Amt}">FY2 Amt</td>
+														<td th:text="${totalReceipts.fy3Amt}">FY3 Amt</td>
+														<td th:text="${totalReceipts.fy4Amt}">FY4 Amt</td>
+														<td th:text="${totalReceipts.fy5Amt}">FY5 Amt</td>
+														<td th:text="${totalReceipts.fy6Amt}">FY6 Amt</td>
+
+													</tr>
+													<tr>
+														<td>A</td>
+														<td>Revenue Receipts(1+2+3)</td>
+														<td th:text="${revenueReceipts.fy1Amt}">FY1 Amt</td>
+														<td th:text="${revenueReceipts.fy2Amt}">FY2 Amt</td>
+														<td th:text="${revenueReceipts.fy3Amt}">FY3 Amt</td>
+														<td th:text="${revenueReceipts.fy4Amt}">FY4 Amt</td>
+														<td th:text="${revenueReceipts.fy5Amt}">FY5 Amt</td>
+														<td th:text="${revenueReceipts.fy6Amt}">FY6 Amt</td>
+
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Own Revenue Receipts(a+b)</td>
+														<td th:text="${taxRevenue.fy1Amt}">FY1 Amt</td>
+														<td th:text="${taxRevenue.fy2Amt}">FY2 Amt</td>
+														<td th:text="${taxRevenue.fy3Amt}">FY3 Amt</td>
+														<td th:text="${taxRevenue.fy4Amt}">FY4 Amt</td>
+														<td th:text="${taxRevenue.fy5Amt}">FY5 Amt</td>
+														<td th:text="${taxRevenue.fy6Amt}">FY6 Amt</td>
+
+													</tr>
+													<tr>
+														<td>a)</td>
+														<td>Tax Revenue (levied and collected by municipal
+															body</td>
+														<td th:text="${taxRevenue.fy1Amt}">FY1 Amt</td>
+														<td th:text="${taxRevenue.fy2Amt}">FY2 Amt</td>
+														<td th:text="${taxRevenue.fy3Amt}">FY3 Amt</td>
+														<td th:text="${taxRevenue.fy4Amt}">FY4 Amt</td>
+														<td th:text="${taxRevenue.fy5Amt}">FY5 Amt</td>
+														<td th:text="${taxRevenue.fy6Amt}">FY6 Amt</td>
+
+													</tr>
+													<tr>
+														<td>i)</td>
+														<td>Property tax</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.propertyTax.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.propertyTax.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.propertyTax.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.propertyTax.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.propertyTax.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.propertyTax.fy6Amt}">FY6
+															Amt</td>
+
+													</tr>
+													<tr>
+														<td>ii)</td>
+														<td>Other tax</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherTax.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherTax.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherTax.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherTax.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherTax.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherTax.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>b)</td>
+														<td>Non-tax revenue (levied and collected by
+															municipal body)</td>
+														<td th:text="${nonTaxRevenue.fy1Amt}">FY1 Amt</td>
+														<td th:text="${nonTaxRevenue.fy2Amt}">FY2 Amt</td>
+														<td th:text="${nonTaxRevenue.fy3Amt}">FY3 Amt</td>
+														<td th:text="${nonTaxRevenue.fy4Amt}">FY4 Amt</td>
+														<td th:text="${nonTaxRevenue.fy5Amt}">FY5 Amt</td>
+														<td th:text="${nonTaxRevenue.fy6Amt}">FY6 Amt</td>
+
+													</tr>
+													<tr>
+														<td>i)</td>
+														<td>Fees and Fines</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.feesAndFines.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.feesAndFines.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.feesAndFines.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.feesAndFines.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.feesAndFines.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.feesAndFines.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>ii)</td>
+														<td>User Charges</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.userCharges.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.userCharges.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.userCharges.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.userCharges.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.userCharges.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.userCharges.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>iii)</td>
+														<td>Other non-tax revenue (levied and collected by
+															municipal body)</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Other Revenue Receipts</td>
+														<td th:text="${otherRevenueReceipts.fy1Amt}">FY1 Amt</td>
+														<td th:text="${otherRevenueReceipts.fy2Amt}">FY2 Amt</td>
+														<td th:text="${otherRevenueReceipts.fy3Amt}">FY3 Amt</td>
+														<td th:text="${otherRevenueReceipts.fy4Amt}">FY4 Amt</td>
+														<td th:text="${otherRevenueReceipts.fy5Amt}">FY5 Amt</td>
+														<td th:text="${otherRevenueReceipts.fy6Amt}">FY6 Amt</td>
+													</tr>
+													<tr>
+														<td>a)</td>
+														<td>Income from interest/investments</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.incomeFromInterest.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>b)</td>
+														<td>Other Revenue income</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherRevenueIncome.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherRevenueIncome.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherRevenueIncome.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherRevenueIncome.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherRevenueIncome.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherRevenueIncome.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Transfers/Grants/Assigned Revenues</td>
+														<td th:text="${transfers.fy1Amt}">FY1 Amt</td>
+														<td th:text="${transfers.fy2Amt}">FY2 Amt</td>
+														<td th:text="${transfers.fy3Amt}">FY3 Amt</td>
+														<td th:text="${transfers.fy4Amt}">FY4 Amt</td>
+														<td th:text="${transfers.fy5Amt}">FY5 Amt</td>
+														<td th:text="${transfers.fy6Amt}">FY6 Amt</td>
+													</tr>
+													<tr>
+														<td>a)</td>
+														<td>State Assigned Revenue</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>b)</td>
+														<td>State Finance Commission (SFC) Grants/Devolution</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateFCGrants.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>c)</td>
+														<td>Octrai compensation</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>d)</td>
+														<td>Other State Governemnt Transfers</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>e)</td>
+														<td>Central Finance Commission (CFC) Grant</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>f)</td>
+														<td>Other Central Government Transfers</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCentralGovtTransfers.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCentralGovtTransfers.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCentralGovtTransfers.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCentralGovtTransfers.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCentralGovtTransfers.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCentralGovtTransfers.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>g)</td>
+														<td>Others</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.others.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.others.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.others.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.others.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.others.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.others.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>B</td>
+														<td>Capital Receipts(1+2+3+4+5+6)</td>
+														<td th:text="${capitalReceipts.fy1Amt}">FY1 Amt</td>
+														<td th:text="${capitalReceipts.fy2Amt}">FY2 Amt</td>
+														<td th:text="${capitalReceipts.fy3Amt}">FY3 Amt</td>
+														<td th:text="${capitalReceipts.fy4Amt}">FY4 Amt</td>
+														<td th:text="${capitalReceipts.fy5Amt}">FY5 Amt</td>
+														<td th:text="${capitalReceipts.fy6Amt}">FY6 Amt</td>
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Sale of Municipal Land</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.saleOfMunicipalLand.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.saleOfMunicipalLand.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.saleOfMunicipalLand.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.saleOfMunicipalLand.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.saleOfMunicipalLand.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.saleOfMunicipalLand.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Loans (from State Govt. or Bank etc.)</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.loans.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>3)</td>
+														<td>State Capital Account Grant (under State Schemes
+															etc.)</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateCapitalAccountGrants.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateCapitalAccountGrants.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateCapitalAccountGrants.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateCapitalAccountGrants.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateCapitalAccountGrants.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.stateCapitalAccountGrants.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Central Capital Account Grant (under Central
+															Schemes etc.)</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.centralCapitalAccountGrants.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.centralCapitalAccountGrants.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.centralCapitalAccountGrants.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.centralCapitalAccountGrants.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.centralCapitalAccountGrants.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.centralCapitalAccountGrants.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>5</td>
+														<td>Other Capital Receipts</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCapitalReceipts.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCapitalReceipts.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCapitalReceipts.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCapitalReceipts.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCapitalReceipts.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalReceipts.otherCapitalReceipts.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+
+									<!-- part 4.4 Revenue and Capital Receipts ends -->
+									<!-- part 4.5 Revenue and Capital Expenditure starts -->
+									<tr>
+										<td rowspan="2">v</td>
+										<td>Revenue and Capital Expenditure Information:</td>
+									</tr>
+									<tr th:if="${finance.revenueNCapitalExpenditure}">
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tbody>
+													<tr>
+														<td rowspan="3">Srl #</td>
+														<td rowspan="3">Details</td>
+														<td colspan="2"
+															th:text="${finance.revenueNCapitalExpenditure.fy1L}"></td>
+														<td colspan="2"
+															th:text="${finance.revenueNCapitalExpenditure.fy2L}"></td>
+														<td colspan="2"
+															th:text="${finance.revenueNCapitalExpenditure.fy3L}"></td>
+													</tr>
+													<tr>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+														<td>Fin Year</td>
+													</tr>
+
+													<tr th:if="${finance.revenueNCapitalExpenditure.details}">
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.details.fy1}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.details.fy2}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.details.fy3}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.details.fy4}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.details.fy5}">Finance
+															Year</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.details.fy6}">Finance
+															Year</td>
+													</tr>
+													<tr>
+														<td></td>
+														<td>Total Expenditure(1+2)</td>
+														<td th:text="${totalExpenditure.fy1Amt}">FY1 Amt</td>
+														<td th:text="${totalExpenditure.fy2Amt}">FY2 Amt</td>
+														<td th:text="${totalExpenditure.fy3Amt}">FY3 Amt</td>
+														<td th:text="${totalExpenditure.fy4Amt}">FY4 Amt</td>
+														<td th:text="${totalExpenditure.fy5Amt}">FY5 Amt</td>
+														<td th:text="${totalExpenditure.fy6Amt}">FY6 Amt</td>
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Revenue Expenditure</td>
+														<td th:text="${revenueExpenditure.fy1Amt}">FY1 Amt</td>
+														<td th:text="${revenueExpenditure.fy2Amt}">FY2 Amt</td>
+														<td th:text="${revenueExpenditure.fy3Amt}">FY3 Amt</td>
+														<td th:text="${revenueExpenditure.fy4Amt}">FY4 Amt</td>
+														<td th:text="${revenueExpenditure.fy5Amt}">FY5 Amt</td>
+														<td th:text="${revenueExpenditure.fy6Amt}">FY6 Amt</td>
+													</tr>
+													<tr>
+														<td>1.1</td>
+														<td>Adminstrative Expenses, Establishment and
+															Salaries (All Departments- Regular and Contractual
+															Staffs)</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.administrativeExpenses.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.administrativeExpenses.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.administrativeExpenses.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.administrativeExpenses.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.administrativeExpenses.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.administrativeExpenses.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>1.2</td>
+														<td>Operation and Maintenance (O and M)</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.operationAndMaintenance.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.operationAndMaintenance.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.operationAndMaintenance.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.operationAndMaintenance.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.operationAndMaintenance.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.operationAndMaintenance.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>1.3</td>
+														<td>Loan repayment (Interest payments)</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.loanRepayment.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.loanRepayment.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.loanRepayment.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.loanRepayment.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.loanRepayment.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.loanRepayment.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>1.4</td>
+														<td>Others(any other revenue expenditure which is not
+															salaries,O and M or Interest Payment)</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherExpenditure.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherExpenditure.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherExpenditure.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherExpenditure.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherExpenditure.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherExpenditure.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Capital Expenditure</td>
+														<td th:text="${capitalExpenditure.fy1Amt}">FY1 Amt</td>
+														<td th:text="${capitalExpenditure.fy2Amt}">FY2 Amt</td>
+														<td th:text="${capitalExpenditure.fy3Amt}">FY3 Amt</td>
+														<td th:text="${capitalExpenditure.fy4Amt}">FY4 Amt</td>
+														<td th:text="${capitalExpenditure.fy5Amt}">FY5 Amt</td>
+														<td th:text="${capitalExpenditure.fy6Amt}">FY6 Amt</td>
+													</tr>
+													<tr>
+														<td>2.1</td>
+														<td>All developmental works under Central/State
+															specific schemes</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.developmentWorks.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.developmentWorks.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.developmentWorks.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.developmentWorks.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.developmentWorks.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.developmentWorks.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+													<tr>
+														<td>2.2</td>
+														<td>Other Capital expenditure</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherCapitalExpenditure.fy1Amt}">FY1
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherCapitalExpenditure.fy2Amt}">FY2
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherCapitalExpenditure.fy3Amt}">FY3
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherCapitalExpenditure.fy4Amt}">FY4
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherCapitalExpenditure.fy5Amt}">FY5
+															Amt</td>
+														<td
+															th:text="${finance.revenueNCapitalExpenditure.otherCapitalExpenditure.fy6Amt}">FY6
+															Amt</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+
+
+									<!-- part 4.5 Revenue and Capital Expenditure ends -->
+									<!-- part 4.6 Status of implementation of DEAS starts -->
+									<tr>
+										<td rowspan="2">vi</td>
+										<td colspan="4"><h4 class="h4">Status of
+												implementation of DEAS:</h4></td>
+									</tr>
+									<tr th:if="${finance.deasImplementationStatus}">
+										<td>
+											<table
+												class="table table-bordered print-friendly table-condensed ">
+												<tbody>
+
+													<tr>
+														<td colspan="4">
+															<h5 class="h5">Description</h5>
+														</td>
+													</tr>
+													<tr>
+														<td colspan="4"
+															th:text="${finance.deasImplementationStatus.description}">FY6
+															Amt</td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td colspan="4"><h4 class="h4">Tally Details</h4></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td colspan="4"><h5 class="h5">Tally Id</h5></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td colspan="4"
+															th:text="${finance.deasImplementationStatus.tallyDetails.tallyId}"></td>
+
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td colspan="4"><h5 class="h5">Tally Serial No.</h5></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td colspan="4"
+															th:text="${finance.deasImplementationStatus.tallyDetails.tallySerialNo}"></td>
+
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td colspan="4"><h5 class="h5">Period</h5></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.tallyDetails}">
+														<td>From</td>
+														<td
+															th:text="${finance.deasImplementationStatus.tallyDetails.periodFrom}"></td>
+														<td>To</td>
+														<td
+															th:text="${finance.deasImplementationStatus.tallyDetails.periodTo}"></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.financeStatementStatus}">
+														<td colspan="2">Particulars</td>
+														<td colspan="2"
+															th:text="${finance.deasImplementationStatus.financeStatementStatus.particulars}"></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.financeStatementStatus}">
+														<td colspan="2">Property Tax Register</td>
+														<td colspan="2"
+															th:text="${finance.deasImplementationStatus.financeStatementStatus.propertyTaxRegister}"></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.financeStatementStatus}">
+														<td colspan="2">Fixed Assets Register</td>
+														<td colspan="2"
+															th:text="${finance.deasImplementationStatus.financeStatementStatus.fixedAssetsRegister}"></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.financeStatementStatus}">
+														<td colspan="2">Opening Balance Sheet</td>
+														<td colspan="2"
+															th:text="${finance.deasImplementationStatus.financeStatementStatus.openingBalanceRegister}"></td>
+													</tr>
+													<tr
+														th:if="${finance.deasImplementationStatus.financeStatementStatus}">
+														<td colspan="2">Annual Finance Statement</td>
+														<td colspan="2"
+															th:text="${finance.deasImplementationStatus.financeStatementStatus.annualFinanceStatement}"></td>
+													</tr>
+													<tr
+														th:each="particulars:${finance.deasImplementationStatus.particularsWithFinanceStatus}">
+														<td colspan="2" th:text="${particulars.particulars}"></td>
+														<td colspan="2" th:text="${particulars.value}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									<tr>
+									</tr>
+									<!-- part 4.6 Status of implementation of DEAS ends -->
+								</table>
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<!-- Part 3 Review of outstanding paras end -->
+	<div style="display: block; clear: both; page-break-after: always;"></div>
+</body>
+</html>

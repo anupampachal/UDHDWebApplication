@@ -1,0 +1,113 @@
+<form [formGroup]="acknowledgementForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+      <legend class="hm-legend">Acknowledgement:</legend>
+
+      <div class="form-group">
+          <label for="acknowledgement">
+          </label><span class="danger">*</span>
+          <textarea class="form-control" name="acknowledgement" formControlName="acknowledgement"
+              id="acknowledgement"></textarea>
+          <p class="danger">Maximum 10,000 characters. </p>
+      </div>
+      <div class="col-md-12" align="right">
+      <button class="btn btn-primary" type="button" *ngIf="acknowledgementForm.disabled" (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+
+          <button type="submit" class="btn btn-primary create-btn"
+              [disabled]="acknowledgementForm.invalid" (click)="onSubmit()">
+              Save</button>
+
+      </div>
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<h4>Acknowledgement</h4>
+
+<mat-card class="mat-card-data">
+  <form [formGroup]="acknowledgementForm" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <textarea matInput formControlName="acknowledgement"> </textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!acknowledgementForm.valid">
+        Submit
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h4>Acknowledgement</h4>
+
+<mat-card class="mat-card-data">
+  <form [formGroup]="acknowledgementForm" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <textarea matInput formControlName="acknowledgement"> </textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!acknowledgementForm.valid">
+        Submit
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card> -->

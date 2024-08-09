@@ -1,0 +1,129 @@
+<mat-card class="mat-card-header-cls">
+  <div class="row">
+    <div class="col-md">
+      <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+    </div>
+    <div class="col-md">
+      <div class="example-button-container">
+        <button mat-stroked-button class="route-button" [routerLink]="'../list'" color="primary" style="float: right"
+          aria-label="Example icon button with a plus one icon">
+          <mat-icon>list</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card class="mat-card-data">
+  <form [formGroup]="createMeetingForm" (submit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <mat-card-title class="mat-card-title">Create Event and Meeting</mat-card-title>
+      </div>
+    </div>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError.Description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Meeting Header<span class="required"> *</span></mat-label>
+            <input matInput formControlName="meetingHeader" minlength="3" maxlength="50" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Meeting Location<span class="required"> *</span></mat-label>
+            <input matInput formControlName="meetingLocation" minlength="3" maxlength="50" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Meeting Description<span class="required"> *</span></mat-label>
+            <textarea type="text" matInput formControlName="description" minlength="2" maxlength="10" ></textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="createMeetingForm" [rangePicker]="picker">
+              <input matStartDate formControlName="startDate" placeholder="Start date">
+              <input matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-error *ngIf="createMeetingForm.controls.startDate?.hasError('matStartDateInvalid')">Invalid start date
+            </mat-error>
+            <mat-error *ngIf="createMeetingForm.controls.endDate?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Meeting Start Time<span class="required"> *</span></mat-label>
+            <input type="time" matInput formControlName="startTime" minlength="3" maxlength="50" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Meeting End Time<span class="required"> *</span></mat-label>
+            <input type="time" matInput formControlName="endTime" minlength="3" maxlength="50"/>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="requiredAttendies" placeholder="Required Attendies">
+              <ng-container *ngFor="let requiredAttendy of allAttendies">
+                <mat-option [value]="requiredAttendy"> {{requiredAttendy}} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Required Attendies<span class="required"> *</span></mat-label>
+            <input matInput formControlName="requiredAttendies" minlength="3" maxlength="50" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Optional Attendies</mat-label>
+            <input matInput formControlName="optionalAttendies" minlength="3" maxlength="50" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="createMeetingForm.invalid" type="submit">
+        Submit
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

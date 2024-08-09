@@ -1,0 +1,18 @@
+<form [formGroup]="partCForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+      <input type="hidden" formControlName="id">
+      <textarea name="description" class="form-control" formControlName="description"
+          placeholder="Enter Description"></textarea>
+      <!-- <div invalidmessage="description">
+          <p *invalidType="'required'" class="error">Please provide description.</p>
+          <p *invalidType="'minLength'" class="error">Description must be atleast 2 characters long.</p>
+          <p *invalidType="'maxLength'" class="error">Description should not exceed 10000 characters.</p>
+      </div> -->
+  </div>
+  <div class="col-md-12" align="right">
+    <button class="btn btn-primary" type="button" *ngIf="partCForm.disabled" (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+
+      <button type="submit" class="btn btn-primary btn-sm" [disabled]="partCForm.invalid">Save</button>
+  </div>
+</form>

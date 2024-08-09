@@ -1,0 +1,234 @@
+<!--
+
+
+<hr>
+
+ -->
+
+
+
+
+
+<div class="row">
+  <form>
+    <!-- <div class="table-responsive" formArrayName="criteriaLayer1FormArray"> -->
+    <div>
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td> 5 </td>
+            <td>
+              Audit Observations
+              <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td>I</td>
+                    <td>
+                      PART- A: All Audit objections/irregularities which has monetary implication,particularly in
+                      following areas:
+                      <div>
+                        <div>
+                          <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>a)</span>
+                                  Leakage of own sources revenue either due to wrong assessment or non-levy of Property
+                                  Tax, Mobile Tower Tax, Rent on municipal properties, Advertisement, Tax, Fee, etc.
+                                  <div>
+                                    <div>
+                                      <app-view-part-aobjectives></app-view-part-aobjectives>
+                                    </div>
+
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>b)</span> Excess payment against bill, lack of prudence in payment against
+                                  voucher, inefficiency in controls resulting loss
+                                  in ULBs.
+                                  <div>
+                                    <app-part-a1></app-part-a1>
+
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>c) Report on findings of field survey of Property Tax of minimum 20 high value
+                                    properties. </span>
+                                  <div>
+                                    <app-part-a2></app-part-a2>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td>II</td>
+                    <td>
+                      PART-B :All Audit objections/irregularities which has monetary implication, but significant
+                      violation of Act, Rules & Directives of UD&HD. Mention the reference to Act & Rules wherein
+                      remedial measure is required. In this part auditor should report in respect of:
+                      <div>
+                        <div>
+                          <table class="table table-bordered">
+                            <tbody *ngFor="let list of partBsubList; let i=index;">
+                              <tr>
+                                <td>
+                                  {{ list }}
+                                  <div>
+                                    <app-view-part-b [bsub]="i"></app-view-part-b>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>f)</span> Non-compliance of TDS, VAT and other relevant Statute.
+                                  <div>
+                                    <app-view-part-bf></app-view-part-bf>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>g)</span> Deficiency in Pay-roll System.
+                                  <div>
+                                    <app-view-part-b [bsub]="5"></app-view-part-b>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>h)</span> Utilisation of Grant and report on missing Utilisation Certificate.
+                                  <div>
+                                    <app-view-part-bh></app-view-part-bh>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  i) Physical verification of Inventory/Stores.,
+                                  <div>
+                                    <app-view-part-b [bsub]="6"></app-view-part-b>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  j) Advances, their adjustment and recovery.
+                                  <!-- <span>a)</span>   Non-maintenance of books of accounts, subsidiary registers. -->
+                                  <div>
+                                    <app-view-part-b [bsub]="7"></app-view-part-b>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  'k)   Any other matter as may be prescribed in due course. '
+                                  <div>
+                                    <app-view-part-b [bsub]="8"></app-view-part-b>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+
+                            <!-- <tbody>
+                              <tr>
+                                <td>
+                                  <span>f)</span> Non-compliance of TDS, VAT and other relevant Statute. -->
+                                  <!-- <div>
+                                 <app-edit-partb-f></app-edit-partb-f>
+                               </div> -->
+                                <!-- </td>
+                              </tr>
+                            </tbody> -->
+                            <!-- <tbody>
+                              <tr>
+                                <td>
+                                  <span>g)</span> Deficiency in Pay-roll System. -->
+                                  <!-- <div>
+                                    <app-edit-part-bdescription></app-edit-part-bdescription>
+                                  </div> -->
+                                <!-- </td>
+                              </tr>
+                            </tbody>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span>h)</span> Utilisation of Grant and report on missing Utilisation Certificate. -->
+                                  <!-- <div>
+                                    <app-edit-part-bh></app-edit-part-bh>
+                                  </div> -->
+                                <!-- </td>
+                              </tr>
+                            </tbody> -->
+                            <!-- <tbody *ngFor="let list of partBijk">
+                                <tr>
+                                  <td>
+                                    {{ list }}
+                                    <div>
+                                      <app-edit-part-bdescription></app-edit-part-bdescription>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody> -->
+
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <td>III</td>
+                    <td>PART- C
+                      <div>
+                        <table class="table table-bordered">
+                        <tbody *ngFor="let clist of partCdescriptionList; let i=index">
+                          <tr>
+                            <td>
+                              {{clist}}
+                              <div>
+                                <app-view-part-c [indx]="i"></app-view-part-c>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>

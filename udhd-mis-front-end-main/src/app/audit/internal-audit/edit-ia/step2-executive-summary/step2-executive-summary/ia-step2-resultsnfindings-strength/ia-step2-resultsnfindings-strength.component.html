@@ -1,0 +1,100 @@
+<form [formGroup]="step2resultsnfindingsForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Results & Finding:</legend>
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td>
+            <h4>a. Strengths observed during audit engagement :</h4>
+            <!-- <div> -->
+            <span style="float: right;">
+              <button (click)="addDescription('')" mat-raised-button>
+                <mat-icon class="add-course-btn">add</mat-icon>
+              </button>
+            </span>
+            <table formArrayName="descriptions" style="width: 100%;">
+              <tbody *ngFor="let descrption of descriptions.controls; let i = index">
+                <tr>
+                  <td [formGroupName]="i">
+                    <textarea class="form-control" formControlName="description" placeholder="Enter Description"
+                      style="display: block"></textarea>
+                  <td>
+                    <button *ngIf="descrption.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+                      title="edit" (click)="enableControl(i)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button [disabled]="!descrption.valid" class="btn btn-default btn-sm" name="save"
+                      type="button" title="Save" (click)="onSubmit(i)">
+                      <mat-icon>save</mat-icon>
+                    </button>
+                    <button class="btn btn-default btn-sm" name="delete" type="button" (click)="deleteDescription(i)">
+                      <mat-icon>delete_forever</mat-icon>
+                    </button>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+            <!-- </div> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<h4>Results and Finding</h4>
+<mat-card style="display: flex; justify-content: space-between;">
+  <mat-card-header> a. Strengths observed during audit engagement :</mat-card-header>
+  <button mat-mini-fab (click)="addDescription()">
+    <mat-icon class="add-course-btn">add</mat-icon>
+  </button>
+</mat-card>
+<mat-card class="mat-card-data">
+  <form [formGroup]="step2resultsnfindingsForm" (submit)="onSubmit()">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md">
+            <div *ngIf="showFormError">
+              <p>{{ showFormError }}</p>
+            </div>
+          </div>
+        </div>
+        <ng-container formArrayName="descriptions">
+          <div class="fc" *ngFor="let descrption of descriptions.controls; let i = index"> -->
+<!-- <div [formGroupName]="i" style="width: 200%;"> -->
+<!-- <div [formGroupName]="i">
+              <mat-form-field appearance="fill">
+                <mat-label>Enter Description</mat-label>
+                <textarea matInput formControlName="description" rowCount=3></textarea>
+                <mat-error matErrorMessages></mat-error>
+              </mat-form-field>
+            </div>
+            <mat-icon class="delete-btn" style="cursor: pointer;" (click)="deleteDescription(i)">
+              delete_forever
+            </mat-icon>
+          </div>
+        </ng-container>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit"
+          [disabled]="!step2resultsnfindingsForm.valid">Save</button>
+      </mat-card-actions>
+  </form>
+</mat-card> -->

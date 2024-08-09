@@ -1,0 +1,70 @@
+<mat-card class="mat-card-data">
+  <form [formGroup]="step1Form" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Title<span class="required"> *</span></mat-label>
+            <input matInput formControlName="title" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="step1Form" [rangePicker]="picker">
+              <input matStartDate formControlName="startDate" placeholder="Start date">
+              <input matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker ></mat-date-range-picker>
+
+            <mat-error *ngIf="step1Form.controls.startDate?.hasError('matStartDateInvalid')">Invalid start date
+            </mat-error>
+            <mat-error *ngIf="step1Form.controls.endDate?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rowCount=3></textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <ng-container *ngIf="ulbs">
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="ulbId" placeholder="ULB" required>
+                <ng-container *ngFor="let ulb of ulbs">
+                <mat-option [value]="ulb.id">{{ulb.code}} - {{ulb.name}} </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" style="float: right;" type="submit" [disabled]="!step1Form.valid">
+        Submit
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

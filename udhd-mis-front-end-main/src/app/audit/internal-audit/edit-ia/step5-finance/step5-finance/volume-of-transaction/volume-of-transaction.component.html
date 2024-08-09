@@ -1,0 +1,61 @@
+<form [formGroup]="volumnOfTransactionForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Volume of Transactions:</legend>
+    <div>
+      <table border="1" class="table" formArrayName="transactions">
+        <ng-container *ngFor="let item of transactionList;let i = index">
+          <tr>
+            <th> {{item}}</th>
+            <td *ngFor="let data of transactionVolume.controls; let j=index;" [formGroupName]="j">
+              <span *ngIf="arrayOfKeys[i]==='id'">
+                <input type="hidden" [formControlName]=arrayOfKeys[i] class="form-control"></span>
+              <span *ngIf="arrayOfKeys[i+1]==='cummulativeForCurrentPeriod'" style="align-content: center">
+                <label *ngIf="j===0">Budgeted<br /> F.Y<br><br /></label>
+                <label *ngIf="j===1">Previous Year
+                  <br>(For one year)<br> F.Y</label>
+                <label *ngIf="j===2">Corresponding Period Previous Year
+                  <br>F.Y</label>
+                <label *ngIf="j===3">Current Period
+                  <br>F.Y<br><br></label>
+                <label *ngIf="j===4">Cumulative <br>for the <br>current<br> period</label>
+                <span *ngIf="j!==4"> <input type="text" [formControlName]=arrayOfKeys[i+1] class="form-control"> </span>
+              </span>
+
+              <span *ngIf="arrayOfKeys[i+1]==='openingBalanace'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetCloseExpenditureAmount(j)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='receipt'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetCloseExpenditureAmount(j)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='total'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] #total
+                readonly  [value]="(data.value.openingBalanace +data.value.receipt)|currency:'₹ ':' symbol-narrow':'3.2-2'"
+                  class="form-control">
+                <!-- {{total.value}} -->
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='netExpenditure'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetCloseExpenditureAmount(j)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='closeExpenditure'">
+
+                <input readonly type="number" [formControlName]=arrayOfKeys[i+1] class="form-control">
+                <!-- {{data.controls.total.value}}
+                              {{total.value}} -->
+              </span>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+      <div style="float: right; margin-right: 24px;">
+        <button class="btn btn-primary" type="button" *ngIf="volumnOfTransactionForm.disabled"
+        (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+        <button (click)="save()" class="btn btn-default">Save</button>
+      </div>
+    </div>
+
+  </fieldset>
+  <!-- {{volumnOfTransactionForm.value | json}} -->
+</form>

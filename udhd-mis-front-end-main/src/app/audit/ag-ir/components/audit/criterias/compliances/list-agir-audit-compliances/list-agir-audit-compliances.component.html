@@ -1,0 +1,26 @@
+<div class="container-fluid fluid-component">
+
+
+    <div class="row">
+        <div class="col-md">
+            <mat-card class="child-card-material">
+                <mat-card-title>
+                    <span>AGIR Audit Compliances</span>
+                    <span style="float:right" *ngIf="parent=='edit'  && auditStatus=='DRAFT' ||auditStatus=='IN_REVIEW_ULB'">
+                        <mat-icon (click)="add()">add_circle_outline</mat-icon>
+                    </span>
+
+
+                </mat-card-title>
+                <mat-card-content>
+                    <ng-container >
+                        <app-dynamic-mat-table [paginationTableData]="paginationTableData"
+                            (paginatorEvent)="changeDataForPagination($event)" (selectedToView)="showView($event)">
+                        </app-dynamic-mat-table>
+                    </ng-container>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

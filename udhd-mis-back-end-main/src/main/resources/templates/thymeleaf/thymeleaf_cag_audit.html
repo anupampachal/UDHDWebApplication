@@ -1,0 +1,256 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" />
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style type="text/css">
+.text-center {
+	text-align: center;
+}
+
+.intro {
+	margin-top: 100px;
+}
+
+.background-color {
+	background-color: #cdcdcd !important;
+	color: #fff;
+}
+
+table.speaker-list {
+	table-layout: fixed;
+}
+
+.exec-summary {
+	text-align: center;
+	border: 1px black solid;
+	background: #cdcdcd !important;
+	color: #000;
+	margin-bottom: 0px;
+}
+
+.srl-no {
+	width: 80px;
+	border-right: 1px black solid;
+	padding: 5px;
+	display: inline;
+}
+
+.audit-title {
+	padding: 5px;
+	width: 90%;
+	text-align: center;
+	display: inline;
+}
+
+.textjustified {
+	text-align: justified;
+	padding: 10px;
+}
+
+h4 {
+	display: inline;
+}
+
+table {
+	page-break-inside: auto
+}
+
+table.table-bordered {
+	border: 1px solid black !important;
+}
+
+table.table-bordered>thead>tr>th, table.table-bordered>thead>tr>td {
+	border: 1px solid black !important;
+}
+
+table.table-bordered>tbody>tr>td {
+	border: 1px solid black !important;
+}
+
+.border {
+	border: 1px black solid;
+}
+
+table tbody tr td:before, table tbody tr td:after {
+	content: "";
+	height: 4px;
+	display: block;
+	page-break-inside: avoid;
+}
+
+.padding5 {
+	padding: 5px !important;
+}
+</style>
+</head>
+<body>
+	<section class="container-fluid intro">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+
+				<h1 class="h1" th:text="${nameOfMunicipality}">Name of
+					municipality</h1>
+				<h3 class="h3">CAG/PAC Report</h3>
+				<h3 class="h3">Govt. of Bihar.</h3>
+				<h3 class="h3">
+					Audit Period: <span th:text="${auditStartDate}"></span> - <span
+						th:text="${auditEndDate}"></span>
+				</h3>
+
+			</div>
+		</div>
+	</section>
+	<div style="display: block; clear: both; page-break-after: always;"></div>
+
+	<section id="Introduction" class="container-fluid border">
+		<div class="row border">
+			<div class="col-xs-12">
+				<h2 class="text-center background-color ">CAG/PAC Audit</h2>
+			</div>
+		</div>
+		<div class="row border">
+			<div class="col-xs-12">
+				<table class="table table-bordered table-condensed">
+
+
+					<tbody class="border">
+						<tr class="border">
+							<td class="border padding5"><h4>Audit Id.</h4></td>
+							<td class="border padding5"><h4
+									th:text="${auditEntity.id}">Audit Id.</h4></td>
+						</tr>
+						<tr>
+							<td class="border padding5"><h4>Title</h4></td>
+							<td class="border padding5"><h4
+									th:text="${auditEntity.title}">Title</h4></td>
+						</tr>
+						<tr>
+							<td class="padding5">Start Date</td>
+							<td class="padding5" th:text="${auditStartDate}"><p>Start
+									Date</p></td>
+						</tr>
+						<tr>
+							<td class="padding5">End Date</td>
+							<td class="padding5" th:text="${auditEndDate}">Current audit
+								Period</td>
+						</tr>
+						<tr>
+							<td class="padding5">Name of ULB:</td>
+							<td class="padding5" th:text="${nameOfMunicipality}">Name of
+								Municipality</td>
+						</tr>
+						<tr>
+							<td class="padding5">Status</td>
+							<td class="padding5" th:text="${auditEntity.auditStatus}">Status</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</section>
+	<div style="display: block; clear: both; page-break-after: always;"></div>
+
+	<section id="criteria-info" class="container-fluid border">
+		<div class="row border text-center">
+			<div class="col-xs-12">
+				<table class="table table-bordered print-friendly table-condensed ">
+					<thead class="border">
+						<tr class="border">
+							<td><h4>Audit Criteria</h4></td>
+						</tr>
+						<tr
+							th:each="criteria,iterator : ${agirAuditEntity.auditCriterias}">
+							<td>
+								<table
+									class="table table-bordered print-friendly table-condensed ">
+									<!-- thead class="border">
+										<tr>
+											<td class="padding5">Id</td>
+											<td class="padding5" colspan="2">Information</td>
+										</tr>
+									</thead-->
+									<tbody class="border">
+										<tr>
+											<td rowspan="8" th:text="${criteria.id}">Id</td>
+											<td>Title</td>
+											<td th:text="${criteria.title}">Title</td>
+										</tr>
+										<tr>
+											<td>Audit Para</td>
+											<td th:text="${criteria.auditPara}"></td>
+										</tr>
+										<tr>
+											<td>Amount</td>
+											<td th:text="${criteria.amount}"></td>
+										</tr>
+										<tr>
+											<td>Status</td>
+											<td th:text="${criteria.status}"></td>
+										</tr>
+										<tr>
+											<td>Risk</td>
+											<td th:text="${criteria.associatedRisk}"></td>
+										</tr>
+										<tr>
+											<td>Description</td>
+											<td th:text="${criteria.description}"></td>
+										</tr>
+										<tr th:if="${criteria.compliances!=null}">
+											<td>Compliances</td>
+											<td>
+												<table
+													class="table table-bordered print-friendly table-condensed "
+													>
+													<thead class="border">
+														<tr>
+															<td>Id</td>
+															<td>Compliance</td>
+														</tr>
+													</thead>
+													<tbody class="border">
+														<tr th:each="compliance,iterator : ${criteria.compliances}">
+															<td th:text="${compliance.id}">Id</td>
+															<td th:text="${compliance.comment}">Comment</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+										<tr th:if="${criteria.comment!=null}">
+											<td>Comments</td>
+											<td>
+												<table
+													class="table table-bordered print-friendly table-condensed "
+													>
+													<thead class="border">
+														<tr>
+															<td>Id</td>
+															<td>Comment</td>
+														</tr>
+													</thead>
+													<tbody class="border">
+														<tr th:each="comment,iterator : ${criteria.comment}">
+															<td th:text="${comment.id}">Id</td>
+															<td th:text="${comment.comment}">Comment</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

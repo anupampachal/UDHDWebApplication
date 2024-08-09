@@ -1,0 +1,30 @@
+<div class="col-lg-12 col-md-12 text-center table-responsive">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Sl No.</th>
+        <th>Division</th>
+        <th>Income (in Cr.)<br> <span class="date-style">{{tableStartDate| date}} - {{tableEndDate | date }}</span>
+        </th>
+        <th>Expenditure (in Cr.)<br><span class="date-style"> {{tableStartDate | date}} - {{tableEndDate | date }}</span>
+        </th>
+        <th>Income (in Cr.)<br><span class="date-style"> {{tableStartDate | date}} - {{tableEndDate |date}} </span></th>
+        <th>Expenditure (in Cr.)<br> <span class="date-style">{{tableStartDate | date}} - {{tableEndDate |date}}</span></th>
+        <th>Surplus / Deficit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>
+          <a href="#" style="text-decoration: none;">Patna</a>
+        </td>
+        <td>{{ 0 | currency: 'INR' }}</td>
+        <td>{{ 0 | currency: 'INR' }}</td>
+        <td>{{ 0 | currency: 'INR' }}</td>
+        <td>{{ 0 | currency: 'INR' }}</td>
+        <td>{{ 0 | currency: 'INR' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

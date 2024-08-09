@@ -1,0 +1,13 @@
+
+<div class="row mt-3">
+  <div class="col-md-6">
+    <app-district-income-expense-table [mainIncomeExpense]="mainIncomeAndExpenseComparativeData"></app-district-income-expense-table>
+  </div>
+  <div class="col-md-6 pt-5" style="display: block">
+    <app-district-income-expense-graph [mainIncomeExpense]="mainIncomeAndExpenseComparativeData"></app-district-income-expense-graph>
+  </div>
+</div>
+
+<app-child-level-district-income-expense [clieData]="childLevelIncomeAndExpenseData"></app-child-level-district-income-expense>
+
+<app-head-level-district-income-expense [headLevelIncome]="headLevelIncomeInfo" [headLevelExpense]="headLevelExpenseInfo"></app-head-level-district-income-expense>

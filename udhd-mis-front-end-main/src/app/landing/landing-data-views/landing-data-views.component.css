@@ -1,0 +1,21 @@
+.active-link{
+  color: #313AA7;
+}
+a{
+  font-size: large;
+}
+mat-card{
+  padding:0px;
+}
+.mat-card-header-cls{
+padding: 0%;
+background-color: #E8E8E8;
+color: rgb(25, 219, 233)
+}
+
+.jumbotron{
+  background-image:url( '/assets/images/calulator_finance.jpg');
+  background-repeat: repeat-y;
+  height:450px;
+
+}

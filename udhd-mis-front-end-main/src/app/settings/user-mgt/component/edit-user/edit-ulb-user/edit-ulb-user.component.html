@@ -1,0 +1,229 @@
+
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+        <div class="example-button-container">
+  
+          <button mat-stroked-button 
+            matTooltip="List users" class="child-route-button" [routerLink]="'/settings/settings-home/user-mgt/usermgt/list'" color="primary"
+            style="float: right" aria-label="Example icon button with a plus one icon">
+            <mat-icon>list</mat-icon>
+          </button>
+  
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card >
+    <div [formGroup]="updateULBUserForm">
+  
+      <div class="row">
+        <div class="col-md">
+          <mat-card-title class="mat-card-title">Update ULB User</mat-card-title>
+        </div>
+      </div>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md">
+            <div *ngIf="showFormError">
+              <p>{{ showFormError.Description }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-label>Id<span class="required"> *</span></mat-label>
+                  <input formControlName="id" matInput />
+                  <mat-error *ngIf="updateULBUserForm.controls['id'].invalid">{{getErrorMessages('id')}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-label>Email<span class="required"> *</span></mat-label>
+                  <input formControlName="username" matInput />
+                  <mat-error *ngIf="updateULBUserForm.controls['username'].invalid">{{getErrorMessages('username')}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-label>Name<span class="required"> *</span></mat-label>
+                  <input matInput formControlName="name" minlength="3" maxlength="50" />
+                  <mat-error *ngIf="updateULBUserForm.controls['name'].invalid">{{getErrorMessages('name')}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-label>Mobile No<span class="required"> *</span></mat-label>
+                  <input matInput formControlName="mobileNo" minlength="10" />
+                  <mat-error *ngIf="updateULBUserForm.controls['mobileNo'].invalid">{{getErrorMessages('mobileNo')}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-select formControlName="authority" placeholder="Authority">
+                    <ng-container *ngFor="let authName of authList">
+                      <mat-option [value]="authName.name">{{authName.name}} </mat-option>
+                    </ng-container>
+                    <mat-error *ngIf="updateULBUserForm.controls['authority'].invalid">{{getErrorMessages('authority')}}</mat-error>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            
+        
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-label>Permanent Address</mat-label>
+                  <textarea formControlName="permanentAddress" matInput></textarea>
+                  <mat-error *ngIf="updateULBUserForm.controls['permanentAddress'].invalid">{{getErrorMessages('permanentAddress')}}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="boolean">
+              <div class="row">
+                <div class="col-md">
+                  <mat-label>mobileVerified<span class="required">*</span></mat-label>
+                  <mat-slide-toggle formControlName="mobileVerified" class="example-margin" color="primary">
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <mat-label>emailVerified<span class="required">*</span></mat-label>
+                  <mat-slide-toggle formControlName="emailVerified" class="example-margin" color="primary">
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <mat-label>accountNonExpired<span class="required">*</span></mat-label>
+                  <mat-slide-toggle formControlName="accountNonExpired" class="example-margin" color="primary">
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <mat-label>enabled<span class="required">*</span></mat-label>
+                  <mat-slide-toggle formControlName="enabled" class="example-margin" color="primary">
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <mat-label>accountNonLocked<span class="required">*</span></mat-label>
+                  <mat-slide-toggle formControlName="accountNonLocked" class="example-margin" color="primary">
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <mat-label>credentialsNonExpired<span class="required">*</span></mat-label>
+                  <mat-slide-toggle formControlName="credentialsNonExpired" class="example-margin" color="primary">
+                  </mat-slide-toggle>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="row" >
+            
+          <h4>Saved ULB data user is mapped to:</h4>
+          
+          <div class="col-md-12">
+            
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Code</th>
+                 
+                </tr>
+              </thead>
+              <tbody *ngIf="user && user.ulbDetails">
+                <tr *ngFor="let item of user.ulbDetails">
+                  <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.code}}</td>
+                  
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="h3">Choose ULB to change:</div>
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-select placeholder="Division" (selectionChange)="getDistricts($event)">
+                    <ng-container *ngFor="let division of divisions">
+                      <mat-option [value]="division">{{division.name}} </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+        
+            <div class="row" >
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-select  placeholder="District" (selectionChange)="setDistrict($event)">
+                    <ng-container *ngFor="let district of districts">
+                      <mat-option [value]="district">{{district.name}} </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+        
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-select  placeholder="ULB Type" (selectionChange)="getUlbList($event)" [compareWith]="compareWithFunc" >
+                    <ng-container *ngFor="let ulb of ulbType">
+                      <mat-option [value]="ulb">{{ulb}} </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+        
+            <div class="row" *ngIf="ulbList">
+              <div class="col-md">
+                <mat-form-field appearance="fill">
+                  <mat-select placeholder="Ulb List" (selectionChange)="onNewULBSelect($event)">
+                    <ng-container *ngFor="let ulb of ulbList">
+                      <mat-option [value]="ulb.id">{{ ulb.name }} </mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <button mat-raised-button color="primary" type="button" [disabled]="updateULBUserForm.invalid"
+        (click)="onSubmit()">Submit</button>
+    </div>
+  </mat-card>
+  

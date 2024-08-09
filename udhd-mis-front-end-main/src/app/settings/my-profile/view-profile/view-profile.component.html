@@ -1,0 +1,66 @@
+<div class="container-fluid fluid-component">
+    <mat-card class="child-card-material mat-card-header-cls">
+        <div class="row">
+            <div class="col-md">
+                <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+            </div>
+            <div class="col-md">
+                <!--div class="example-button-container ">
+                    <button mat-stroked-button class="child-route-button" color="primary"
+                        [routerLink]="'../info/edit/'">
+                        <mat-icon>mode_edit</mat-icon>
+                    </button>
+                </div-->
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mat-card mat-data-card container-fluid" *ngIf="myProfileRes$ | async as myProfile">
+        <!--mat-card-header style="text-align:center">
+            <div style="text-align:center;">
+            <mat-card-title  >My Profile</mat-card-title></div>
+        </mat-card-header-->
+        <mat-card-content class="view-mat-card-content">
+
+            <div class="row">
+                <!--div class="col-md-4" *ngIf="myProfile.fileId">
+                    <img class="form-control " style="float:right; margin-top:17px;height:200px;width:200px;"
+                        [src]="logourl$" class="img-responsive img" alt="No image available">
+                </div-->
+                
+               
+                    <h3>My profile:</h3>
+                    <div class="form-group">
+                        <label for="id"> Name</label>
+                        <input type="text" [value]="myProfile.name" mat-input class="form-control" id="id"
+                            [disabled]="'true'" />
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email</label>
+                        <input type="text" [value]="myProfile.username" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mobile No.</label>
+                        <input type="text" [value]="myProfile.mobileNo" mat-input class="form-control" id="description"
+                            [disabled]="'true'" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aliasName">Address</label>
+                        <input type="text" [value]="myProfile.address" mat-input class="form-control" id="description"
+                            [disabled]="'true'" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Authority</label>
+                        <input type="text" [value]="myProfile.authority" mat-input class="form-control" id="description"
+                            [disabled]="'true'" />
+                    </div>
+
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

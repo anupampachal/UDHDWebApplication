@@ -1,0 +1,95 @@
+<form [formGroup]="objectiveForm">
+  <div class="col-md-12">
+    <div class="col-md-12" align="right">
+      <button type="button" title="add new row" (click)="addNewObjective()">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
+    <div formArrayName="objectives">
+      <ng-container *ngFor="let item of objectivesControl.controls; let i=index" [formGroupName]="i">
+
+        <div class="form-group col-md-12" align="right">
+          <button type="button" title="delete" (click)="removeObjectiveControl(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <fieldset class="hm-fieldset">
+          <legend class="hm-legend">
+            <span *ngIf="leakageList[i]">
+              {{ leakageList[i] }}
+            </span>
+            <span *ngIf="!leakageList[i]">
+              {{ " =>)" }}
+            </span>
+          </legend>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="col-md-4">Objective :<span class="danger"> *</span></label>
+              <span class="col-md-8"> <input type="text" name="auditObjective" class="form-control"
+                  formControlName="objective" id="auditObjective" placeholder="Enter  auditObjective">
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="col-md-4">Criteria :<span class="danger"> *</span></label>
+              <span class="col-md-8"> <input type="text" name="criteria" class="form-control" formControlName="criteria"
+                  id="criteria" placeholder="Enter criteria">
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="col-md-4">Condition :<span class="danger"> *</span></label>
+              <span class="col-md-8"> <input type="text" name="condition" class="form-control"
+                  formControlName="condition" id="condition" placeholder="Enter condition">
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="col-md-4">Consequences/Effect/Impact :<span class="danger"> *</span></label>
+              <span class="col-md-8"> <input type="text" name="consequenses" class="form-control"
+                  formControlName="consequences" id="consequenses" placeholder="Enter  consequenses">
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="col-md-4">Cause :<span class="danger"> *</span></label>
+              <span class="col-md-8"> <input type="text" name="cause" class="form-control" formControlName="cause"
+                  id="cause" placeholder="Enter cause">
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="col-md-4">Corrective Action/Recommendation :<span class="danger">
+                  *</span></label>
+              <span class="col-md-8"> <input type="text" name="correctiveActionRecommendation" class="form-control"
+                  formControlName="correctiveAction" id="correctiveActionRecommendation"
+                  placeholder="Enter correctiveActionRecommendation">
+              </span>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="form-group col-md-12">
+              <p *ngIf="showFileError" class="danger">{{showFileError}}</p>
+              <label class="col-md-4" for="upload">Upload File
+              </label>
+              <span class="col-md-8" style="padding: 0">
+                <input type="file" [disabled]="!isEdit?true:false" (change)="onSelected($event)"
+                  class=" btn-file pull-left">
+              </span>
+            </div>
+          </div>
+          <button align="right" class="btn btn-primary" [disabled]="!item.valid" style="float: right;" (click)="save(i)">Save</button>
+          <button align="right" class="btn btn-primary" *ngIf="item.disabled" style="float: right; margin-right: 12px;" (click)="enableControl(i)">Edit</button>
+          <br>
+          <hr>
+        </fieldset>
+      </ng-container>
+    </div>
+  </div>
+</form>

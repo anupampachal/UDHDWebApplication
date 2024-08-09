@@ -1,0 +1,25 @@
+<section>
+
+  <div class="row">
+    <div class="col-md-5">
+      <h3 style="text-align: center;"> <a  class="link" (click)="deas()" [routerLink]="'/deas/deas/data-views/'" title="goto deas">DEAS</a> </h3>
+      <app-deas-audit-cahrt></app-deas-audit-cahrt>
+      <h3 style="text-align: center;"> <a  class="link"(click)="financeAudit()" [routerLink]=" '/audit/audit/finance/finance/list' " title="goto finance audit">Finance Audit</a></h3>
+      <app-finance-audit-cahrt></app-finance-audit-cahrt>
+    </div>
+    <div class="col-md-5">
+      <h3 style="text-align: center;"> <a  class="link"(click)="internalAudit()" [routerLink]="'/audit/ia-audit/ia/ia-list'" title="goto internal audit">Internal Audit</a></h3>
+      <app-internal-audit-cahrt></app-internal-audit-cahrt>
+      <h3 style="text-align: center;"> <a class="link" [routerLink]=" '/audit/audit/ag-ir/ag-ir/list' " (click)="agAudit()" title="goto ag audit">AG Audit</a></h3>
+      <app-ag-audit-cahrt></app-ag-audit-cahrt>
+    </div>
+    <p>sow data</p>
+    <!-- <div class="col-md-4">
+      <h3 style="text-align: center;"> <a (click)="utilizationCertificate()" title="goto uc">Utilization Certificate</a>
+      </h3>
+      <app-ucchart [dashbordInfo]='dashboardInfo'></app-ucchart>
+      <h3 style="text-align: center;"> <a (click)="pacAudit()" title="goto pac audit">PAC Audit</a> </h3>
+      <app-pacchart [dashbordInfo]='dashboardInfo'></app-pacchart>
+    </div> -->
+  </div>
+</section>

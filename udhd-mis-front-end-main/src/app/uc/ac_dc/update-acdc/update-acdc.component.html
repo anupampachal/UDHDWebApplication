@@ -1,0 +1,189 @@
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+        <div class="col-md">
+            <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+        </div>
+        <div class="col-md">
+            <div class="example-button-container">
+                <button mat-stroked-button class="route-button" [routerLink]="'../../list'" color="primary"
+                    style="float: right" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>list</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<div class="">
+    <mat-card class="mat-card-data">
+        <form [formGroup]="updateACDC" (submit)="onSubmit()">
+            <div class="row main-div">
+                <div class="col-md">
+                    <mat-card-title class="mat-card-title">Update AC/DC</mat-card-title>
+                </div>
+            </div>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-select formControlName="ulb" placeholder="ULB" [compareWith]="compareFn">
+                                <mat-option>None</mat-option>
+                                <ng-container *ngFor="let ulbl of ulbs">
+                                    <mat-option [value]="ulbl">{{ulbl.code}} -
+                                        {{ulbl.name}} </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Treasury Code<span class="required"> *</span></mat-label>
+                            <input matInput formControlName="treasuryCode" minlength="3" maxlength="20" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Treasury Name<span class="required"> *</span></mat-label>
+                            <input type="text" matInput formControlName="treasuryName" minlength="2" maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Financial Year Start</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="financialYearStart">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Financial Year End</mat-label>
+                            <input matInput [matDatepicker]="picker1" formControlName="financialYearEnd">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-label>Planned<span class="required">*</span></mat-label>
+                        <mat-slide-toggle formControlName="plannedNonPlanned" class="example-margin" color="primary">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Budget Code<span class="required"> *</span></mat-label>
+                            <input type="text" matInput formControlName="budgetCode" minlength="2" maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-label>Status<span class="required">*</span></mat-label>
+                        <mat-slide-toggle formControlName="status" class="example-margin" color="primary">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Bill No.<span class="required"> *</span></mat-label>
+                            <input type="text" matInput formControlName="billNo" minlength="2" maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Bill Date</mat-label>
+                            <input matInput [matDatepicker]="picker2" formControlName="billDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Sanction Order No.<span class="required"> *</span></mat-label>
+                            <input type="text" matInput formControlName="sanctionOrderNo" minlength="2"
+                                maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Sanction Order date</mat-label>
+                            <input matInput [matDatepicker]="picker3" formControlName="sanctionOrderDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Bill TV No.<span class="required"> *</span></mat-label>
+                            <input type="text" matInput formControlName="billTVNo" minlength="2" maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Amount Withdrawn under AC Bill<span class="required"> *</span></mat-label>
+                            <input type="number" matInput formControlName="drawn" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Amount Adjusted by AG.<span class="required"> *</span></mat-label>
+                            <input type="number" matInput formControlName="adjusted" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Amount unadjusted.<span class="required"> *</span></mat-label>
+                            <input type="number" matInput formControlName="unadjusted" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>DDO Code<span class="required"> *</span></mat-label>
+                            <input type="text" matInput formControlName="ddoCode" minlength="2" maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Remarks</mat-label>
+                            <input type="text" matInput formControlName="remarks" minlength="2" maxlength="200" />
+                            <mat-error matErrorMessages></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" [disabled]="!(updateACDC.valid )" type="submit">
+                    Submit
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

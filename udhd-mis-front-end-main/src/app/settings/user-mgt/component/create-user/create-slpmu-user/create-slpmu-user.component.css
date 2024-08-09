@@ -1,0 +1,37 @@
+
+.button-row button {
+  margin: 5px;
+}
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+}
+.mat-card-data{
+  margin-top:10px;
+  display: flex;
+  justify-content: center;
+  }
+
+  .mat-card-header-cls{
+    padding: 0%;
+    background-color: #E8E8E8;
+  }
+  mat-card{
+    margin:10px 0;
+  }
+  .mat-card-title{
+    padding:20px;
+  }
+  form,mat-form-field{
+    width: 100%;
+  }
+
+  .boolean {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    gap: 32px 10%;
+    padding-top: 20px;
+    /* align-items: center;
+    justify-content: space-between; */
+  }

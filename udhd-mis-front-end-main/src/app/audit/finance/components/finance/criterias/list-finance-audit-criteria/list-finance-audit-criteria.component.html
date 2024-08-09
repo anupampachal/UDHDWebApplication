@@ -1,0 +1,80 @@
+<div class="container-fluid fluid-component">
+    <div class="row " *ngIf="showFilter">
+        <app-filter [sortOptions]="sortOptions" (clearDataEvent)="clearDataEvent($event)"
+            (filteredData)="filteredDataEvent($event)" (getSortedByEvent)="getSortedByEvent($event)"
+            (sortDirectionChange)="sortingDirectionChangeEvent($event)"></app-filter>
+    </div>
+
+    <div *ngIf="paginationTableData$|async as pageData">
+        <mat-accordion *ngFor="let criteria of pageData.data.data" class="paginated-accordion">
+            <div *ngIf="criteria!=null">
+                <mat-expansion-panel hideToggle (opened)="onPanelExpand(criteria.id||-1)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="bold">
+                            {{"id. "+criteria.id+" ,Title:"+criteria.title}}
+                        </mat-panel-title>
+                        <mat-panel-description class="bold">
+                            {{"Status="+criteria.status +", Amount=" +criteria.amount}}
+                            <button *ngIf="parent==='edit'  && criteria && criteria.id" mat-button
+                                (click)="editClicked(criteria.id)">
+                                <mat-icon>mode_edit</mat-icon>
+                            </button>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <hr>
+                    <app-edit-finance-audit-criteria *ngIf="currentCriteriaView==='edit'"></app-edit-finance-audit-criteria>
+                    <div *ngIf="currentCriteriaView==='list'">
+                        <div class="row">
+                            <div class="col-md">
+                                Risk: {{criteria.associatedRisk}}
+                            </div>
+                            <div class="col-md">
+                                Audit Para : {{criteria.auditPara}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                Description: {{criteria.description}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row" *ngIf=" criteria && criteria.id">
+                            <div class="col-md">
+                                <div *ngIf="complianceView==='list'">
+                                    <app-list-finance-audit-compliances [criteriaId]="criteria.id"
+                                        [openedAccordion]="openedAccordion" >
+                                    </app-list-finance-audit-compliances>
+                                </div>
+                                <div *ngIf="complianceView==='view' && complianceId">
+                                    <app-view-finance-audit-compliances [complianceId]="complianceId">
+                                    </app-view-finance-audit-compliances>
+                                </div>
+
+                                <div *ngIf="complianceView==='create'">
+                                    <app-create-finance-audit-compliances>
+                                    </app-create-finance-audit-compliances>
+                                </div>
+
+                            </div>
+                            <div class="col-md">
+                                <app-list-finance-audit-comments [criteriaId]="criteria.id"
+                                    [openedAccordion]="openedAccordion">
+                                </app-list-finance-audit-comments>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </div>
+        </mat-accordion>
+
+        <mat-paginator [pageSizeOptions]="pageData.pageSizeOptions" [pageIndex]="pageData.currentPage"
+            [pageSize]="pageData.pageSize" [length]="pageData.dataTotLength" (page)="getServerData($event)"
+            showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+
+
+
+
+</div>

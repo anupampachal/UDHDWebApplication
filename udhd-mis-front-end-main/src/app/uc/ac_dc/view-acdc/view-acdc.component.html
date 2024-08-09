@@ -1,0 +1,206 @@
+<div class="container-fluid fluid-component">
+    <mat-card class="child-card-material mat-card-header-cls">
+        <div class="row">
+            <div class="col-md">
+                <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+            </div>
+            <div class="col-md">
+                <div class="example-button-container ">
+                    <button mat-stroked-button [routerLink]="'../../list'" color="primary" class="child-route-button"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mat-card mat-data-card container-fluid" *ngIf="acdc$ | async as acdc">
+        <mat-card-content class="view-mat-card-content">
+            <div class="row header-row">
+                <span class="col-md">
+                    <h2 style="display: inline">AC/DC</h2>
+                </span>
+                <span class="col-md" style="text-align: right">
+                    <button mat-stroked-button class="child-route-button" color="warn" (click)="confirmDelete()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-stroked-button class="child-route-button" color="primary"
+                        [routerLink]="'../../edit/' + acdc.id">
+                        <mat-icon>mode_edit</mat-icon>
+                    </button>
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <mat-label> Id</mat-label>
+                        <input type="text" [value]="acdc.id" mat-input class="form-control" id="id"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <mat-label>Treasury Name</mat-label>
+                        <input type="text" [value]="acdc.treasuryName" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <mat-label>Treasury Code</mat-label>
+                        <input type="text" [value]="acdc.treasuryCode" mat-input class="form-control" id="treasuryCode"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="id"> Budget Code</label>
+                        <input type="text" [value]="acdc.budgetCode" mat-input class="form-control" id="id"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md" style="padding-top:20px">
+                    <div class="form-group">
+                        <mat-label>Financial Year Start </mat-label>
+                        <input [disabled]=true mat-input  class="form-control"
+                            [value]="acdc.financialYearStart">
+                    </div>
+                </div>
+                <div class="col-md" style="padding-top:20px">
+                    <mat-label>Financial Year End </mat-label>
+                    <input [disabled]=true mat-input  class="form-control"
+                        [value]="acdc.financialYearStart">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md" style="padding-top:20px;padding-bottom: 20px;">
+                    <div class="form-group">
+                        <mat-label>Planned<span class="required">*</span></mat-label>
+                        <mat-slide-toggle [disabled]="true" class="example-margin" color="primary"
+                            [checked]="acdc.plannedNonPlanned">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+                <div class="col-md" style="padding-top:20px">
+                    <div class="form-group">
+                        <mat-label>Status<span class="required">*</span></mat-label>
+                        <mat-slide-toggle [disabled]="true" class="example-margin" color="primary"
+                            [checked]="acdc.status">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Bill No.</label>
+                        <input type="text" [value]="acdc.billNo" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md" >
+                    <div class="form-group">
+                        <mat-label>Bill Date </mat-label>
+                        <input [disabled]=true mat-input class="form-control" [value]="acdc.billDate">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Sanction Order No.</label>
+                        <input type="text" [value]="acdc.sanctionOrderNo" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md" style="padding-top:20px">
+                    <div class="form-group">
+                        <mat-label>Sanction Order Date </mat-label>
+                        <input [disabled]=true mat-input class="form-control" [value]="acdc.sanctionOrderDate">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Bill TV No.</label>
+                        <input type="text" [value]="acdc.billTVNo" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Amount Drawn under AC Bill.</label>
+                        <input type="text" [value]="acdc.drawn" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Amount Adjusted by AG.</label>
+                        <input type="text" [value]="acdc.adjusted" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Unadjusted Amount.</label>
+                        <input type="text" [value]="acdc.unadjusted" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">DDO Code.</label>
+                        <input type="text" [value]="acdc.ddoCode" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">ULB.</label>
+                        <input type="text" [value]="acdc.ulb?.name" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="name">Remarks.</label>
+                        <input type="text" [value]="acdc.remarks" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

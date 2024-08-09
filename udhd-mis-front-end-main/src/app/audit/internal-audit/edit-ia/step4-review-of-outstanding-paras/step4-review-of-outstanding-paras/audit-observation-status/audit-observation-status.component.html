@@ -1,0 +1,75 @@
+<form [formGroup]="auditObservationStatusForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <!-- <legend class="hm-legend">3.1 Status of Audit Observations:</legend> -->
+    <span style="float:right"><button type="button" (click)="addAuditObservationStatusForm()">
+        <mat-icon color="primary">add</mat-icon>
+      </button></span>
+    <table class="table table-bordered table-striped" formArrayName="auditObservationStatus">
+      <thead>
+        <th>S.No.</th>
+        <th>Particulars of audit and date of report</th>
+        <th>Total no.of audit paras</th>
+        <th>Total no. of audit <br> paras where <br> necessary improvement/ <br> corrective measures <br> required</th>
+        <th>Total no.of audit paras where recovery of cash is proposed</th>
+        <th>Total no. of audit paras where recovery has been made</th>
+        <th>Total amount of Recovery</th>
+        <th>Total no.of O/s para where no action has been taken</th>
+        <th>No. & date of compliance report</th>
+      </thead>
+      <tbody *ngFor="let auditObservationStatus of auditObservationStatus.controls; let i=index">
+        <tr [formGroupName]="i">
+
+          <td>{{i+1}}</td>
+          <td>
+            <input type="hidden" formControlName="id">
+            <input type="text" class="form-control" id="particular" formControlName="auditParticularsWithDate"
+              name="particular">
+          </td>
+
+          <td>
+            <input type="number" class="form-control" id="totalNoOfAuditpara" formControlName="totalNosOfAuditParas"
+              name="totalNoOfAuditpara" placeholder="Enter total No. of Auditpara">
+          </td>
+
+          <td>
+            <input type="number" class="form-control" formControlName="totalAuditParasWithCorrectiveActionReq"
+              name="totalNoOfAuditParaWhereImprovementsRequired">
+          </td>
+          <td>
+            <input type="number" class="form-control" formControlName="totalAuditParasWithCashRecProposed"
+              name="totalNoOfAuditParaWhereRecoveryOfCashIsProposed">
+          </td>
+          <td>
+            <input type="number" class="form-control" id="totalNoOfAuditParaWhereRecoveryMade"
+              formControlName="totalAuditParasWithCashRecMade" name="totalNoOfAuditParaWhereRecoveryMade">
+          </td>
+          <td>
+            <input type="number" class="form-control" id="totalNoOfRecovery" formControlName="totalAmtOfRecovery"
+              name="totalNoOfRecovery" placeholder="Enter totalNoOfRecovery">
+
+          </td>
+          <td>
+            <input type="number" class="form-control" id="totalNoOfAuditParaWhereNoActionHasBeenTaken"
+              formControlName="totalNosOfParasWithNoAction" name="totalNoOfAuditParaWhereNoActionHasBeenTaken">
+          </td>
+          <td>
+            <input type="text" class="form-control" id="totalNoOfCompliences"
+              formControlName="nosAndDateOfComplianceReport" name="totalNoOfCompliences">
+
+          </td>
+          <td>
+            <button *ngIf="auditObservationStatus.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+              title="edit" (click)="enableControl(i)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button type="button" title="{{buttonText}}" name="{{buttonText}}" [disabled]="!auditObservationStatus.valid" class="btn btn-default btn-sm"
+              (click)="onSubmit(i, auditObservationStatus)">
+              <i class="fa fa-save"></i></button>
+            <button type="button" name="delete" class="btn btn-default btn-sm" (click)="remove(i)">
+              <i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</form>

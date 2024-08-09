@@ -1,0 +1,31 @@
+<div class="col-lg-12 col-md-12 table-responsive">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Sl No.</th>
+        <th>District</th>
+        <th>Income (in Cr.)<br> <span class="date-style">{{currentPeriod}}</span>
+        </th>
+        <th>Expenditure (in Cr.)<br><span class="date-style"> {{currentPeriod}}</span>
+        </th>
+        <th>Income (in Cr.)<br><span class="date-style"> {{ prevPeriod }} </span></th>
+        <th>Expenditure (in Cr.)<br> <span class="date-style">{{ prevPeriod }}</span></th>
+        <th>Surplus / Deficit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataToDisplay; let i = index">
+        <td>{{ i+1 }}</td>
+        <td (click)="goToDistrict(data.geographyId, data.geographyName)">
+          <span class="link"> {{ data.geographyName }}</span>
+        </td>
+        <td>{{ data.incomeAmtFromCurrentToPrev | formatAmount }}</td>
+        <td>{{ data.expenseAmtFromCurrentToPrev | formatAmount }}</td>
+        <td>{{ data.incomeAmtFromPrevToLast | formatAmount }}</td>
+        <td>{{ data.expenseAmtFromPrevToLast | formatAmount }}</td>
+        <td>{{  data.net| formatAmount }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

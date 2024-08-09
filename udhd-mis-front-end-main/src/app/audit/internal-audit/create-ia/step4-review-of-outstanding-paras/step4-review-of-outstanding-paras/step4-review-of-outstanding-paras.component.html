@@ -1,0 +1,19 @@
+<div class="row">
+  <label>REVIEW OF OUTSTANDING AUDIT PARAS:</label>
+  <hr>
+  <form>
+    <fieldset class="hm-fieldset col-md-12 ">
+        <legend class="hm-legend"> Status of Audit Observations is as under:</legend>
+        <app-audit-observation-status #part [reportId]="reportId"></app-audit-observation-status>
+    </fieldset>
+
+    <fieldset class="hm-fieldset col-md-12 ">
+        <legend class="hm-legend"> Details of total no of audit paras:</legend>
+        <app-audit-para-details #part [reportId]="reportId"></app-audit-para-details>
+    </fieldset>
+
+  </form>
+
+
+</div>
+

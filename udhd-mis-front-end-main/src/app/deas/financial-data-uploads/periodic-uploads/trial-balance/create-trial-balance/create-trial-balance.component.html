@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <mat-card class="child-card-material mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="mat-card-data">
+    <form (submit)="onSubmit()">
+      <div class="row">
+        <div class="col-md">
+          <span class="col-md">
+            <h4>Upload trial balance spreadsheet here</h4>
+          </span>
+          <hr>
+        </div>
+      </div>
+
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md">
+            <div *ngIf="showFormError">
+              <p>{{ showFormError.Description }}</p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="row" style="margin-top:4px;">
+          <div style="text-align:center; height:150px;width:150px;" *ngIf="fileName && isFile">
+            <img [src]="fileName | safe" style="width:100%;height:100%;">
+          </div>
+          <input type="file" class="btn btn-default" [disabled]="!isEdit?true:false" (change)="onSelected($event)"
+            accept=".xlsx">
+
+          <small style="margin-top: 8px;" *ngIf="this.selectedFile==null">Please select a .xlsx file of size less than
+            10 mb to proceed.
+          </small>
+
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="this.selectedFile==null">
+          <mat-icon>upload_file</mat-icon>
+         Submit
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

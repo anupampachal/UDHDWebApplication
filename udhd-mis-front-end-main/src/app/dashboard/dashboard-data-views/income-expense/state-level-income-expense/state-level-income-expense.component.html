@@ -1,0 +1,16 @@
+<div class="container">
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <app-income-expense-table [mainIncomeExpense]="mainIncomeAndExpenseComparativeData"></app-income-expense-table>
+  </div>
+  <div class="col-md-6 pt-5" style="display: block">
+    <app-income-expense-graph [mainIncomeExpense]="mainIncomeAndExpenseComparativeData"></app-income-expense-graph>
+  </div>
+</div>
+
+<app-child-level-income-expense [clieData]="childLevelIncomeAndExpenseData"></app-child-level-income-expense>
+
+<app-head-level-income-expense [headLevelIncome]="headLevelIncomeInfo" [headLevelExpense]="headLevelExpenseInfo"></app-head-level-income-expense>
+
+</div>

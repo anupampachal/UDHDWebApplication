@@ -1,0 +1,33 @@
+<mat-table matTableExporter #exporter="matTableExporter" *ngIf="paginationTableData.data" [dataSource]="paginationTableData.data" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>{{'Actions'}}</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-stroked-button color="primary" 
+        matTooltip="View details"
+        (click)="onClick(row)">
+        <mat-icon>visibility</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container *ngFor="let column of paginationTableData.cols" [matColumnDef]="column">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{column|titlecase}}</mat-header-cell>
+    <!--mat-cell *matCellDef="let object">{{transformData(object[column])}}</mat-cell-->
+    <!--mat-cell *matCellDef="let object" ><mat-icon>cancel</mat-icon></mat-cell-->
+    <mat-cell *matCellDef="let object"><span *ngIf="getInstanceType(object[column]);else nonBoolean">
+        <mat-icon *ngIf="object[column]" style="color:green;">done</mat-icon>
+        <mat-icon *ngIf="!object[column]" style="color:red;" >cancel</mat-icon>
+      </span>
+      <ng-template #nonBoolean><span>{{transformData(object[column])}}</span></ng-template>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="srlNo">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{'Srl No'}}</mat-header-cell>
+    <mat-cell *matCellDef="let element; let i =index;">{{i+1}}
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="paginationTableData.colsWithAction"></mat-header-row>
+  <mat-row *matRowDef="let row;columns:paginationTableData.colsWithAction;"></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="paginationTableData.pageSizeOptions" [pageIndex]="paginationTableData.currentPage"
+  [pageSize]="paginationTableData.pageSize" [length]="paginationTableData.dataTotLength" (page)="getServerData($event)"
+  showFirstLastButtons></mat-paginator>

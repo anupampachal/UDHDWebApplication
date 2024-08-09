@@ -1,0 +1,13 @@
+.mat-data-card{
+  display: flex;
+  justify-content: center;
+}
+
+
+.mat-card-header-cls{
+  padding: 0%;
+}
+
+input.swor + input.swor {
+  margin-top: 12px;
+}

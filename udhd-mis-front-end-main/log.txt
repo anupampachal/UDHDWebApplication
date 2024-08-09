@@ -1,0 +1,1122 @@
+commit ce8c0ed40e8a834bbcd5a8341c7deea0e74ff660
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 28 18:11:34 2022 +0530
+
+    added changes to step 6 part B edit
+
+commit 47bbb5952a7fc4bb32b4b45e4061971bb725a9d7
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 28 16:40:02 2022 +0530
+
+    added changes to step 6 part c
+
+commit 899197a01b788718acd056550f154306336279e1
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 28 16:18:37 2022 +0530
+
+    removed weed component from dashboard
+
+commit 0455dc7852cab3c12f7f3d464077cfc62b5e900b
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 28 15:53:29 2022 +0530
+
+    implemented dashboard
+
+commit eb143ecde71ccddb60a9813b2708e2733a151bf5
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Jan 28 15:39:48 2022 +0530
+
+    Added changes for production create-acdc
+
+commit eb0761fe386f713481cc9ca3b0fc357f2b8baf2d
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Jan 28 14:24:07 2022 +0530
+
+    added changes for cagpac
+
+commit f366008173c8aa674b3ed3e9f0288bfd8bbdbfb2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 28 07:14:30 2022 +0530
+
+    wrote code to implement snack bar
+
+commit 6d4b04504bbfa3b5b0d9da634ba390bfb353012a
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 21:13:55 2022 +0530
+
+    adding commit
+
+commit 303b98e2ae09001121243cd3f7375a2a7aa39078
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 20:30:44 2022 +0530
+
+    removed all console.log's from internal audit
+
+commit 09acfda92bf1b3ecca73e3121ae6b4745f8cbcb0
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 19:53:11 2022 +0530
+
+    implemented download file in view part B
+
+commit 5e269d118a0f749e7f4fcfb33a49211d5eebc4ed
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 19:42:25 2022 +0530
+
+    added changes to view part B
+
+commit 0e6b23b01f805e0b4e090116aa42588ca85c9d15
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 19:21:59 2022 +0530
+
+    added changes create part B
+
+commit 67fb96cba6dc760bcdb647e0463d994de8ca7b8c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 18:24:17 2022 +0530
+
+    added changes to part c of objectve step 6
+
+commit 2a4237b25bf295fb3a23d7ff124e62d5b5e1b1a5
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 16:37:38 2022 +0530
+
+    implemented edit and view(delete) part a objective
+
+commit 0830d2d10b1e869ee1de9725cc2a5dbf53cfed1a
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 11:12:44 2022 +0530
+
+    added changes to step 6 view part a objective
+
+commit 7637c3ffb39494fbfc8f546bf40b97bef2dbe9c7
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 27 10:52:55 2022 +0530
+
+    added changes to step 6 view part a objective
+
+commit 5a9d49abd563d43124a75f23541d6103f9b54916
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Jan 26 21:04:48 2022 +0530
+
+    added changes to step 6 create part a objective
+
+commit 7c23f4d09d199bd5b2972b1c1954200ed30212a3
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Jan 26 14:53:51 2022 +0530
+
+    handled error generated from failed backend request and disabled navigation by mat stepper header
+
+commit 512d5f0010bb2db3c84009bd459a00e318f35f3c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Jan 26 11:59:44 2022 +0530
+
+    implemented crud case of deas finance particulars
+
+commit 2acf98f531defe020dbd975ef811dd4ed35eb8d3
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Jan 26 09:46:54 2022 +0530
+
+    improved style of some elements in step 5
+
+commit 4245e77556437817b2169e6f181785638340aa2f
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 25 22:19:01 2022 +0530
+
+    added changes to edit and view of deas implementation status
+
+commit 2abcb02a5a5e7f84c7d9bf55559eeaf1012448e4
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 25 18:57:37 2022 +0530
+
+    added changes to step 5 to create update deas
+
+commit 29a58addc67bf90eb5f39d0d622176d26384c41a
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 25 13:33:41 2022 +0530
+
+    added changes to internal audit
+
+commit bdcff148d8a1fbba4d0d9a16b84cb98e6a96a27c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 24 22:36:04 2022 +0530
+
+    added changes to create edit and view of revenue capital expenditure
+
+commit 27e90582b19b5f67747d85f37265dfeb648d76db
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 24 19:57:59 2022 +0530
+
+    fixed edit and view issues of internal audit steps
+
+commit eb8dac406cfa4a971f822816ad69413728a1aba8
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 24 14:18:54 2022 +0530
+
+    added changes to create revenue and capital expenditure
+
+commit fd76c328248d56f2cc228b512f16f10206b22706
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 24 12:01:54 2022 +0530
+
+    added changes to view and edit of revenue capital receipt and bank reconciliation
+
+commit 3840cf3983e7d04abc82d46d3bf9a1bb8232aa50
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 23 17:39:20 2022 +0530
+
+    added changes to create revenue and capital expenditure
+
+commit ceb797815d46166b96ced9fff42dacf7a0c26912
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 23 16:47:59 2022 +0530
+
+    added changes to create revenue and capital receipt
+
+commit 70cd0886c3068f0aed96d37c22e764c3c63d1f7d
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 23 14:04:27 2022 +0530
+
+    added changes to edit of step 5 vot and budgetary provision
+
+commit c4f994e408a814c7755e95cace2702555b522187
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 23 10:33:21 2022 +0530
+
+    added changes to view step5 bank reconciliation
+
+commit 070cae7bf6e090f9617c851d9d9eecb26d47238e
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 23 09:47:13 2022 +0530
+
+    added changes to create step5 bank reconciliation
+
+commit ae9c7a34c10ad2420b701cef6fec25f1ac77239d
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Jan 22 21:28:20 2022 +0530
+
+    added changes to view step5 volm of trnx
+
+commit dbe53d40a63a867961c4a83b538691629606a381
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Jan 22 15:07:27 2022 +0530
+
+    added changes to create step5 volm of trnx
+
+commit 9c2db894622753323b61ad63229b8e5ea82171c2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Jan 22 12:44:21 2022 +0530
+
+    added changes to edit of step 1 step 2 and step3
+
+commit 6d35a08bf01b5ead085293409ad52b9640822ca7
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 21 14:21:18 2022 +0530
+
+    added changes to step 5 budgetary provision view
+
+commit a1d062f1be92542955ba332bb796f47e44491332
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 21 12:53:22 2022 +0530
+
+    added changes to step 5 budgetary provision
+
+commit 3f0afa06b06158d28d7c5262f43424f60f371586
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 21 11:25:49 2022 +0530
+
+    added changes to step 4 view
+
+commit 05a518094bdc0c7a2fb8d722f66356837e22b42e
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 20 18:53:53 2022 +0530
+
+    added changes to step 4 Audit Details
+
+commit 8ad28a421c29791b7c8cca69f914792640d127d2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 20 18:00:27 2022 +0530
+
+    added changes to step 4 Audit Details
+
+commit 05aa643a0ec771137a2d9b58424c06ddc1d4db52
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 20 10:15:24 2022 +0530
+
+    added changes to step 2 view
+
+commit 106f083874e7c08fdbf6afe08f8bb7e9ad82b669
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Jan 19 15:39:55 2022 +0530
+
+    changed date format to DD-MM-YYYY in balance sheet table
+
+commit 456e55bc93b77d34d70366778d28128ab3505af2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Jan 19 15:02:28 2022 +0530
+
+    fixed table data display order and completed step 2 ia create
+
+commit cc07517ec5511260c0c015d8fea3c603a03c54b6
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 18 19:48:59 2022 +0530
+
+    removed quarter from export to pdf and excel sheet
+
+commit d9d76d7866d97db52ac9d0f26b704909715c4074
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 18 19:44:51 2022 +0530
+
+    removed quarter from annual financial upload
+
+commit 342d72bed0dd3e41ffa80a95607b3c71aaf6c253
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 18 19:40:53 2022 +0530
+
+    added changes to deas
+
+commit 85ece9d4039f13e12cf923c3b0218c376b6f1de2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 18 14:36:42 2022 +0530
+
+    added changes to internal audit
+
+commit 80c7e5bcad243e071fb630854775de6bcd27640c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 19:16:03 2022 +0530
+
+    fixed view of table in deas
+
+commit 5b7243f1e585fc2183e40c5e55fbfd6950c16218
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 18:50:56 2022 +0530
+
+    fixed view of internal audit step 2
+
+commit 72990285833174a849a648f862b17ae96ab2fc7d
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 17:13:31 2022 +0530
+
+    added date range display in deas module
+
+commit 6c5a54de3179c481c170a38245bc0b3d570fe023
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 16:56:03 2022 +0530
+
+    added changes to annual financial statement tab
+
+commit ef92a1fee59092b320f1ada9d177f348c0a755b7
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 16:20:51 2022 +0530
+
+    removed budget upload, property tax, and fixed asset periodic upload
+
+commit 4ffe716327dd0b877daec73b02c7b10b4c781f27
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 16:14:03 2022 +0530
+
+    added budget upload, property tax, and fixed asset to annual financial statement
+
+commit 168b7ef2cd1b5c14a51682c69c562ce93e5b3756
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 17 14:59:30 2022 +0530
+
+    added changes to data views
+
+commit 1966ee47f7b56b1f61db5ed101e93af6be14fa38
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 19:50:42 2022 +0530
+
+    added changes to hierarchical navigation between levels
+
+commit 7048ca9ebdc1c4122f9d205a1c76c95913ab08ec
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 18:17:34 2022 +0530
+
+    added changes to data views
+
+commit 8ef95ac51d9a3be7fed7e65b4733192496467d3c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 14:13:12 2022 +0530
+
+    added changes to ulb level balance sheet
+
+commit d56658873d5be8c1bab6725099efe34d3d906b27
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 13:22:57 2022 +0530
+
+    added changes to district level balance sheet
+
+commit 94269cb2f9ae84fa31b37ea120beb7f48db037a8
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 13:08:31 2022 +0530
+
+    added changes to division level balance sheet
+
+commit 518121e48dd788a1d7c7b26eec25b320c5aa109f
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 12:38:33 2022 +0530
+
+    completed state level balance sheet
+
+commit 4e3e66e41b8dfb3448c2328f1c10f0dbc800dc18
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 11:04:07 2022 +0530
+
+    added changes to cash and bank balance
+
+commit a95331a8f4a11191e1a5696ee4d03c8a19581de1
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Jan 16 07:18:57 2022 +0530
+
+    added changes to cash bank balance
+
+commit 88855690532b201c37a4d9c5c4dfe23bfb7124ff
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Jan 15 18:26:01 2022 +0530
+
+    added changes to cash and bank balance
+
+commit 2a7936a7add6419a53700c95bb001a0460a21025
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Jan 15 18:01:49 2022 +0530
+
+    Added changes for ia
+
+commit fe8d38c9d517944e23193957b0f7045902d16d11
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Jan 15 17:23:26 2022 +0530
+
+    added changes to cash and bank balance
+
+commit 4c68457292bd1275e3b0384669d370939e38d73b
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Jan 14 19:03:27 2022 +0530
+
+    added changes data vies income expense
+
+commit b99020a76715891c4919c110bb134843a9b57058
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 13 19:16:53 2022 +0530
+
+    added changes to deas
+
+commit 9d5bbbd899ac2ee49c89566bdd30999ee7fadf4a
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 11 19:19:17 2022 +0530
+
+    completed internal audit step 6
+
+commit 50587b5b689a37f5dbf5f8c0117c2ed62a6758bd
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 10 18:52:24 2022 +0530
+
+    added changes to edit internal audit
+
+commit fbd29cb6e80b88e08eedeb290647e906da12ddf9
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Jan 6 13:28:53 2022 +0530
+
+    added changes to step5 IA revenue and capital receipt
+
+commit 1966aef43785bacbae95b230f5c6615e311ba9b9
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Jan 4 18:29:08 2022 +0530
+
+    added changes to periodic uploads
+
+commit 03d3ffde8b2fc12f0e7cb13a26beb6e9725316c3
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Jan 3 20:21:55 2022 +0530
+
+    added changes to historical data upload
+
+commit 4c41c290ddb1185c94015a456d8d71501b32b7c8
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Dec 29 18:49:08 2021 +0530
+
+    added chart and income expense table
+
+commit 4bf4ab378ea30c1d75b68c75bdd4407c44f90bc2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Dec 28 16:18:38 2021 +0530
+
+    added changes to export mat table data as spreadsheet in Geography
+
+commit 2c75f3d98d383a939a6fea016bded7a98153d34e
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Dec 28 12:55:58 2021 +0530
+
+    completed export to pdf and excel sheet in Geography mgt.
+
+commit 870b9353f621174b4da1b703bff13e4d5177ff68
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Dec 27 18:53:45 2021 +0530
+
+    added changes for support and exporting mat table data to spreadsheet
+
+commit 3876ca80d88b3a1d5c8188e8496d249cc85b201f
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 11:10:43 2021 +0530
+
+    create user group functionality completed
+
+commit 2bdcd3a2b01ac6b05bbe5f4aed6d992143125244
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 10:59:32 2021 +0530
+
+    added changes for security and functionality testing for user group
+
+commit 1f44d653e3a46f03f5fc9743e496fd975b2738de
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 01:17:47 2021 +0530
+
+    Added changes to remove issues from ulb in geography settings
+
+commit 04b0c64f0d012f26517de9383eb195a8765cbbaf
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 01:06:03 2021 +0530
+
+    added changes for district security and division css
+
+commit 35e5b8a4fca42e225b4271e0b0db9032387ef290
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 00:41:11 2021 +0530
+
+    added username at the header
+
+commit 9029898fdf7cd57d2c1c076ecdac2f9ca90fe841
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 00:36:11 2021 +0530
+
+    changes for division create issue resolution
+
+commit e86c37dee7fbe6371231ae1f814cbee73e29532e
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 00:23:26 2021 +0530
+
+    added changes for security clearance for user interface for geography
+
+commit ac32b2f179eafd33cc4142d66fe1f2846e1dc554
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 00:08:59 2021 +0530
+
+    added changes for view part where the status button wasnt disabled
+
+commit 8851eacf98dbca8c79f64929717aaa74a1f1a00d
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Dec 25 00:06:17 2021 +0530
+
+    made changes to table for tick and cancel mark
+
+commit 53cdacf3e8f243272f535470b909ef1aef8908ce
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Dec 24 15:12:35 2021 +0530
+
+    added changes for geography distribution
+
+commit cad9072cf570b5176a73bbab5f42edd7d4746ae8
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Wed Dec 22 00:28:02 2021 +0530
+
+    Removed the ulb and date filter from periodic and moved it to sharedfilter module, changed the look of data views by including date and ulb filter at the top
+
+commit 00d636e519b8ded8638f2bd3f04b68c922e01dee
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Dec 21 21:39:34 2021 +0530
+
+    Added changes to disable making changes to ulb view status bar
+
+commit f03468c40848e7720fdf3f32117e44087a7e4aa4
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Dec 21 21:36:46 2021 +0530
+
+    added changes for ulb and other geography model to shared component
+
+commit dd1c17cde5a17ef4bcbf86df832964c9e962e338
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Dec 21 13:33:03 2021 +0530
+
+    added changes to historical data upload module
+
+commit 35091de4c1ef28c48cabef50b9f6662c1e487840
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Dec 21 13:10:26 2021 +0530
+
+    Added changes for periodic uploads path
+
+commit b7feb3e588a80559cc924592486370bed4919357
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Dec 21 13:03:18 2021 +0530
+
+    removed routes issues
+
+commit f4046e129bb547e6a97086ab472ca397912a171b
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Dec 21 12:59:20 2021 +0530
+
+    added changes for routes and names
+
+commit 287cf63e3d00c59d3f03ad88028546416e039f47
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Dec 20 17:53:25 2021 +0530
+
+    added changes to periodic uploads
+
+commit 64dc92b40f40392eaf36df48548aae9ee0da5b10
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Dec 19 19:06:52 2021 +0530
+
+    added changes to deas module
+
+commit aca2cbbe749e35c539f7e9c64c3e22738295e287
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Dec 19 12:06:25 2021 +0530
+
+    generated activities and reports module and required elements
+
+commit 6a14e46444cbc46acd1da75527b28cd50473b0f5
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Dec 17 18:16:13 2021 +0530
+
+    completed user group mngmnt
+
+commit b838561676edce9eb37652043a745cdacbf73797
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Dec 17 15:39:14 2021 +0530
+
+    added changes for edit user group
+
+commit 9bc187779df87424791b7c5ee2b79e2cfc1485ef
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Dec 16 18:56:54 2021 +0530
+
+    added changes to view user group
+
+commit 5929177e18e12e49cb2bcdf86b04b46182832ab8
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sun Nov 21 14:57:45 2021 +0530
+
+    To do activities and step5 deas Implementation completed
+
+commit 5cc0d0e3b5d478e28d26d8eef8655cfd3ba0d29a
+Author: Rajeev Kumar <rajeev@scsinfinity.com>
+Date:   Sun Nov 21 00:01:30 2021 +0530
+
+    Income Expense UI improved.
+
+commit 41f9c2fca5e91d887f7ede97eb6e8c4f77ef19cd
+Author: Rajeev Kumar <rajeev@scsinfinity.com>
+Date:   Sat Nov 20 00:16:03 2021 +0530
+
+    Activities module and rooutes added.
+
+commit e084546c6a3029d7e48d0694d531230a36118671
+Author: Rajeev Kumar <rajeev@scsinfinity.com>
+Date:   Fri Nov 19 00:23:52 2021 +0530
+
+    trial balance UI improved.
+
+commit 5bd8efb4746d04dc670b4dc70717487f09130624
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Nov 18 20:13:33 2021 +0530
+
+    Deas Income expense Table Incomplete
+
+commit 700608313b966c5fde887d6d9a35ba49cc634175
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Nov 18 15:45:42 2021 +0530
+
+    Deas completed
+
+commit da19f6db4c648aab2fb32dcf61fec97152a18131
+Merge: 82d3af2 0ef952b
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Nov 18 11:26:24 2021 +0530
+
+    Merge branch 'master' of https://git.scsinfinity.com/adityanarayan/udhd_mis_front_end
+
+commit 82d3af213218cd4fa6c43d6c76c3f517303967c0
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Thu Nov 18 11:26:18 2021 +0530
+
+    local
+
+commit 0ef952b45fc00aca5e02a34802e100d7faf935b8
+Author: Rajeev Kumar <rajeev@scsinfinity.com>
+Date:   Wed Nov 17 23:41:37 2021 +0530
+
+    Deas module and child componet with routes added.
+
+commit b33d0511eea35a427008db8645893f8475a560ec
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Nov 17 20:29:48 2021 +0530
+
+    in step5
+
+commit 8e3b4c0869839cdf2791cc38d7a817877aea498e
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Nov 17 14:46:19 2021 +0530
+
+    completed step4
+
+commit 1686434d229872d32495aa09909a25f7df04a670
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Nov 17 10:41:11 2021 +0530
+
+    fixed styling of step2
+
+commit 7b25e3cf532d50a88b73bc1dc0d12f7039b4d6ce
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Wed Nov 17 10:21:27 2021 +0530
+
+    fixed styling of step 2
+
+commit 29048da1756ca76380ff5ca3240f38f64dd77526
+Author: Rajeev Kumar <rajeev@scsinfinity.com>
+Date:   Tue Nov 16 23:50:21 2021 +0530
+
+    Internal Audit List UI
+
+commit 4ecb10b9790978774337b7bac4c1205718aa2b96
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Nov 16 20:40:29 2021 +0530
+
+    executive summary step 2
+
+commit cb226d740472972a03c5b4c7a2b3bb84ca26b687
+Merge: 890f6df f947382
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Nov 16 15:31:57 2021 +0530
+
+    step 1 and step 3 completed
+
+commit 890f6dfa0e52231b0ef2e50f007c7ee3672801ab
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Nov 16 14:51:39 2021 +0530
+
+    Completed step1 and step3 fiels
+
+commit f94738226506973f9db3c1fb005cdf873baa0f92
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Nov 16 14:01:51 2021 +0530
+
+    added changes for step 2
+
+commit 19c29e215f4279274884cffcaa23de441d0ca31d
+Merge: e477685 3087246
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Nov 16 13:15:58 2021 +0530
+
+    Merge branch 'master' of https://git.scsinfinity.com/adityanarayan/udhd_mis_front_end
+
+commit 308724666e9813771bf568fdd5d10353d3720078
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Nov 16 13:15:38 2021 +0530
+
+    changes for ia
+
+commit e477685621f45c1dd95690b1093e57ae1d4028fa
+Merge: 0ed0702 45a4e28
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Nov 16 13:13:04 2021 +0530
+
+    Merge branch 'master' of https://git.scsinfinity.com/adityanarayan/udhd_mis_front_end
+
+commit 45a4e28dae6f99f0e12b11beeaaeca0f0d21c5fe
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Nov 16 13:12:39 2021 +0530
+
+    Added changes for ia
+
+commit 0ed070287827f0b255399d2246669f44e66d29d0
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Tue Nov 2 10:35:35 2021 +0530
+
+    completed finance audit
+
+commit b307f3260f666f8a938f531a749e0cd3116db162
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Oct 30 13:11:52 2021 +0530
+
+    cag/pac completed
+
+commit 718cdb2afd1de55ae97d3be3e393ac44e98687b2
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Oct 29 15:50:04 2021 +0530
+
+    added changes for summary in agir audit report
+
+commit e475e36c88983f53223b54d0d0a126ae3d9aaff2
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 15:59:58 2021 +0530
+
+    Added changes for edit criteria
+
+commit f64b01e86ae1f6b3699456143238304c3bae3126
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 15:55:41 2021 +0530
+
+    added changes for agir audit criteria edit
+
+commit 91920ff7b1235ae76630b9372527d4e47b8d2b3d
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 14:46:07 2021 +0530
+
+    added changes for create audit criteria routing
+
+commit a19cf614b6a065b6aa91566ae7de4fed79112dc1
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 14:17:12 2021 +0530
+
+    Added changes to create criteria
+
+commit 5fadb79fa20c9d5b139e2503e3be8553d26bcf98
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 12:43:36 2021 +0530
+
+    made changes to edit page to compress edit functionality
+
+commit 7f6735fb8897927fb2a707450aab3a99d24c468a
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 12:16:02 2021 +0530
+
+    Added changes for view of ag audit component with list of criterias completed
+
+commit 65102f6b5ee64d7c0eece28e7b4962e2fe897534
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Oct 21 09:34:20 2021 +0530
+
+    added accordion expansion logic
+
+commit cf862ea35939afcd2908f69e5ad0b2864350920d
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Wed Oct 20 23:45:42 2021 +0530
+
+    made changes till audit criteria on accordion
+
+commit d623ac8aa1be4eda7ac074524590f02cbef725e1
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Oct 10 14:27:55 2021 +0530
+
+    Added changes for view and list criteria
+
+commit c9f500aabafacf13ba0569f7e619b8fb5537a886
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Oct 10 13:05:25 2021 +0530
+
+    changes to audit criteria for view audit
+
+commit 7168383fe5cd3f4b79968e1eab115bb968bf797d
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Oct 10 03:37:34 2021 +0530
+
+    Added changes for completion of all crud cases for agir audit
+
+commit 4e2e35a27a4eefba24b0011f724ebb557682c118
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Oct 10 01:58:15 2021 +0530
+
+    added changes for create case:
+
+commit 97439b0612a5cff3803fd546e1713d452d554d94
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Oct 9 22:05:44 2021 +0530
+
+    removed un-necessary fields from create
+
+commit 25c694f8b0a94dac162dc61426c6e52a366a7cd9
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Oct 9 21:39:26 2021 +0530
+
+    Create AGIR
+
+commit c13f51cbf20396b2cf5a3f8175655ddda5cd657f
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Oct 9 20:43:34 2021 +0530
+
+    added changes for ulb list
+
+commit 24f0414b1f34131c7f9e3481058b19660bded4c4
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Oct 9 20:32:22 2021 +0530
+
+    View agir
+
+commit 900c152048bfdad9630014825d1f7801fa3e44ac
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Oct 9 19:04:04 2021 +0530
+
+    made server specific changes for complex object
+
+commit 918c1a0add6bfa082b1e60451fed0423a02ceecf
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Oct 9 18:57:48 2021 +0530
+
+    Added changes for breadcrumb fix
+
+commit a8d3b48b2c44e858adbf7f9ebde3d365ad3fb9e2
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Sat Oct 9 18:47:09 2021 +0530
+
+    list AGIR
+
+commit 6a1f96cc2e76f467137c4e790d229df4e42fc9e8
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Oct 8 14:58:06 2021 +0530
+
+    added changes for AGIR audit
+
+commit 477af481721ea2b6d9029544af0e60de9c592a9c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Oct 4 20:29:40 2021 +0530
+
+    added changes for user mgt in settings module
+
+commit 64f2b4e225f38fa6bb5f35ed4a70b3ac66a65915
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Sep 28 20:01:12 2021 +0530
+
+    added changes for ulb pull using ulb type for a district
+
+commit e2dd11211d40f358e1e5dede454e125659f806ec
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Sep 28 18:46:39 2021 +0530
+
+    added changes for user management
+
+commit 2b4952e37c97c612eb94848c5184d91498fce257
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Tue Sep 28 17:52:05 2021 +0530
+
+    added changes for user
+
+commit 4dcca38209a1a231ddcf319ac32a7a2882f440e3
+Author: assssshutosh kumar <ashutoshkumar@scsinfinity.com>
+Date:   Mon Sep 27 20:02:37 2021 +0530
+
+    changes for usergroroup
+
+commit da58c7c31a92b1103e7ef22eec6a52574b204ca9
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Mon Sep 27 19:11:22 2021 +0530
+
+    added changes for user management
+
+commit e9d47d5d9c693c60901d84bf94f131de0896b567
+Merge: 57c7333 47f779c
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Mon Sep 27 16:25:55 2021 +0530
+
+    Merge branch 'master' of https://git.scsinfinity.com/adityanarayan/udhd_mis_front_end
+
+commit 57c73335b53116cd688f2f27e99738014f5a79b4
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Mon Sep 27 16:25:46 2021 +0530
+
+    added changes for user management
+
+commit 47f779c9e17ee5c55d6dc33786c54f2f4ada3633
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Sep 27 14:09:36 2021 +0530
+
+    completed ulb-create component
+
+commit 2dc14e2805121cca71e3b4775db7637dde6f7310
+Merge: 37a1a10 ac212e5
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Sep 27 12:58:44 2021 +0530
+
+    Merge branch 'master' of https://git.scsinfinity.com/adityanarayan/udhd_mis_front_end
+    final touch to ulb and district
+
+commit 37a1a10b1c857664cea456c3060800a0616e9e3e
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Mon Sep 27 12:58:11 2021 +0530
+
+    final touch to ulb and district
+
+commit ac212e5da6683826795d1fb511b9d426e3f746df
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Mon Sep 27 11:53:14 2021 +0530
+
+    added changes for roles based info
+
+commit 912a8db5c5895c722e4902e32f15428a4a69f902
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 26 16:18:51 2021 +0530
+
+    Added changes for create acdc
+
+commit bbf4a19d69f24e4c00e2485c1eb0be12fad78adb
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 26 16:03:09 2021 +0530
+
+    Added changes for update
+
+commit 97bf94a5c8f3f8eebd4e3871c4d8d067f2a7ee49
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 26 15:26:24 2021 +0530
+
+    Added changes for view acdc:
+
+commit 3aa405097701b30ee4ab706d3ba0140f82457294
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 26 15:01:06 2021 +0530
+
+    Added changes for view acdc
+
+commit b46f4b697a29940a5a008b9530ff2a5364c38cf5
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 26 09:57:15 2021 +0530
+
+    Added changes for acdc
+
+commit e633bc60ea7c7fc43b11458cad0fb45139719c6e
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 26 01:23:44 2021 +0530
+
+    Added changes till reaching list from UI
+
+commit 2b3bf050b4545bbc249e47fa1345c52e7f8fe334
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Sep 25 19:27:44 2021 +0530
+
+    Added changes for UC
+
+commit 1083a89e55859067ed5c4b7ad59082c4bc413761
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Sep 25 19:16:24 2021 +0530
+
+    security with ac/dc and uc
+
+commit 26505b3d11b1733e79f9148b33604f479665a627
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 19 14:54:53 2021 +0530
+
+    added changes for user-group-mgt service in module.ts
+
+commit 86917f5c87a966f52280c6fb801fa782fe30f285
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 19 14:54:18 2021 +0530
+
+    Added changes for user interface for user group, added service and model
+
+commit c8dc96cd65df33cdbc6440daec6787a234724602
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 19 14:42:14 2021 +0530
+
+    added cases for user group mgt
+
+commit fd9b1a0527c860d7be68b16588373429d6da0113
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 19 14:41:09 2021 +0530
+
+    added cases for user group mgt
+
+commit 11bd368dfa174d516f9b48c98d8d316ea3d76f1f
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Sep 19 12:51:01 2021 +0530
+
+    Added changes to bring the ulb in ulb settings tab first on initial load
+
+commit f1f80136765cf57827d92b56469dfb0b9b27959c
+Author: tezaswiraj@scsinfinity.com <tezaswi.raj@scsinfinity.com>
+Date:   Fri Sep 17 15:05:19 2021 +0530
+
+    taking my user
+
+commit 27dfb1eaebf6073fabfe02519c5c31b549ba6e10
+Author: shaz <shaz@scsinfinity.com>
+Date:   Fri Sep 17 15:00:39 2021 +0530
+
+    cases for ulb and district crud
+
+commit 88e88b76622d1a7c6433a71e08b8e1844ccdc627
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Sep 16 17:11:27 2021 +0530
+
+    added changes for ulb-service
+
+commit 5dda308435b5be62a19ddcef3f4537f5a7a12410
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Sep 16 13:22:56 2021 +0530
+
+    completed navigation for ulb and district
+
+commit cb6600ea86574db4c70430765877eeafb7a919a3
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Sep 16 12:58:34 2021 +0530
+
+    added use cases for ulb
+
+commit 569ba433f343b1eb2ca2c8d319669f04f3eccd0c
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Wed Sep 15 18:02:45 2021 +0530
+
+    Removed ulb group from geography
+
+commit 7af1f469abc27f87331b94d010a71dd7d2976c5d
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Wed Sep 15 18:00:03 2021 +0530
+
+    Added changes for geo-division
+
+commit 0e63481a0538cf9b62889d6211937a7229996139
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Sep 4 16:55:02 2021 +0530
+
+    geo division
+
+commit 6bdfbf5e7c9a26a9dcfb6021a892d252075328b2
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Sep 4 13:29:21 2021 +0530
+
+    added changes for division view
+
+commit 4736333c93f8176df00143d368d7c1c552b98638
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Sep 4 12:45:15 2021 +0530
+
+    added changes for list of division
+
+commit b1527cae89ed68a0b463b9f50aa494d7afe58c8b
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sat Sep 4 08:52:41 2021 +0530
+
+    Added changes for geography
+
+commit c0edc5fe8445f83c7650426a2ed3cf302fd80cae
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Sep 3 21:03:09 2021 +0530
+
+    added changes for ulb geography setup
+
+commit 1547ce8026a3c25cb889365148337389c3e71853
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Fri Sep 3 14:52:59 2021 +0530
+
+    added changes for side menu security
+
+commit ac4438f5c79ebde2e57f858f47d4e87ebe21c8e3
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Aug 26 23:23:45 2021 +0530
+
+    modules and submodules
+
+commit f339bfb3bc4b89ab101b8fd4a838e7f7e1f2c2f5
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Thu Aug 26 13:08:48 2021 +0530
+
+    added changes to remove the front-end issues
+
+commit 25c3c84ac984d5ed2c215ec6676a31bf3c42f200
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Aug 15 08:32:00 2021 +0530
+
+    added basic modules to get the things started
+
+commit 837c74a6b1a7ccdac52e9506a3ae48c995915214
+Author: adityanarayan <adityanarayan@scsinfinity.com>
+Date:   Sun Aug 15 07:14:26 2021 +0530
+
+    initial commit

@@ -1,0 +1,65 @@
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+        <div class="col-md">
+            <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+        </div>
+        <div class="col-md">
+            <div class="example-button-container">
+                <button mat-stroked-button class="route-button" [routerLink]="'../list'" color="primary"
+                    style="float: right" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>list</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-card-data">
+    <form [formGroup]="sendEmailForm" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-md">
+                <mat-card-title class="mat-card-title">Send Email</mat-card-title>
+            </div>
+        </div>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md">
+                    <div *ngIf="showFormError">
+                        <p>{{ showFormError.Description }}</p>
+                    </div>
+                    <div *ngIf="sendSuccess">
+                        <p>Email sent successfully.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Recepient Email Id<span class="required"> *</span></mat-label>
+                        <input matInput formControlName="emailIdsCSV" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Subject</mat-label>
+                        <textarea matInput formControlName="subject" rowCount=3></textarea>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-label>Body<span class="required"> *</span></mat-label>
+                    <angular-editor mat-input formControlName="body" [config]="editorConfig"></angular-editor>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!sendEmailForm.valid">
+                Submit
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>

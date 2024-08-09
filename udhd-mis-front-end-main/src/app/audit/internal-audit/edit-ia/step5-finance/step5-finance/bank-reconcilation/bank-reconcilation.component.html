@@ -1,0 +1,88 @@
+<form [formGroup]="bankReconciliationForm">
+  <fieldset class="hm-fieldset">
+    <legend class="hm-legend">Bank Reconciliation:</legend>
+    <div style="display: flex;justify-content: end;">
+      <button type="button" (click)="pushNewForm()">
+        <mat-icon color="primary">add</mat-icon>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+
+      </div>
+    </div>
+
+    <div class="table-responsive" formArrayName="bankReconciliations">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th style="width: 154px;">Bank Name </th>
+            <th>Project/Scheme Name</th>
+            <th>Account No.</th>
+            <th>Bank Balance as per PassBook(A)</th>
+            <th>Cash Balance as per CashBook(B)</th>
+            <th>Difference(A-B)</th>
+            <th>Amount Reconciled/ Un-reconciled</th>
+            <th>BRS Status(Prepared/Not Prepared)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of bankReconcilationForm.controls; let i=index;">
+          <tr [formGroupName]="i">
+            <td>{{i+1}}</td>
+            <td>
+              <input type="hidden" formControlName="id">
+              <textarea class="form-control" id="bankName" formControlName="bankName"
+                ></textarea>
+            </td>
+            <td>
+              <textarea class="form-control" id="schemeName" formControlName="purposeOfBankAccount"></textarea>
+            </td>
+            <td> <input class="form-control" id="accountNumber" formControlName="accountNumber"
+                placeholder="Enter Account Number"></td>
+            <td> <input type="number" class="form-control" id="balanceAsPerBankStatement"
+                formControlName="balanceAsPerBankStatement"></td>
+            <td> <input type="number" class="form-control" id="balanceAsPerCashBook"
+                formControlName="balanceAsPerCashBook"></td>
+            <td> <input class="form-control" id="differences" [disabled]=true formControlName="differences"
+                value="{{item.value.balanceAsPerBankStatement - item.value.balanceAsPerCashBook}} ">
+            </td>
+            <td> <select class="form-control" id="reconcilieEnum" formControlName="reconcilieEnum">
+                <option [selected]=true disabled>Select---</option>
+                <!-- <option *ngFor="let bankReconciliation of bankReconciliationPositionEnum"
+                                  [value]="bankReconciliation.value">
+                                  {{bankReconciliation.title}}
+                              </option> -->
+                <option value="YES">Yes</option>
+                <option value="NO">No</option>
+                <option value="BANK_STATEMENT_NOT_AVAILABLE">BANK_STATEMENT_NOT_AVAILABLE</option>
+
+              </select></td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" name="brsStatus" formControlName="brsStatus">
+                  <option [selected]=true disabled>Select---</option>
+                  <!-- <option *ngFor="let type of brsStatusEnum" [value]="type.value">{{ type.title }}</option> -->
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </td>
+            <td>
+              <button *ngIf="item.disabled" class="btn btn-default btn-sm" name="edit" type="button" title="edit"
+                (click)="enableControl(i)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button type="button" title="{{buttonText}}" name="save" class="btn btn-default btn-sm" (click)="save(i)"
+                [disabled]="item.invalid">
+                <i class="fa fa-save"></i></button>
+              <button type="button" name="delete" class="btn btn-default btn-sm" (click)="remove(i)">
+                <i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+</form>

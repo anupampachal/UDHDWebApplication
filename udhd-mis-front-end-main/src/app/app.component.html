@@ -1,0 +1,10 @@
+
+<!-- <router-outlet></router-outlet> -->
+
+<div  *ngIf="isLoggedIn$|async ; else login">
+  <app-authorised></app-authorised>
+</div>
+<ng-template #login>
+  <app-unauthorised></app-unauthorised>
+</ng-template>
+

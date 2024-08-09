@@ -1,0 +1,883 @@
+package com.scsinfinity.udhd.services.deas;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.io.UrlResource;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.scsinfinity.udhd.configurations.application.date.DateUtil;
+import com.scsinfinity.udhd.configurations.security.SecuredUserInfoService;
+import com.scsinfinity.udhd.dao.entities.base.UserEntity;
+import com.scsinfinity.udhd.dao.entities.deas.BalanceSheetEntity;
+import com.scsinfinity.udhd.dao.entities.deas.BankAndCashBalanceEntity;
+import com.scsinfinity.udhd.dao.entities.deas.CodeTypeMajorMinorDetailEnum;
+import com.scsinfinity.udhd.dao.entities.deas.LedgerTransactionEntity;
+import com.scsinfinity.udhd.dao.entities.deas.TrialBalanceFileInfoEntity;
+import com.scsinfinity.udhd.dao.entities.deas.TrialBalanceUploadReportSummaryEntity;
+import com.scsinfinity.udhd.dao.entities.deas.TrialUploadStatusEnum;
+import com.scsinfinity.udhd.dao.entities.deas.TypeStatusEnum;
+import com.scsinfinity.udhd.dao.entities.geography.ULBEntity;
+import com.scsinfinity.udhd.dao.entities.ledger.BaseHeadEntity;
+import com.scsinfinity.udhd.dao.entities.ledger.ChartOfAccountsEntity;
+import com.scsinfinity.udhd.dao.entities.ledger.DetailHeadEntity;
+import com.scsinfinity.udhd.dao.entities.ledger.MajorHeadEntity;
+import com.scsinfinity.udhd.dao.entities.ledger.MinorHeadEntity;
+import com.scsinfinity.udhd.dao.entities.storage.FileEntity;
+import com.scsinfinity.udhd.dao.repositories.deas.IBalanceSheetRepository;
+import com.scsinfinity.udhd.dao.repositories.deas.IBankAndCashBalanceRepository;
+import com.scsinfinity.udhd.dao.repositories.deas.ILedgerTransactionRepository;
+import com.scsinfinity.udhd.dao.repositories.deas.ITrialBalanceFileInfoRepository;
+import com.scsinfinity.udhd.dao.repositories.deas.ITrialBalanceUploadReportSummaryRepository;
+import com.scsinfinity.udhd.dao.repositories.ledger.IBaseHeadRepository;
+import com.scsinfinity.udhd.dao.repositories.ledger.IChartOfAccountsRepository;
+import com.scsinfinity.udhd.dao.repositories.ledger.IDetailHeadRepository;
+import com.scsinfinity.udhd.dao.repositories.ledger.IMajorHeadRepository;
+import com.scsinfinity.udhd.dao.repositories.ledger.IMinorHeadRepository;
+import com.scsinfinity.udhd.services.base.interfaces.IFileService;
+import com.scsinfinity.udhd.services.deas.dto.AccountCodeAliasDTO;
+import com.scsinfinity.udhd.services.deas.dto.DetailHeadMapKeyDTO;
+import com.scsinfinity.udhd.services.deas.dto.KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO;
+import com.scsinfinity.udhd.services.deas.dto.LedgerTransactionDTO;
+import com.scsinfinity.udhd.services.deas.dto.TrialBalanceSheetCreditAndDebitSumDTO;
+import com.scsinfinity.udhd.services.deas.dto.TrialBalanceUploadReportSummaryDTO;
+import com.scsinfinity.udhd.services.deas.dto.TrialBalanceXlsxStructureDataDTO;
+import com.scsinfinity.udhd.services.deas.interfaces.ITrialBalanceAsyncDetailService;
+import com.scsinfinity.udhd.services.settings.interfaces.IULBService;
+import com.scsinfinity.udhd.services.utils.dto.FinancialRealDatesDTO;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class TrialBalanceAsyncOptDetailsService implements ITrialBalanceAsyncDetailService {
+
+	@Value("${scs.setting.folder.deas-data.nickname}")
+	private String deasFolderNickname;
+
+	private final IULBService ulbService;
+	private final IChartOfAccountsRepository chartOfAccountRepository;
+	private final IBaseHeadRepository baseHeadRepository;
+	private final IMajorHeadRepository majorHeadRepository;
+	private final IMinorHeadRepository minorHeadRepository;
+	private final IDetailHeadRepository detailheadRepository;
+	private final SecuredUserInfoService securedUser;
+	private final ITrialBalanceFileInfoRepository trialBalanceFileInfoRepository;
+	private final ILedgerTransactionRepository ledgerTransactionRepo;
+	private final IBankAndCashBalanceRepository bankBalanceRepo;
+	private final IBalanceSheetRepository balanceSheetRepo;
+	private final ITrialBalanceUploadReportSummaryRepository trialBalanceReportSummaryRepo;
+	private final DateUtil dateUtil;
+	private final IFileService fileService;
+	private static final Integer liabilityHead = 3;
+	private static final Integer assetsHead = 4;
+
+	//@Async
+	@Override
+	public void handleTrialBalanceUploadDataOperation(MultipartFile file, FileEntity fileE) {
+
+		// duplicate file
+		try {
+			TrialBalanceXlsxStructureDataDTO structuredData = readXlsxAndCovertToDataArr(file, fileE,
+					getChartOfAccountsMap(), getBaseHeads(), getMajorHeadMap(), minorHeadMap(), detailHeadMap());
+			FileEntity responseFile = fileService.copyFile(fileE, "_response", fileE.getParentFolder().getFolderId());
+			TrialBalanceUploadReportSummaryDTO summary = validateData(file, structuredData, responseFile);
+			writeDataToDBAndFile(structuredData, summary);
+
+			writeErrorAndCommentsToTrialBalanceXlsx(structuredData, responseFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// fill with structure data
+	private TrialBalanceXlsxStructureDataDTO readXlsxAndCovertToDataArr(MultipartFile file, FileEntity fileEntity,
+			Map<String, String> chart, Map<Integer, BaseHeadEntity> baseHeadMap,
+			Map<String, MajorHeadEntity> majorHeadMap,
+			Map<KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO, MinorHeadEntity> minorHeadMap,
+			Map<DetailHeadMapKeyDTO, DetailHeadEntity> detailHeadMap) {
+		List<LedgerTransactionDTO> ledgerTransactionDTOsList = new ArrayList<>();
+		List<Row> rowList = new ArrayList<>();
+		try {
+			// load file from disk
+			FileInputStream fileIn = new FileInputStream(getFilePathFn.apply(fileEntity).toFile());
+
+			// Create Workbook instance holding reference to .xlsx file
+			XSSFWorkbook workbook = new XSSFWorkbook(fileIn);
+
+			// Get first/desired sheet from the workbook
+			XSSFSheet sheet = workbook.getSheetAt(0);
+
+			// get each row and convert it to list for easy operations
+			Iterator<Row> rowIterator = sheet.iterator();
+
+			// rowIterator.forEachRemaining(rowList::add);
+			rowIterator.forEachRemaining(row -> {
+				ledgerTransactionDTOsList.add(getTBForEachRowL(row.getRowNum(), row, chart, baseHeadMap, majorHeadMap,
+						minorHeadMap, detailHeadMap));
+				System.out.println("inside readXlsxAndCovertToDataArr row  is " + row.toString() + "row 1st cell num= "+ row.getFirstCellNum() );
+				rowList.add(row);
+			});
+
+			String ulbName = getULBName(rowList);
+			System.out.println("inside readXlsxAndCovertToDataArr ULB  is " + ulbName );
+			FinancialRealDatesDTO finDates = getDatesFromXLSX(rowList);
+			System.out.println("inside readXlsxAndCovertToDataArr Date  is " + finDates.toString() );
+			Optional<ULBEntity> ulbO = ulbService.getULBEntityByName(ulbName);
+			TrialBalanceSheetCreditAndDebitSumDTO tbCandDSum = getTBSheetCreditAndDebit
+					.apply(ledgerTransactionDTOsList.subList(7, ledgerTransactionDTOsList.size() - 1));
+			System.out.println("inside readXlsxAndCovertToDataArr Sum  is " + tbCandDSum.toString() );
+			// make adjustments for profit and loss
+			tbCandDSum = adjustForProfitAndLossAcc(tbCandDSum,
+					ledgerTransactionDTOsList.subList(7, ledgerTransactionDTOsList.size() - 1));
+			TrialBalanceSheetCreditAndDebitSumDTO sheetCandDSum = getSheetTBCreditAndDebitSum(
+					ledgerTransactionDTOsList);
+
+			return TrialBalanceXlsxStructureDataDTO.builder().file(fileEntity).finDate(finDates).inputXlsx(file)
+					.sheetCreditAndDebitSum(sheetCandDSum).trialBalanceInputs(ledgerTransactionDTOsList)
+					.trialCreditAndDebitSum(tbCandDSum).ulbId(ulbO.isPresent() ? ulbO.get().getId() : null)
+					.ulbName(ulbO.isPresent() ? ulbO.get().getName() : null).build();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	private TrialBalanceSheetCreditAndDebitSumDTO adjustForProfitAndLossAcc(
+			TrialBalanceSheetCreditAndDebitSumDTO existing, List<LedgerTransactionDTO> list) {
+		Optional<LedgerTransactionDTO> pNLDTOO = list.stream()
+				.filter(data -> data != null && data.getParticular() != null)
+				.filter(data -> data.getParticular().contains("Profit & Loss")
+						|| data.getParticular().contains("Profit and Loss")
+						|| data.getParticular().contains("Profit n Loss"))
+				.findFirst();
+		if (pNLDTOO.isPresent()) {
+			existing.setCreditAmount(existing.getCreditAmount().add(pNLDTOO.get().getCreditAmount()));
+			existing.setDebitAmount(existing.getDebitAmount().add(pNLDTOO.get().getDebitAmount()));
+		}
+		return existing;
+	}
+
+	private TrialBalanceUploadReportSummaryDTO validateData(MultipartFile file, TrialBalanceXlsxStructureDataDTO data,
+			FileEntity responseFile) {
+
+		UserEntity user = securedUser.getCurrentUserInfo();
+		Boolean ulbCorrect = data.getUlbId() != null;
+		Boolean overwriteHappened = true;
+		Boolean previouslyActiveTBForDates = anyPreviouslyActiveTB(data);
+		Boolean userAllowed = isUploadAllowedByCurrentUser(user, data.getUlbId());
+		Boolean fileReadErrors = isAnyFieldHavingErrorsValidForRejectionOfSheet(data);
+		Boolean tbAndSheetSumErrors =isTBandBalanceSumEqual.apply(data.getTrialCreditAndDebitSum(),
+				data.getSheetCreditAndDebitSum());
+		Boolean error = !ulbCorrect || !userAllowed || fileReadErrors || tbAndSheetSumErrors;
+		String errorDetails = "";
+		String errorSummary = "";
+		int severeErrorCount = 0;
+		if (error || !previouslyActiveTBForDates) {
+			overwriteHappened = false;
+		}
+		if (error) {
+			if (!ulbCorrect) {
+				severeErrorCount = severeErrorCount + 1;
+				errorDetails = errorDetails + "," + " \nULB name " + data.getUlbName()
+						+ " not found in database. Please use specific ulb name as provided from the list";
+			}
+			if (!userAllowed) {
+				severeErrorCount = severeErrorCount + 1;
+				errorDetails = errorDetails + ","
+						+ " \nYou are not allowed to make changes to trial balance for the current ulb";
+			}
+			if (fileReadErrors) {
+				severeErrorCount = severeErrorCount + 1;
+				errorDetails = errorDetails + ","
+						+ " \nFile has multiple code related issues. Please fix them using the details provided in response file";
+			}
+			//if (!tbAndSheetSumErrors) {
+			//	severeErrorCount = severeErrorCount + 1;
+			//	errorDetails = errorDetails + ","
+			//			+ " \nThe sum of trial balance through valid codes calculated through system, and provided in xlsx differ. Kindly do not make manual modifications, and also check for code errors";
+			//}
+
+			if (severeErrorCount == 1)
+				errorSummary = "One error found in upload. Kindly check the error details";
+			else if (severeErrorCount > 1)
+				errorSummary = "Multiple error found in upload. Kindly check the error details";
+		}
+
+		// FileEntity fileD = fileService.saveFileAndReturnEntity(file,
+		// data.getFile().getParentFolder().getFolderId());
+		//@formatter:off
+		return TrialBalanceUploadReportSummaryDTO.builder().currentUserName(user.getUsername())
+				.error(error)
+				.errorDetails(errorDetails)
+				.errorSummary(errorSummary)
+				.overwriteHappened(overwriteHappened)
+				.trialBalanceFileId(data.getFile().getFileId())
+				.sheetSummationIssue(!tbAndSheetSumErrors)
+				.responseFileId(responseFile.getFileId())
+				.trialBalanceFileInfoId(responseFile.getFileId())
+				.ulbCorrect(ulbCorrect)
+				.ulbId(data.getUlbId())
+				.ulbName(data.getUlbName())
+				.userAllowed(userAllowed)
+				.build();
+		//@formatter:on
+	}
+
+	private void writeDataToDBAndFile(TrialBalanceXlsxStructureDataDTO data,
+			TrialBalanceUploadReportSummaryDTO summary) {
+		TrialBalanceFileInfoEntity tbFileInfo = saveTBF(data, summary);
+		saveFileReportSummary(summary, tbFileInfo);
+		List<LedgerTransactionEntity> ledgers = saveLedgerTransactions(data, tbFileInfo);
+		tbFileInfo.setTransactions(ledgers);
+		tbFileInfo = trialBalanceFileInfoRepository.save(tbFileInfo);
+		saveBankBalances(ledgers, tbFileInfo);
+		saveBalanceSheet(ledgers, tbFileInfo);
+	}
+
+	private void writeErrorAndCommentsToTrialBalanceXlsx(TrialBalanceXlsxStructureDataDTO data,
+			FileEntity responseFile) {
+		Workbook workbook = null;
+		Sheet sheet = null;
+		try {
+
+			Path pathForStorage = Paths.get(responseFile.getParentFolder().getPathToCurrentDir());
+			Path originalPath = pathForStorage.resolve(responseFile.getFileServerName());
+			UrlResource resource = new UrlResource(originalPath.toUri());
+			FileInputStream file = new FileInputStream(resource.getFile());
+
+			// Create Workbook instance holding reference to .xlsx file
+			workbook = new XSSFWorkbook(file);
+
+			// Get first/desired sheet from the workbook
+			sheet = workbook.getSheetAt(0);
+			// inputStream = new FileInputStream(new File(filePath));
+
+			int rowCount = 0;
+
+			for (LedgerTransactionDTO trialBalanceDTO : data.getTrialBalanceInputs()) {
+
+				Row currentRow = sheet.getRow(rowCount++);
+
+				writeRecordCommentToCurrentRow(trialBalanceDTO, currentRow);
+			}
+			createHeaderRow(sheet, data.getTrialBalanceInputs());
+			getRowToShowTransactionSummary(sheet, data);
+
+			Path pathForStorageOutput = Paths.get(responseFile.getParentFolder().getPathToCurrentDir());
+			Path originalPathPut = pathForStorageOutput.resolve(responseFile.getFileServerName());
+			UrlResource resourceOut = new UrlResource(originalPathPut.toUri());
+			OutputStream fileOutputStream = new FileOutputStream(resourceOut.getFile());
+			workbook.write(fileOutputStream);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+	}
+
+	private void updatePeriodicInfo() {
+		// TODO Auto-generated catch block
+	}
+
+	private void getRowToShowTransactionSummary(Sheet sheet, TrialBalanceXlsxStructureDataDTO data) {
+
+		int lastRowNumber = sheet.getLastRowNum();
+		Row rowForHeaders = sheet.createRow(++lastRowNumber);
+		Cell debitHeader = rowForHeaders.createCell(2);
+		Cell creditHeader = rowForHeaders.createCell(3);
+		debitHeader.setCellValue("Calculated total debit");
+		creditHeader.setCellValue("Calculated total credit");
+
+		Row rowForValues = sheet.createRow(++lastRowNumber);
+		Cell debitValue = rowForValues.createCell(2);
+		Cell creditValue = rowForValues.createCell(3);
+		debitValue.setCellValue(data.getTrialCreditAndDebitSum().getDebitAmount().toString());
+		creditValue.setCellValue(data.getTrialCreditAndDebitSum().getCreditAmount().toString());
+
+		if (!((data.getSheetCreditAndDebitSum().getCreditAmount()
+				.compareTo(data.getTrialCreditAndDebitSum().getCreditAmount()) == 0)
+				&& (data.getSheetCreditAndDebitSum().getDebitAmount()
+						.compareTo(data.getTrialCreditAndDebitSum().getDebitAmount()) == 0))) {
+			Cell sheetSummationIssues = rowForValues.createCell(4);
+			sheetSummationIssues
+					.setCellValue("Sheet summation incorrect due to other errors, please verify the sheet carefully");
+		}
+
+	}
+
+	private void createHeaderRow(Sheet sheet, List<LedgerTransactionDTO> tbDto) {
+		short lastCellNumber = sheet.getRow(4).getLastCellNum();
+		Row currentRow = sheet.getRow(4);
+
+		cellDataWriteOperation(currentRow, lastCellNumber + 2, "Total accepted: ");
+		cellDataWriteOperation(currentRow, lastCellNumber + 3,
+				count.apply(tbDto, TrialUploadStatusEnum.ACCEPTED).toString());
+		cellDataWriteOperation(currentRow, lastCellNumber + 4, "Total accepted with warning: ");
+		cellDataWriteOperation(currentRow, lastCellNumber + 5,
+				count.apply(tbDto, TrialUploadStatusEnum.ACCEPTED_WITH_WARNING).toString());
+
+		cellDataWriteOperation(currentRow, lastCellNumber + 6, "Total ignored");
+		cellDataWriteOperation(currentRow, lastCellNumber + 7,
+				count.apply(tbDto, TrialUploadStatusEnum.IGNORED).toString());
+		cellDataWriteOperation(currentRow, lastCellNumber + 8, "Total Rejected: ");
+		cellDataWriteOperation(currentRow, lastCellNumber + 9,
+				count.apply(tbDto, TrialUploadStatusEnum.REJECTED).toString());
+
+	}
+
+	private void cellDataWriteOperation(Row row, int cellIndex, String cellInfo) {
+		Cell cell = row.createCell(cellIndex);
+		cell.setCellValue(cellInfo);
+	}
+
+	private void writeRecordCommentToCurrentRow(LedgerTransactionDTO tbDto, Row currentRow) {
+
+		if (tbDto == null) {
+			return;
+		}
+		if (tbDto != null && tbDto.getAccountCode() != null && tbDto.getAccountCode().equalsIgnoreCase("45021")) {
+		}
+
+		short lastCellNumber = currentRow.getLastCellNum();
+		Cell cell1 = currentRow.createCell(lastCellNumber + 2);
+		Cell cell2 = currentRow.createCell(lastCellNumber + 3);
+		cell1.setCellValue(tbDto.getStatus().toString());
+		String errorInfo = "";
+		if (tbDto.getError1() != null)
+			errorInfo = errorInfo + tbDto.getError1();
+		if (tbDto.getError2() != null)
+			errorInfo = errorInfo + tbDto.getError2();
+		if (tbDto.getError3() != null)
+			errorInfo = errorInfo + tbDto.getError3();
+		if (tbDto.getError4() != null)
+			errorInfo = errorInfo + tbDto.getError4();
+
+		cell2.setCellValue(errorInfo);
+
+	}
+
+	private BiFunction<List<LedgerTransactionDTO>, TrialUploadStatusEnum, Long> count = (tbdtoList, status) -> tbdtoList
+			.stream().filter(tbDto -> tbDto != null && tbDto.getStatus() == status).count();
+
+	private void saveBalanceSheet(List<LedgerTransactionEntity> ledgers, TrialBalanceFileInfoEntity trialBalance) {
+		Double assets = calculateAssetsNLiabilitiesForBalanceSheet(ledgers, assetsHead);
+		Double liabilities = calculateAssetsNLiabilitiesForBalanceSheet(ledgers, liabilityHead);
+
+		BalanceSheetEntity balanceSheet = new BalanceSheetEntity();
+
+		balanceSheet = BalanceSheetEntity.builder().ulb(trialBalance.getUlb()).active(true)
+				.dateTill(trialBalance.getEndDate()).trialBalance(trialBalance).totalAssets(new BigDecimal(assets))
+				.totalLiabilities(new BigDecimal(liabilities)).build();
+
+		/*
+		 * Optional<BalanceSheetEntity> balanceSheetO =
+		 * balanceSheetRepo.findByTrialBalance_Id(trialBalance.getId()); if
+		 * (balanceSheetO.isPresent()) {
+		 * balanceSheet.setId(balanceSheetO.get().getId()); }
+		 */
+		balanceSheetRepo.saveAndFlush(balanceSheet);
+	}
+
+	private Double calculateAssetsNLiabilitiesForBalanceSheet(List<LedgerTransactionEntity> ledgers,
+			Integer baseHeadCode) {
+		return ledgers.stream().filter(tr -> tr.getBaseHead() != null && tr.getBaseHead().getCode() != null)
+				.filter(transaction -> transaction.getBaseHead().getCode() == baseHeadCode)
+				.filter(tr -> tr.getAccountCode().length() == 3).map(transaction -> transaction.getClosingBalance())
+				.reduce(BigDecimal.ZERO, BigDecimal::add).doubleValue();
+
+		// return transactions.stream().map(transaction ->
+		// transaction.getClosingBalance())
+		// .reduce(BigDecimal.ZERO, BigDecimal::add).doubleValue();
+
+	}
+
+	private List<BankAndCashBalanceEntity> saveBankBalances(List<LedgerTransactionEntity> ledgers,
+			TrialBalanceFileInfoEntity tbFileInfo) {
+		List<BankAndCashBalanceEntity> cashNBankBalances = ledgers.stream()
+				.filter(ledger -> ledger.getAccountCode().startsWith("450"))
+				.map(ledger -> getCashNBankBalance.apply(ledger, tbFileInfo)).collect(Collectors.toList());
+		return bankBalanceRepo.saveAllAndFlush(cashNBankBalances);
+	}
+
+	private BiFunction<LedgerTransactionEntity, TrialBalanceFileInfoEntity, BankAndCashBalanceEntity> getCashNBankBalance = (
+			trial, file) -> BankAndCashBalanceEntity.builder().code(Integer.parseInt(trial.getAccountCode()))
+					.name(trial.getName()).openingBlnc(trial.getOpeningBalance()).closingBlnc(trial.getClosingBalance())
+					.debitAmount(trial.getAmountDebited()).creditAmount(trial.getAmountCredited()).trialBalance(file)
+					.build();
+
+	private List<LedgerTransactionEntity> saveLedgerTransactions(TrialBalanceXlsxStructureDataDTO data,
+			TrialBalanceFileInfoEntity tbFileInfo) {
+		List<LedgerTransactionEntity> ledgerTnList = data.getTrialBalanceInputs().stream()
+				.filter(tb -> (tb != null) && (tb.getActive() == true))
+				.map(tb -> getLedgerTransactionEntity.apply(tb, tbFileInfo)).collect(Collectors.toList());
+		return ledgerTransactionRepo.saveAllAndFlush(ledgerTnList);
+	}
+
+	private TrialBalanceUploadReportSummaryEntity saveFileReportSummary(TrialBalanceUploadReportSummaryDTO summary,
+			TrialBalanceFileInfoEntity tbFileInfo) {
+		return trialBalanceReportSummaryRepo.saveAndFlush(summary.getEntity(tbFileInfo));
+	}
+
+	private TrialBalanceFileInfoEntity saveTBF(TrialBalanceXlsxStructureDataDTO data,
+			TrialBalanceUploadReportSummaryDTO summary) {
+		TypeStatusEnum status = summary.getError() ? TypeStatusEnum.ERROR : TypeStatusEnum.ACTIVE;
+		Optional<ULBEntity> ulbO = ulbService.getULBEntityByName(data.getUlbName());
+		return trialBalanceFileInfoRepository.saveAndFlush(TrialBalanceFileInfoEntity.builder().file(data.getFile())
+				.startDate(data.getFinDate().getStartDate()).endDate(data.getFinDate().getEndDate()).status(status)
+				.ulb(ulbO.isPresent() ? ulbO.get() : null).build());
+	}
+
+	private BiFunction<TrialBalanceSheetCreditAndDebitSumDTO, TrialBalanceSheetCreditAndDebitSumDTO, Boolean> isTBandBalanceSumEqual = (
+			tb,
+			bs) -> tb.getCreditAmount().equals(bs.getCreditAmount()) && tb.getDebitAmount().equals(bs.getDebitAmount());
+
+	private Boolean isAnyFieldHavingErrorsValidForRejectionOfSheet(TrialBalanceXlsxStructureDataDTO data) {
+		return data.getTrialBalanceInputs().stream()
+				.filter(tb -> tb != null && tb.getStatus() != null && tb.getStatus() == TrialUploadStatusEnum.REJECTED)
+				.count() >= 1L;
+	}
+
+	private BiFunction<LedgerTransactionDTO, TrialBalanceFileInfoEntity, LedgerTransactionEntity> getLedgerTransactionEntity = (
+			trialBalanceDTO, tbFileInfo) -> LedgerTransactionEntity.builder()
+					.accountCode(trialBalanceDTO.getAccountCode()).amountCredited(trialBalanceDTO.getCreditAmount())
+					.openingBalance(trialBalanceDTO.getOpeningBlnc()).amountDebited(trialBalanceDTO.getDebitAmount())
+					.closingBalance(trialBalanceDTO.getClosingBlnc()).baseHead(trialBalanceDTO.getBaseHead())
+					.majorHead(trialBalanceDTO.getMajorHead()).minorHead(trialBalanceDTO.getMinorHead())
+					.detailHead(trialBalanceDTO.getDetailHead()).name(trialBalanceDTO.getParticular())
+					.trialBalance(tbFileInfo).build();
+
+	private Boolean anyPreviouslyActiveTB(TrialBalanceXlsxStructureDataDTO xlsData) {
+		List<TrialBalanceFileInfoEntity> tbFList = trialBalanceFileInfoRepository
+				.findByUlb_IdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatus(xlsData.getUlbId(),
+						xlsData.getFinDate().getStartDate(), xlsData.getFinDate().getEndDate(), TypeStatusEnum.ACTIVE);
+		if (tbFList.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private Boolean isUploadAllowedByCurrentUser(UserEntity user, Long ulbId) {
+		if (user.getUserProfile() == null)
+			return false;
+		List<ULBEntity> ulbsUserAttachedTo = user.getUserProfile().getUserUlbInfo().getUlbs();
+		return ulbsUserAttachedTo.stream().filter(ulb -> ulb.getId() == ulbId).count() >= 1L;
+	}
+
+	private TrialBalanceSheetCreditAndDebitSumDTO getSheetTBCreditAndDebitSum(
+			List<LedgerTransactionDTO> ledgerTransactionDTOsList) {
+		LedgerTransactionDTO tbDtoFinalRow = ledgerTransactionDTOsList.get(ledgerTransactionDTOsList.size() - 1);
+		// gets the credit and debit amount as calculated by tally
+		return new TrialBalanceSheetCreditAndDebitSumDTO(tbDtoFinalRow.getCreditAmount(),
+				tbDtoFinalRow.getDebitAmount());
+		// adjust to remove the last row of the arraylist to put the total etc in place
+		// structureData.getTrialBalanceInputs().remove(structureData.getTrialBalanceInputs().size()
+		// - 1);
+	}
+
+	private LedgerTransactionDTO getTBForEachRowL(Integer index, Row row, Map<String, String> chart,
+			Map<Integer, BaseHeadEntity> baseHeadMap, Map<String, MajorHeadEntity> majorHeadMap,
+			Map<KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO, MinorHeadEntity> minorHeadMap,
+			Map<DetailHeadMapKeyDTO, DetailHeadEntity> detailHeadMap) {
+	//	System.out.println("inside getTBForEachRowL Index is " + index + "row = "+ row );
+		if (index < 7) {
+			return null;
+		}
+		LedgerTransactionDTO tbDto = LedgerTransactionDTO.builder().closingBlnc(BigDecimal.ZERO)
+				.openingBlnc(BigDecimal.ZERO).creditAmount(BigDecimal.ZERO).debitAmount(BigDecimal.ZERO).build();
+
+		Iterator<Cell> cellIterator = row.cellIterator();
+		cellIterator.forEachRemaining(cell -> {
+			LedgerTransactionDTO tbDtoL = tbDto;
+			tbDtoL = cellOperation(cell, tbDtoL, chart, baseHeadMap, majorHeadMap, minorHeadMap, detailHeadMap);
+		});
+
+		if (tbDto.getStatus() == TrialUploadStatusEnum.ACCEPTED
+				|| tbDto.getStatus() == TrialUploadStatusEnum.ACCEPTED_WITH_WARNING) {
+
+			BigDecimal mathSum = tbDto.getOpeningBlnc().subtract(tbDto.getDebitAmount()).add(tbDto.getCreditAmount());
+
+			if (mathSum.compareTo(tbDto.getClosingBlnc()) != 0) {
+				tbDto.setError4(
+						"Sum of opening balance, debit and credit doesn't match with closing balance. Kindly do not modify the sheet manually. Make corrections to verify the same.");
+				tbDto.setActive(false);
+
+			}
+		}
+		return tbDto;
+	}
+
+	private LedgerTransactionDTO cellOperation(Cell cell, LedgerTransactionDTO tbDto, Map<String, String> chart,
+			Map<Integer, BaseHeadEntity> baseHeadMap, Map<String, MajorHeadEntity> majorHeadMap,
+			Map<KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO, MinorHeadEntity> minorHeadMap,
+			Map<DetailHeadMapKeyDTO, DetailHeadEntity> detailHeadMap) {
+		int columnIndex = cell.getColumnIndex();
+		LedgerTransactionDTO tbDtoL = tbDto;
+		
+	//	System.out.println("inside cellOperation Index is " );
+		switch (columnIndex) {
+		
+		case 0: {
+			tbDtoL = dtoChangesForCol1(tbDto, cell, chart, baseHeadMap, majorHeadMap, minorHeadMap, detailHeadMap);
+			break;
+		}
+		case 1: {
+			tbDtoL = dtoChangesForCol2(cell, tbDto);
+			break;
+		}
+		case 2: {
+			if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+				tbDtoL.setDebitAmount(BigDecimal.valueOf(cell.getNumericCellValue()));
+			break;
+		}
+		case 3: {
+			if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+				tbDto.setCreditAmount(BigDecimal.valueOf(cell.getNumericCellValue()));
+			break;
+		}
+		case 4: {
+			tbDtoL = dtoChangesForCell4(cell, tbDto);
+		}
+
+		}
+		return tbDto;
+	}
+
+	private LedgerTransactionDTO dtoChangesForCol2(Cell cell, LedgerTransactionDTO tbDto) {
+		if (cell.getCellType() != Cell.CELL_TYPE_BLANK) {
+			
+			System.out.println("Cell row " + cell.getRow() + "Cell Col "+ cell.getColumnIndex()+ cell.getCellStyle() );
+			String formatstring = cell.getCellStyle().getDataFormatString();
+			
+			Double opBal = cell.getNumericCellValue();
+			tbDto.setOpeningDebitOrCredit(false);
+			if (formatstring.contains("Dr")) {
+				opBal = opBal * -1;
+				tbDto.setOpeningDebitOrCredit(true);
+			}
+			tbDto.setOpeningBlnc(BigDecimal.valueOf(opBal));
+
+		}
+		return tbDto;
+	}
+	
+/* //////// From this part/////	
+public void dtoChangesForCol2(XSSFCell cell) {
+        double numericValue = 0.0;
+        // Check the cell type before retrieving its value
+        if (cell.getCellType() == CellType.NUMERIC) {
+            numericValue = cell.getNumericCellValue();
+        } else if (cell.getCellType() == CellType.STRING) {
+            // Attempt to convert string to numeric, if applicable
+            try {
+                numericValue = Double.parseDouble(cell.getStringCellValue());
+            } catch (NumberFormatException e) {
+                // Handle the case where conversion is not possible
+                System.out.println("Cell contains non-numeric text: " + cell.getStringCellValue());
+            }
+        }
+        // Use numericValue for further processing
+        System.out.println("Numeric value: " + numericValue);
+    }
+
+    public void cellOperation(XSSFCell cell) {
+        dtoChangesForCol2(cell);
+    }
+
+    public void getTBForEachRowL(Iterator<XSSFCell> cellIterator) {
+        while (cellIterator.hasNext()) {
+            XSSFCell cell = cellIterator.next();
+            cellOperation(cell);
+        }
+    }
+
+    public void readXlsxAndConvertToDataArr(String filePath) {
+        try (FileInputStream file = new FileInputStream(filePath);
+             XSSFWorkbook workbook = new XSSFWorkbook(file)) {
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<XSSFRow> rowIterator = sheet.rowIterator();
+            while (rowIterator.hasNext()) {
+                XSSFRow row = rowIterator.next();
+                Iterator<XSSFCell> cellIterator = row.cellIterator();
+                getTBForEachRowL(cellIterator);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleTrialBalanceUploadDataOperation(String filePath) {
+        readXlsxAndConvertToDataArr(filePath);
+    }
+}
+
+//////// ttill this part///// */
+
+	private LedgerTransactionDTO dtoChangesForCell4(Cell cell, LedgerTransactionDTO tbDto) {
+		if (cell.getCellType() != Cell.CELL_TYPE_BLANK) {
+			String formatstring = cell.getCellStyle().getDataFormatString();
+			Double closingBal = cell.getNumericCellValue();
+			tbDto.setClosingDebitOrCredit(false);
+			if (formatstring.contains("Dr")) {
+				closingBal = closingBal * -1;
+				tbDto.setClosingDebitOrCredit(true);
+			}
+			tbDto.setClosingBlnc(BigDecimal.valueOf(closingBal));
+
+		}
+		return tbDto;
+	}
+
+	private LedgerTransactionDTO dtoChangesForCol1(LedgerTransactionDTO tbDto, Cell cell, Map<String, String> chart,
+			Map<Integer, BaseHeadEntity> baseHeadMap, Map<String, MajorHeadEntity> majorHeadMap,
+			Map<KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO, MinorHeadEntity> minorHeadMap,
+			Map<DetailHeadMapKeyDTO, DetailHeadEntity> detailHeadMap) {
+		AccountCodeAliasDTO codeAndAlias = getAccInfo(cell.getStringCellValue(), chart);
+
+		tbDto.setParticular(codeAndAlias.getAlias());
+		tbDto.setAccountCode(codeAndAlias.getCode());
+		tbDto.setStatus(codeAndAlias.getStatus());
+		if (tbDto.getStatus() == TrialUploadStatusEnum.ACCEPTED
+				|| tbDto.getStatus() == TrialUploadStatusEnum.ACCEPTED_WITH_WARNING) {
+			tbDto.setActive(true);
+			tbDto.setBaseHead(baseHeadMap.get(Integer.parseInt(codeAndAlias.getCode().substring(0, 1))));
+			// setting up account heads
+			tbDto = dtoChangesToSetMajorMinorAndDetailHeadEntity(tbDto, codeAndAlias, majorHeadMap, minorHeadMap,
+					detailHeadMap);
+			if (tbDto.getStatus() == TrialUploadStatusEnum.ACCEPTED_WITH_WARNING) {
+				tbDto.setError2("Alias is incorrect, kindly use->" + chart.get(codeAndAlias.getCode()));
+			}
+		} else if (tbDto.getStatus() == TrialUploadStatusEnum.IGNORED) {
+			tbDto.setActive(false);
+			tbDto.setError1(
+					"Ignored due to : 1.Code missing,\n 2. code does not represent major, minor or detail head,\n 3. code is incorrect but left as it it not major head");
+		} else if (tbDto.getStatus() == TrialUploadStatusEnum.REJECTED) {
+			tbDto.setActive(false);
+			tbDto.setError3("Incorrect code, its not found");
+		}
+
+		return tbDto;
+	}
+
+	private LedgerTransactionDTO dtoChangesToSetMajorMinorAndDetailHeadEntity(LedgerTransactionDTO tbDto,
+			AccountCodeAliasDTO codeAndAlias, Map<String, MajorHeadEntity> majorHeadMap,
+			Map<KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO, MinorHeadEntity> minorHeadMap,
+			Map<DetailHeadMapKeyDTO, DetailHeadEntity> detailHeadMap) {
+		switch (codeAndAlias.getType()) {
+		case Major: {
+			MajorHeadEntity majorHead = majorHeadMap.get(codeAndAlias.getCode());
+			tbDto.setMajorHead(majorHead);
+			break;
+		}
+		case Minor: {
+			String majorHead = codeAndAlias.getCode().substring(0, 3);
+			String minorHead = codeAndAlias.getCode().substring(3, 5);
+			KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO key = new KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO(
+					majorHead, minorHead);
+			MinorHeadEntity minorHeadEntity = minorHeadMap.get(key);
+			tbDto.setMajorHead(majorHeadMap.get(majorHead));
+			tbDto.setMinorHead(minorHeadEntity);
+			break;
+		}
+		case Detail: {
+			DetailHeadMapKeyDTO key = new DetailHeadMapKeyDTO(codeAndAlias.getCode().substring(0, 3),
+					codeAndAlias.getCode().substring(3, 5), codeAndAlias.getCode().substring(5, 7));
+			tbDto.setMajorHead(majorHeadMap.get(key.getMajorHeadCode()));
+			KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO keyMinor = new KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO(
+					key.getMajorHeadCode(), key.getMinorHeadCode());
+			tbDto.setMinorHead(minorHeadMap.get(keyMinor));
+			tbDto.setDetailHead(detailHeadMap.get(key));
+			break;
+		}
+		case Ignored:
+			break;
+		default:
+			break;
+		}
+		return tbDto;
+	}
+
+	private AccountCodeAliasDTO getAccInfo(String testString, Map<String, String> chart) {
+		String[] codeAndAlias = testString.split(" ");
+		String code = codeAndAlias[0].trim();
+		String alias = testString.substring(code.length(), testString.length()).trim();
+		AccountCodeAliasDTO accCodeAlias = new AccountCodeAliasDTO();
+		accCodeAlias.setAlias(alias);
+		accCodeAlias.setCode(code);
+
+		Predicate<String> isNumeric = codeS -> StringUtils.isNumeric(codeS);
+		Predicate<String> isValidCode = codeS -> chart.get(codeS) != null;
+		Predicate<String> isValidAliasPerChart = codeS -> chart.get(codeS).equalsIgnoreCase(alias);
+		Predicate<String> isValidLength = codeS -> code.length() >= 3 && code.length() <= 7;
+		Predicate<String> isMinorOrDetailIgnored = codeS -> StringUtils.isNumeric(codeS) && chart.get(codeS) == null
+				&& (code.length() == 5 || code.length() == 7);
+
+	//	 System.out.println("Inside AccountCodeAliasDTO "+isValidAliasPerChart.test(code));
+
+		if (isMinorOrDetailIgnored.test(code)) {
+			accCodeAlias.setStatus(TrialUploadStatusEnum.IGNORED);
+			accCodeAlias.setError("Ignored: Code is invalid but is 5 or 7 digit code, hence ignored.");
+		} else if (isNumeric.and(isValidLength).and(isValidCode).and(isValidAliasPerChart).test(code)) {
+			accCodeAlias.setStatus(TrialUploadStatusEnum.ACCEPTED);
+			accCodeAlias.setType(getCodeType(code));
+		} else if (isNumeric.and(isValidLength).and(isValidCode).test(code)) {
+			accCodeAlias.setStatus(TrialUploadStatusEnum.ACCEPTED_WITH_WARNING);
+			accCodeAlias.setError("Accepted with warning : Incorrect alias, please use ->" + chart.get(code));
+			accCodeAlias.setType(getCodeType(code));
+		} else if (isNumeric.negate().test(code)) {
+			accCodeAlias.setError("Ignored: No code found, hence ignored");
+			accCodeAlias.setAlias(testString);
+			accCodeAlias.setCode(null);
+			accCodeAlias.setStatus(TrialUploadStatusEnum.IGNORED);
+		} else if (isNumeric.and(isValidLength).negate().test(code)) {
+			accCodeAlias.setError("Ignored:Code length <3 or >7 digit");
+			accCodeAlias.setStatus(TrialUploadStatusEnum.IGNORED);
+		} else if (isNumeric.and(isValidLength).negate().test(code)
+				|| isNumeric.and(isValidLength).and(isValidCode).negate().test(code)) {
+			accCodeAlias.setError("Error: Code not present in Chart of Accounts. Please correct the coding");
+			accCodeAlias.setStatus(TrialUploadStatusEnum.REJECTED);
+		}
+
+		return accCodeAlias;
+	}
+
+	private CodeTypeMajorMinorDetailEnum getCodeType(String code) {
+		switch (code.length()) {
+		case 3:
+			return CodeTypeMajorMinorDetailEnum.Major;
+		case 5:
+			return CodeTypeMajorMinorDetailEnum.Minor;
+
+		case 7:
+			return CodeTypeMajorMinorDetailEnum.Detail;
+
+		default:
+			return CodeTypeMajorMinorDetailEnum.Ignored;
+
+		}
+	}
+
+	// read and provide in string format the ULB name from the xlsx
+	private String getULBName(List<Row> rowList) {
+		try {
+			Row row = rowList.get(0);
+			if (row.getFirstCellNum() == 0) {
+				Iterator<Cell> cellIterator = row.cellIterator();
+				Cell cell = cellIterator.next();
+				if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+					return cell.getStringCellValue();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private Function<FileEntity, Path> getFilePathFn = fileEn -> Paths
+			.get(fileEn.getParentFolder().getPathToCurrentDir()).resolve(fileEn.getFileServerName());
+
+	@Cacheable("coa")
+	private Map<String, String> getChartOfAccountsMap() {
+		return chartOfAccountRepository.findAll().stream()
+				.collect(Collectors.toMap(ChartOfAccountsEntity::getCode, ChartOfAccountsEntity::getName));
+	}
+
+	private Map<String, MajorHeadEntity> getMajorHeadMap() {
+		return majorHeadRepository.findAll().stream()
+				.collect(Collectors.toMap(MajorHeadEntity::getCode, Function.identity()));
+	}
+
+	private Map<KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO, MinorHeadEntity> minorHeadMap() {
+		return minorHeadRepository.findAll().stream()
+				.collect(Collectors.toMap(minorHeadKeyFinder, Function.identity()));
+	}
+
+	private Function<MinorHeadEntity, KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO> minorHeadKeyFinder = (
+			minorHeadEntity) -> new KeyForMinorHeadWithMajorHeadIdAndMinorHeadIdDTO(
+					minorHeadEntity.getMajorHead().getCode(), minorHeadEntity.getCode());;
+
+	private Function<DetailHeadEntity, DetailHeadMapKeyDTO> detailHeadKeyFinder = (
+			detailHead) -> new DetailHeadMapKeyDTO(detailHead.getMinorHead().getMajorHead().getCode(),
+					detailHead.getMinorHead().getCode(), detailHead.getCode());
+
+	private Map<DetailHeadMapKeyDTO, DetailHeadEntity> detailHeadMap() {
+		return detailheadRepository.findAll().stream()
+				.collect(Collectors.toMap(detailHeadKeyFinder, Function.identity()));
+	}
+
+	private Map<Integer, BaseHeadEntity> getBaseHeads() {
+		return baseHeadRepository.findAll().stream()
+				.collect(Collectors.toMap(BaseHeadEntity::getCode, Function.identity()));
+	}
+
+	private Function<List<LedgerTransactionDTO>, BigDecimal> getCreditSum = tbDtoList -> tbDtoList.stream()
+			.filter(tbdto -> tbdto != null && tbdto.getAccountCode() != null && tbdto.getAccountCode().length() == 3
+					&& tbdto.getActive() == true
+					&& (tbdto.getStatus() == TrialUploadStatusEnum.ACCEPTED
+							|| tbdto.getStatus() == TrialUploadStatusEnum.ACCEPTED_WITH_WARNING))
+			.map(tb -> tb.getCreditAmount()).reduce(BigDecimal.ZERO, BigDecimal::add);
+	private Function<List<LedgerTransactionDTO>, BigDecimal> getDebitSum = tbDtoList -> tbDtoList.stream()
+			.filter(tbdto -> tbdto != null && tbdto.getAccountCode() != null && tbdto.getAccountCode().length() == 3)
+			.map(tb -> tb.getDebitAmount()).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+	private Function<List<LedgerTransactionDTO>, TrialBalanceSheetCreditAndDebitSumDTO> getTBSheetCreditAndDebit = tbDtoList -> new TrialBalanceSheetCreditAndDebitSumDTO(
+			getCreditSum.apply(tbDtoList), getDebitSum.apply(tbDtoList));
+
+	private FinancialRealDatesDTO getDatesFromXLSX(List<Row> rowList) {
+		try {
+			Row row = rowList.get(2);
+			if (row.getFirstCellNum() == 0) {
+
+				List<String> datesList = Arrays.asList(row.getCell(0).getStringCellValue().trim().split("to"));
+
+				return new FinancialRealDatesDTO(dateUtil.getDateFromMonthName(datesList.get(0).trim()),
+						dateUtil.getDateFromMonthName(datesList.get(1).trim()));
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,148 @@
+<div class="container-fluid fluid-component">
+    <mat-card class="child-card-material mat-card-header-cls" *ngIf="agir$ | async as agir">
+        <div class="row">
+            <div class="col-md">
+                <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+            </div>
+            <div class="col-md">
+                <div class="example-button-container ">
+                    <button mat-stroked-button [routerLink]="'../../list'" color="primary" class="child-route-button"
+                        matTooltip="List AGIR"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </div>
+                <div class="example-button-container">
+                    <button mat-stroked-button (click)="exportTableToPdf()" color="primary" class="child-route-button"
+                        matTooltip="Export PDF"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                    </button>
+                </div>
+                <div class="example-button-container" *ngIf="agir && agir.id">
+                    <button
+                        *ngIf="(agir.auditStatus=='IN_REVIEW_ULB'||agir.auditStatus=='IN_REVIEW_SLPMU') && !agir.isAssigned "
+                        matTooltip="Assign to me"
+                        mat-stroked-button class="child-route-button" color="primary" (click)="assignToMe(agir.id)">
+                        <mat-icon>assignment_ind</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mat-card mat-data-card container-fluid" *ngIf="agir$ | async as agir">
+        <mat-card-content>
+            <section>
+                <div class="row header-row">
+                    <span class="col-md">
+                        <h3 style="display: inline">AGIR Audit: View</h3>
+                        <h5 [ngStyle]="!messageStatus?{'background-color':'red'}:{'background-color':'white'}">
+                            {{message}}</h5>
+                    </span>
+                    <span class="col-md" style="text-align: right">
+                        <button
+                            *ngIf="agir.auditStatus=='DRAFT'||agir.auditStatus=='IN_REVIEW_SLPMU'||agir.auditStatus=='IN_REVIEW_ULB'"
+                            matTooltip="Edit"
+                            mat-stroked-button class="child-route-button" color="primary"
+                            [routerLink]="'../../edit/' + agir.id">
+                            <mat-icon>mode_edit</mat-icon>
+                        </button>
+                        <button
+                            *ngIf="agir.id && agir.auditStatus=='IN_REVIEW_SLPMU' && agir.isAssigned && authority=='ROLE_SLPMU_AUDIT'"
+                            matTooltip="Approve"
+                            mat-stroked-button class="child-route-button" color="primary"
+                            (click)="approveReject(agir.id,true)">
+                            <mat-icon>check_circle</mat-icon>
+                        </button>
+                        <button
+                            *ngIf="agir.id && agir.auditStatus=='IN_REVIEW_SLPMU' && agir.isAssigned  && authority=='ROLE_SLPMU_AUDIT'"
+                            matTooltip="Reject"
+                            mat-stroked-button class="child-route-button" color="primary"
+                            (click)="approveReject(agir.id,false)">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+
+                        <button *ngIf="agir.id && (agir.auditStatus=='DRAFT'|| agir.auditStatus=='IN_REVIEW_ULB') &&  agir.isAssigned  "
+                            matTooltip="Send for review"
+                            mat-stroked-button class="child-route-button" color="primary"
+                            (click)="sendForReview(agir.id)">
+                            <mat-icon>access_time</mat-icon>
+                        </button>
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id"> Id</label>
+                            <input type="text" [value]="agir.id" mat-input class="form-control" id="id"
+                                [disabled]="'true'" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name"> Title</label>
+                            <input type="text" [value]="agir.title" mat-input class="form-control" id="name"
+                                [disabled]="'true'" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <input type="text" [value]="agir.startDate" mat-input class="form-control" id="startDate"
+                                [disabled]="'true'" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <input type="text" [value]="agir.endDate" mat-input class="form-control" id="endDate"
+                                [disabled]="'true'" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="description">ULB</label>
+                            <input type="text" [value]="agir.ulb.id + ' - ' + agir.ulb.name" mat-input
+                                class="form-control" id="description" [disabled]="'true'" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="description">Audit Status</label>
+                            <input type="text" [value]="agir.auditStatus" mat-input class="form-control"
+                                id="description" [disabled]="'true'" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea [value]="agir.description" mat-input class="form-control" id="description"
+                                [disabled]="'true'"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="criteria-section" *ngIf="agir.id">
+                <mat-card>
+                    <div *ngIf="currentScr=='list'">
+                        <app-list-agir-audit-criteria [id]="agir.id" (criteriaId)="setCriteriaId($event)"
+                            [parent]="'view'">
+                        </app-list-agir-audit-criteria>
+                    </div>
+                    <div *ngIf="currentScr=='view'">
+                        <app-view-agir-audit-criteria [id]="agir.id" (sendToParent)="openList($event)"
+                            [criteriaId]="criteriaIdInfo" [parent]="'view'">
+                        </app-view-agir-audit-criteria>
+                    </div>
+
+                </mat-card>
+            </section>
+
+        </mat-card-content>
+
+    </mat-card>
+
+
+</div>

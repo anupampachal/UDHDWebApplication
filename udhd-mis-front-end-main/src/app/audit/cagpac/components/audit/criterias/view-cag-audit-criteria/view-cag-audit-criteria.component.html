@@ -1,0 +1,79 @@
+<div class="container-fluid fluid-component">
+    <mat-card class="child-card-material mat-card-header-cls">
+        <div class="row">
+            <div class="col-md">
+                <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+            </div>
+            <div class="col-md">
+                <div class="example-button-container ">
+                    <button mat-stroked-button (click)="showList()" color="primary" class="child-route-button"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mat-card mat-data-card container-fluid" *ngIf="criteria$ | async as criteria">
+        <mat-card-content>
+            <div class="row header-row">
+                <span class="col-md">
+                    <h2 style="display: inline">Criteria</h2>
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="id"> Id</label>
+                        <input type="text" [value]="criteria.id" mat-input class="form-control" id="id"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name"> Title</label>
+                        <input type="text" [value]="criteria.title" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name"> Audit Para</label>
+                        <input type="text" [value]="criteria.auditPara" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description">Amount</label>
+                        <input type="text" [value]="criteria.amount" mat-input class="form-control" id="description"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description">Associated Risk</label>
+                        <input type="text" [value]="criteria.associatedRisk" mat-input class="form-control"
+                            id="description" [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description">Status</label>
+                        <input type="text" [value]="criteria.status" mat-input class="form-control" id="description"
+                            [disabled]="'true'" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" [value]="criteria.description" mat-input class="form-control"
+                            id="description" [disabled]="'true'"></textarea>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

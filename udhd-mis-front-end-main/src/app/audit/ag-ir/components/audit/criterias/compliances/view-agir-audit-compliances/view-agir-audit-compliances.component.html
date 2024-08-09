@@ -1,0 +1,55 @@
+<div *ngIf="agirAuditCompliance$ | async as compliance" class="container">
+    <div class="row">
+        <div class="col-md">
+
+            <mat-card class="child-card-material mat-card-header-cls">
+                <div class="row">
+                    <div class="col-md">
+                        <mat-card-title>
+                            <span>AGIR Audit Compliances</span>
+                            <span class="example-spacer"></span>
+                            <span class="example-button-container ">
+                                <button mat-stroked-button (click)="toList()" color="primary" class="child-route-button"
+                                    aria-label="Example icon button with a plus one icon">
+                                    <mat-icon>list</mat-icon>
+                                </button>
+                            </span>
+                            <span class="example-button-container "
+                                *ngIf="compliance && compliance.id && parent==='edit'">
+                                <button mat-stroked-button (click)="toEdit(compliance.id)" color="primary"
+                                    class="child-route-button" aria-label="Example icon button with a plus one icon">
+                                    <mat-icon>mode_edit</mat-icon>
+                                </button>
+                            </span>
+                        </mat-card-title>
+
+                    </div>
+                </div>
+            </mat-card>
+            <mat-card class="mat-card mat-data-card container-fluid">
+                <mat-card-content class="view-mat-card-content">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="id"> Id</label>
+                                <input type="text" [value]="compliance.id" mat-input class="form-control" id="id"
+                                    [disabled]="'true'" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name"> Comment</label>
+                                <input type="text" [value]="compliance.comment" mat-input class="form-control" id="name"
+                                    [disabled]="'true'" />
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Status</label>
+                                <input type="text" [value]="compliance.status" mat-input class="form-control"
+                                    id="description" [disabled]="'true'" />
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,102 @@
+<form [formGroup]="partBForm">
+  <span style="float:right"><button type="button" (click)="pushNewForm()">
+          <i class="fa fa-plus"></i>
+      </button></span>
+  <table class="table table-bordered" formArrayName="details">
+      <tbody *ngFor="let topic of detailsControl['controls']; let i=index">
+          <tr [formGroupName]="i">
+              <td class="col-md-6">
+                  <input type="hidden" formControlName="id">
+                  <textarea name="description" class="form-control" formControlName="description"
+                      placeholder="Enter Description"></textarea>
+              </td>
+              <td class="col-md-4">
+                  <section class="form-group">
+                      <p *ngIf="showFileError" class="danger">{{showFileError}}</p>
+                      <div style="padding-left: 0">
+                          <span style="padding: 0">
+                              <input formControlName="file" type="file" (change)="onSelected($event)"
+                                  class="btn btn-default btn-file pull-left">
+                          </span>
+                      </div>
+
+                  </section>
+
+              </td>
+              <td class="col-md-2">
+                <button *ngIf="topic.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+                title="edit" (click)="enableControl(i)">
+                <mat-icon>edit</mat-icon>
+              </button>
+                  <button type="button" title="save" name="save" class="btn btn-default btn-sm"
+                      [disabled]="!detailsControl.controls[i].value.description"
+                      (click)="savePartB(i)">
+                      <i class="fa fa-save"></i></button>
+
+              </td>
+
+          </tr>
+      </tbody>
+  </table>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="partBForm">
+  <span style="float:right"><button type="button" (click)="pushNewForm()">
+          <i class="fa fa-plus"></i>
+      </button></span>
+  <table class="table table-bordered" formArrayName="details">
+      <tbody *ngFor="let topic of detailsControl['controls']; let i=index">
+          <tr [formGroupName]="i">
+              <td class="col-md-6">
+                  <input type="hidden" formControlName="id">
+                  <textarea name="description" class="form-control" formControlName="description"
+                      placeholder="Enter Description"></textarea>
+              </td>
+              <td class="col-md-4">
+                  <section class="form-group">
+                      <p *ngIf="showFileError" class="danger">{{showFileError}}</p>
+                      <div style="padding-left: 0">
+                          <span style="padding: 0">
+                              <input type="file" (change)="onSelected($event)"
+                                  class="btn btn-default btn-file pull-left">
+                          </span>
+                      </div>
+
+                  </section>
+
+              </td>
+              <td class="col-md-2">
+                  <button type="button" title="save" name="save" class="btn btn-default btn-sm"
+                      [disabled]="!detailsControl.controls[i].value.description"
+                      (click)="savePartB(i)">
+                      <i class="fa fa-save"></i></button>
+
+
+                  <button type="button" name="delete" class="btn btn-default btn-sm" (click)="remove(i)">
+                      <mat-icon>delete</mat-icon></button>
+              </td>
+
+          </tr>
+      </tbody>
+  </table>
+</form> -->

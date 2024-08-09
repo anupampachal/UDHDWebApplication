@@ -1,0 +1,51 @@
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+        <div class="col-md">
+            <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+        </div>
+        <div class="col-md">
+            <div class="example-button-container">
+                <button mat-stroked-button class="route-button" (click)="toList()" color="primary" style="float: right"
+                    aria-label="Example icon button with a plus one icon">
+                    <mat-icon>list</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-card-data" *ngIf="agirAuditCompliance$|async ">
+    <form [formGroup]="editAgirAuditComplianceForm" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-md">
+                <mat-card-title class="mat-card-title">Add Compliance</mat-card-title>
+            </div>
+        </div>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md">
+                    <div *ngIf="showFormError">
+                        <p>{{ showFormError.Description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Comment<span class="required"> *</span></mat-label>
+                        <input matInput formControlName="comment" minlength="3" maxlength="2000" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="status">
+            <input type="hidden" formControlName="auditCriteriaId">
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="editAgirAuditComplianceForm.invalid" type="submit">
+                Submit
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>

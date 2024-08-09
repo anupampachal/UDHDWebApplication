@@ -1,0 +1,75 @@
+<div class="container-fluid fluid-component">
+  <mat-card class="child-card-material mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+        <div class="example-button-container ">
+          <button mat-stroked-button [routerLink]="'../../list'" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+            <mat-icon>list</mat-icon>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="mat-card mat-data-card container-fluid" *ngIf="budgetData$ | async as budgetData">
+    <mat-card-content class="view-mat-card-content">
+      <div class="row header-row">
+        <span class="col-md">
+          <h3 class="header-info-view">Budget Upload Data</h3>
+        </span>
+        <span class="col-md" style="text-align: right">
+
+          <button mat-stroked-button class="child-route-button" color="primary" *ngIf="budgetData.fileId"
+            (click)="downloadFile(budgetData.fileId)">
+            <mat-icon>file_download</mat-icon>
+          </button>
+        </span>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="id"> Id</label>
+            <input type="text" [value]="budgetData.id" mat-input class="form-control" id="id" [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="name"> Start Date </label>
+            <input type="text" [value]="budgetData.startDate" mat-input class="form-control" id="name"
+              [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="description">End Date</label>
+            <input type="text" [value]="budgetData.endDate" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div>
+          <!-- <div class="form-group">
+            <label for="description">Quarter</label>
+            <input type="text" [value]="budgetData.quarter" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div> -->
+          <div class="form-group">
+            <label for="description">Ulb Name</label>
+            <input type="text" [value]="budgetData.ulbName" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="description">Overwritten</label>
+            <input type="text" [value]="budgetData.overWritten" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="description">Status</label>
+            <input type="text" [value]="budgetData.status" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

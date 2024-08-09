@@ -1,0 +1,140 @@
+<mat-card class="mat-card-data">
+  <form [formGroup]="step1Form" >
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Id<span class="required"> *</span></mat-label>
+            <input readonly matInput formControlName="id" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Title<span class="required"> *</span></mat-label>
+            <input readonly matInput formControlName="title" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="step1Form">
+              <input readonly matStartDate formControlName="startDate" placeholder="Start date">
+              <input readonly matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+       </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea readonly matInput formControlName="description" rowCount=3></textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <ng-container *ngIf="ulbs">
+            <mat-form-field appearance="fill">
+              <mat-select [disabled]="true" formControlName="ulbId" placeholder="ULB" [compareWith]="compareFn">
+                <ng-container *ngFor="let ulb of ulbs">
+                <mat-option [value]="ulb.id">{{ulb.code}} - {{ulb.name}} </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+  </form>
+</mat-card>
+
+
+
+
+
+
+
+<!-- <mat-card class="mat-card mat-data-card container-fluid" *ngIf="step1Report$ | async as st1report">
+      <mat-card-content class="view-mat-card-content">
+          <div class="row header-row">
+              <span class="col-md">
+                  <h3 class="header-info-view">Step 1 Report</h3>
+              </span>
+              <span class="col-md" style="text-align: right">
+                  <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT', 'ROLE_INTERNAL_AUDITOR']" [disabled]="st1report.active==false"
+                  mat-stroked-button class="child-route-button" color="warn" (click)="confirmDelete()">
+                      <mat-icon>delete</mat-icon>
+                  </button>
+                  <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']"
+                  mat-stroked-button class="child-route-button" color="primary"
+                      [routerLink]="'../../edit/' + st1report.id">
+                      <mat-icon>mode_edit</mat-icon>
+                  </button>
+              </span>
+              <hr>
+          </div>
+          <div class="row" >
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="id"> Id</label>
+                      <input type="text" [value]="st1report.id" mat-input class="form-control" id="id"
+                          [disabled]="'true'" />
+                  </div>
+                  <div class="form-group">
+                    <label for="name"> Title</label>
+                    <input type="text" [value]="st1report.title" mat-input class="form-control" id="name"
+                        [disabled]="'true'" />
+                </div>
+                <div class="form-group">
+                  <label for="name"> Description</label>
+                  <input type="text" [value]="st1report.description" mat-input class="form-control" id="name"
+                      [disabled]="'true'" />
+              </div>
+                  <div class="form-group">
+                      <label for="name"> Start Date</label>
+                      <input type="text" [value]="st1report.startDate" mat-input class="form-control" id="name"
+                          [disabled]="'true'" />
+                  </div>
+                  <div class="form-group">
+                    <label for="name"> End Date</label>
+                    <input type="text" [value]="st1report.endDate" mat-input class="form-control" id="name"
+                        [disabled]="'true'" />
+                </div>
+                <div class="form-group">
+                  <label for="name"> Ulb Name</label>
+                  <input type="text" [value]="st1report.ulb.name" mat-input class="form-control" id="name"
+                      [disabled]="'true'" />
+              </div>
+              <div class="form-group">
+                <label for="name"> Audit Status</label>
+                <input type="text" [value]="st1report.auditStatus" mat-input class="form-control" id="name"
+                    [disabled]="'true'" />
+            </div>
+
+
+              </div>
+          </div>
+      </mat-card-content>
+  </mat-card> -->
+
+

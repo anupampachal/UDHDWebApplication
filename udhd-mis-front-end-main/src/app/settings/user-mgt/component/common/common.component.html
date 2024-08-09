@@ -1,0 +1,138 @@
+<mat-card class="mat-card-header-cls">
+  <div class="row">
+    <div class="col-md">
+      <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+    </div>
+    <div class="col-md">
+      <div class="example-button-container">
+        <button *ngIf="addOrUpdate == 'Add'" mat-stroked-button class="route-button" [routerLink]="'../../list'" color="primary" style="float: right"
+          aria-label="Example icon button with a plus one icon">
+          <mat-icon>list</mat-icon>
+        </button>
+        <button *ngIf="addOrUpdate == 'Update'" mat-stroked-button class="route-button" [routerLink]="'../../../list'" color="primary" style="float: right"
+        aria-label="Example icon button with a plus one icon">
+        <mat-icon>list</mat-icon>
+      </button>
+
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<div [formGroup]="parentGroup">
+  <div formGroupName="commonForm">
+    <div class="row">
+      <div class="col-md">
+        <mat-card-title class="mat-card-title">{{addOrUpdate}} {{userType}} User</mat-card-title>
+      </div>
+    </div>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+            <div *ngIf="showFormError">
+                <p>{{ showFormError.Description }}</p>
+            </div>
+        </div>
+    </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-md">
+              <mat-form-field appearance="fill">
+                <mat-label>Email<span class="required"> *</span></mat-label>
+                <input formControlName="username" matInput />
+                <mat-error>This field is mandatory</mat-error>
+                <mat-error>This must be email id</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <mat-form-field appearance="fill">
+                <mat-label>Name<span class="required"> *</span></mat-label>
+                <input matInput formControlName="name" minlength="3" maxlength="50" />
+                <mat-error matErrorMessages></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <mat-form-field appearance="fill">
+                <mat-label>Mobile No<span class="required"> *</span></mat-label>
+                <input matInput formControlName="mobileNo" minlength="10" />
+                <mat-error matErrorMessages></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md">
+              <mat-form-field appearance="fill">
+                <mat-select formControlName="authority" placeholder="Authority">
+                  <ng-container *ngFor="let authName of authorityNames">
+                    <mat-option [value]="authName.name">{{authName.name}} </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-md">
+              <mat-form-field appearance="fill">
+                <mat-label>Permanent Address</mat-label>
+                <textarea formControlName="permanentAddress" matInput></textarea>
+                <mat-error matErrorMessages></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="boolean">
+            <div class="row">
+              <div class="col-md">
+                <mat-label>mobileVerified<span class="required">*</span></mat-label>
+                <mat-slide-toggle formControlName="mobileVerified" class="example-margin" color="primary">
+                </mat-slide-toggle>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-label>emailVerified<span class="required">*</span></mat-label>
+                <mat-slide-toggle formControlName="emailVerified" class="example-margin" color="primary">
+                </mat-slide-toggle>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-label>accountNonExpired<span class="required">*</span></mat-label>
+                <mat-slide-toggle formControlName="accountNonExpired" class="example-margin" color="primary">
+                </mat-slide-toggle>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-label>enabled<span class="required">*</span></mat-label>
+                <mat-slide-toggle formControlName="enabled" class="example-margin" color="primary">
+                </mat-slide-toggle>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-label>accountNonLocked<span class="required">*</span></mat-label>
+                <mat-slide-toggle formControlName="accountNonLocked" class="example-margin" color="primary">
+                </mat-slide-toggle>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-label>credentialsNonExpired<span class="required">*</span></mat-label>
+                <mat-slide-toggle formControlName="credentialsNonExpired" class="example-margin" color="primary">
+                </mat-slide-toggle>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </div>
+</div>

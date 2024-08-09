@@ -1,0 +1,161 @@
+server:
+  port: 8080
+  
+security.token: 
+  validity: 7200
+  secret: 4t7w!z$C&F)J@NcRfUjXn2r5u8x/A?D*6262xsa2!
+
+logging.level:
+  org.springframework:
+    mail.javamail: WARN
+    web: WARN
+  com.scsinfinity: TRACE
+ 
+ 
+google.recaptcha:
+  site:
+    key: 6LfWjZAdAAAAAC06Q8EoPk6iULpcVAxP3Yo-QOjA
+  secret:
+    key: 6LfWjZAdAAAAALmw4m2B5ax9s85OwGiAxDG1jVkx
+  verify:
+    url: https://www.google.com/recaptcha/api/siteverify  
+   
+  
+scs:
+  setting:
+    thread-pool:
+      core-pool-size: 16
+      max-pool-size: 60
+      keep-alive-in-sec: 60
+      queue-capacity: 30
+      prefix: SCS-FMIS-THREAD-POOL-
+      wait-for-task-completion-on-shutdown: true
+      await-termination: 60
+    file:
+      name: heads/Chart_of_Accounts.xlsx
+      override: true
+    folder:
+      createDBFolderIfExists: true
+      root:
+        name: home
+        nickname: rootsahduhiuhaihhvy324@werw  
+      reports:
+        name: report
+        nickname: reportadnkasjbdiasbdasdja@aknsa  
+      logoAndImages: 
+        name: logo_images
+        nickname: logomdakjnakdajakankasndkasndkasnd12@ 
+      internalDocs:
+        name: internal-docs
+        nickname: internal-docsemberdlskmlsmlklk0973xss3@
+      externalDocs:
+        name: external-docs
+        nickname: external-docskmczxxdfsevghwbsbmlrhskko123@
+      profile:
+        name: profile-pic
+        nickname: profile-pic-jnkjndnl23233asdsdvdfnhfhggh@  
+      xls-import:
+        name: xls-import-member
+        nickname: xls-import-memberdlskmlsmlklmslmsldms123@
+      deas-data:
+        name: deas-data
+        nickname: deas-data-hieuehwirgewiurgweiugw
+      ia-data:
+        name: ia-data
+        nickname: ia-data0sdamsbdasjkdbaskbdaskjdbakbdakj
+      audit-data:
+        name: audit-data
+        nickname: audit-datakansdklanakndkandkasndaksadnlns
+      comments:
+        name: comments-data
+        nickname: comments-datasdandklasdbkalsbdaksbd
+      meeting:
+        name: meetings-data
+        nickname: meetings-datadamndasndklandaksndsalk
+      support:
+        name: support-data
+        nickname: support-datadkansdnakdankdas
+                
+    templates:
+      member-import: /Users/adityanarayan/Documents/workspace/library-workspace/library-back-end/library/src/main/resources/templates/xls-templates/Library_member_import_template.xlsx
+
+
+
+
+
+spring:
+  mail:
+    host: smtpout.secureserver.net
+    port: 465
+    username: admin@techvarsity.org
+    password: M@2014apr
+    protocol: smtp
+    properties.mail:
+      debug: true
+      smtp:
+        auth: true
+        ssl.enable: true
+        ssl.trust: "*"
+
+
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    timeout: 60000
+    lettuce:
+      pool:
+        max-active: 12
+        max-idle: 12
+        max-wait: 6
+        min-idle: 4
+        max-total: 13
+  cache:
+    redis:
+      time-to-live: 60000
+      key-prefix: fmis-cache-
+    cache-names: fmis
+  devtools:
+    restart:
+      exclude: logs/**
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      enabled: true
+    console:
+      enabled: true
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+     # ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        generate_statistics: false
+        format_sql: false
+  datasource:
+    #initialization-mode: always
+    #schema: classpath:queries.sql
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 25
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      auto-commit: true
+      driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/h2-db/udhd8;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;AUTO_SERVER=TRUE;
+    #url: jdbc:h2:mem:testdb2  
+    username: sa
+    password: 
+    
+
+
+
+    

@@ -1,0 +1,51 @@
+<table class="table table-bordered">
+  <thead>
+    <caption>
+      <h5>Income</h5>
+    </caption>
+    <tr>
+      <th scope="col">Sl No.</th>
+      <th scope="col">Period</th>
+      <th scope="col">Total in cr.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ currentPeriod }}</td>
+      <td>{{ dataToDisplay.incomeAmtFromCurrentToPrev | formatAmount }}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>{{ prevPeriod }}</td>
+      <td>{{ dataToDisplay.incomeAmtFromPrevToLast | formatAmount }}</td>
+   </tr>
+  </tbody>
+  <thead>
+    <caption>
+      <h5>Expenditure</h5>
+    </caption>
+    <tr>
+      <th scope="col">Sl No.</th>
+      <th scope="col">Period</th>
+      <th scope="col">Total in cr.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>{{ currentPeriod }}</td>
+      <td>{{ dataToDisplay.expenseAmtFromCurrentToPrev | formatAmount }}</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>{{ prevPeriod }}</td>
+      <td>{{ dataToDisplay.expenseAmtFromPrevToLast | formatAmount }}</td>
+    </tr>
+    <tr>
+      <td  colspan="2">Net</td>
+      <td>{{ dataToDisplay.net | formatAmount  }}</td>
+    </tr>
+  </tbody>
+</table>
+

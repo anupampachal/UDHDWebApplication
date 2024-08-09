@@ -1,0 +1,88 @@
+<div class="container-fluid fluid-component">
+  <mat-card class="child-card-material mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+        <div class="example-button-container ">
+          <button mat-stroked-button [routerLink]="'../../list'" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+            <mat-icon>list</mat-icon>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="mat-card mat-data-card container-fluid" *ngIf="trialBalanceData$ | async as trialBalanceData">
+    <mat-card-content class="view-mat-card-content">
+      <div class="row header-row">
+        <span class="col-md">
+          <h3 class="header-info-view">Trial Balance Data</h3>
+        </span>
+        <span class="col-md" style="text-align: right">
+
+          <button mat-stroked-button class="child-route-button" color="primary"
+            *ngIf="trialBalanceData.trialBalanceFileId" (click)="downloadFile(trialBalanceData.trialBalanceFileId)">
+            <mat-icon>file_download</mat-icon>
+          </button>
+          <button mat-stroked-button class="child-route-button" color="accent"
+            *ngIf="trialBalanceData.trialBalanceFileId" (click)="downloadSummaryFile(trialBalanceData.responseFileId)">
+            <mat-icon>sd_card_alert</mat-icon>
+          </button>
+
+        </span>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="id"> Id</label>
+            <input type="text" [value]="trialBalanceData.id" mat-input class="form-control" id="id"
+              [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="id">Ulb Id</label>
+            <input type="text" [value]="trialBalanceData.ulbId" mat-input class="form-control" id="id"
+              [disabled]="'true'" />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Ulb Name</label>
+            <input type="text" [value]="trialBalanceData.ulbName" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="description">Current User Name</label>
+            <input type="text" [value]="trialBalanceData.currentUserName" mat-input class="form-control"
+              id="description" [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="description">User Allowed</label>
+            <input type="text" [value]="trialBalanceData.userAllowed" mat-input class="form-control" id="description"
+              [disabled]="'true'" />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Sheet Summation Issue</label>
+            <input type="text" [value]="trialBalanceData.sheetSummationIssue" mat-input class="form-control"
+              id="description" [disabled]="'true'" />
+          </div>
+          <div class="form-group" *ngIf="trialBalanceData.error">
+            <label for="description">Error Summary</label>
+            <input type="text" [value]="trialBalanceData.errorSummary" mat-input class="form-control"
+              id="description" [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="description">Ulb Correct</label>
+            <input type="text" [value]="trialBalanceData.ulbCorrect" mat-input class="form-control"
+              id="description" [disabled]="'true'" />
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

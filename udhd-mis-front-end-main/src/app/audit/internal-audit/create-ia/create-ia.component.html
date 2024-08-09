@@ -1,0 +1,51 @@
+<mat-card class="mat-card-header-cls">
+  <div class="row">
+    <div class="col-md">
+      <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+    </div>
+    <div class="col-md">
+      <div class="example-button-container">
+        <button mat-stroked-button class="route-button" [routerLink]="'../ia-list'" color="primary" style="float: right"
+          aria-label="Example icon button with a plus one icon">
+          <mat-icon>list</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<section id="body" class="col-md-12">
+  <mat-card class="mat-card-data">
+    <mat-horizontal-stepper [linear]="true" #stepper >
+      <mat-step [stepControl]="form1FG" [completed]="step1completed">
+        <ng-template matStepLabel>Report</ng-template>
+        <app-step1-report [step1Form]="form1" (nextStep)="goToStep(1,$event)"></app-step1-report>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Executive Summary</ng-template>
+        <app-step2-executive-summary [step1Report]="step1Rep"></app-step2-executive-summary>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Administration</ng-template>
+        <app-step3-detailed-audit (nextStep)="goToNextStepFromStep3($event)"></app-step3-detailed-audit>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Audit Details</ng-template>
+        <app-step4-review-of-outstanding-paras></app-step4-review-of-outstanding-paras>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Finance</ng-template>
+        <app-step5-finance></app-step5-finance>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Audit Observation</ng-template>
+        <app-step6-audit-observation></app-step6-audit-observation>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+  <!--div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="stepper.previous()">Back</button>
+    <button mat-raised-button color="accent" [hidden]="this.stepper.selectedIndex==6" (click)="stepper.next()" style="margin-left: 12px;">Next</button>
+  </div-->
+</section>

@@ -1,0 +1,103 @@
+<div class="row">
+<form [formGroup]="step2IntroductionForm">
+  <fieldset class="hm-fieldset col-md-12">
+    <legend class="hm-legend">Introduction</legend>
+    <table class="table table-bordered">
+      <input formControlName="id"  type="hidden" value="">
+      <tbody>
+        <tr>
+          <td>
+            <label for="">Name of the Municipality</label>
+          </td>
+          <td>
+            <textarea [readonly]="true" formControlName="municipalityName" style="display: block" placeholder="Enter Municipality Name"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="">Period covered under current audit</label>
+          </td>
+          <td>
+            <textarea formControlName="periodCovered" style="display: block" placeholder="Enter Period"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="">Name of Executive Officer for the period under Audit</label>
+          </td>
+          <td>
+            <textarea formControlName="executiveOfficerNameForPeriod" style="display: block" placeholder="Enter Executive Officer Name"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div align="right">
+      <button class="btn btn-primary" type="button" *ngIf="step2IntroductionForm.disabled" (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+
+      <button class="btn btn-primary" type="button"  [disabled]="!step2IntroductionForm.valid" (click)="onSubmit()">Save</button>
+    </div>
+  </fieldset>
+</form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+<h4>Introduction</h4>
+<mat-card class="mat-card-data">
+  <form [formGroup]="step2IntroductionForm" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter Municipality Name<span class="required"> *</span></mat-label>
+            <input matInput formControlName="municipalityName" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <label for=""></label>
+            <mat-label>Period covered under current audit <span class="required"> *</span></mat-label>
+            <input matInput formControlName="period" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-md">
+        <mat-form-field appearance="fill">
+          <mat-label>Name of Executive Officer<span class="required"> *</span></mat-label>
+          <input matInput formControlName="executiveOfficerName" />
+          <mat-error matErrorMessages></mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!step2IntroductionForm.valid">Save</button>
+    </mat-card-actions>
+  </form>
+</mat-card> -->

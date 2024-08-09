@@ -1,0 +1,45 @@
+<div>
+  <h4>
+    <strong>Income</strong>
+  </h4>
+  <div class="row table-responsive">
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+        <tr>
+          <th scope="col">SrlNo.</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let income of incomeData; let i=index;">
+          <th scope="row"> {{ i+1 }} </th>
+          <td> {{ income.code }} - {{ income.description }} </td>
+          <td> {{  income.amount | formatAmount}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+  <h4><strong>Expense</strong></h4>
+  <div class="row table-responsive">
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+        <tr>
+          <th scope="col">SrlNo.</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of expenseData; let i=index;">
+          <th scope="row"> {{ i+1 }} </th>
+          <td> {{ expense.code }} - {{ expense.description }} </td>
+          <td> {{  expense.amount | formatAmount}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

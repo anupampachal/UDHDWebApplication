@@ -1,0 +1,48 @@
+<form [formGroup]="tdsForm">
+  <div class="col-md-12" align="right"><button type="button" (click)="pushNewForm()">
+          <i class="fa fa-plus"></i>
+      </button></div>
+  <div class="col-md-12 table-responsive">
+      <table class="table table-bordered" formArrayName="tds">
+          <tbody *ngFor="let item of tdsControl.controls; let i=index">
+              <tr [formGroupName]="i">
+                  <td *ngIf="tdsFormDescriptions[i]">{{tdsFormDescriptions[i]}}</td>
+                  <td *ngIf="!tdsFormDescriptions[i]">
+                    <input required placeholder="Enter Name" class="form-control" style="display: block"
+                    formControlName="name">
+                  </td>
+
+                  <td>
+                    <input type="hidden" formControlName="id">
+
+                      <textarea placeholder="DESCRIPTION" class="form-control" style="display: block"
+                          formControlName="description"></textarea>
+                  </td>
+                  <td>
+                      <input type="number" placeholder="AMOUNT INVOLVED" class="form-control" style="display: block"
+                          formControlName="amountInvolved" />
+                  </td>
+                  <td>
+                      <div class="pull-left" style="display: inline-block">
+                          <input type="file" formControlName="file" name="attachment{{i}}" id="attachment{{i}}" class="custome-file"
+                              (change)="onSelected($event,i)">
+
+                      </div>
+                  </td>
+                  <td>
+                    <button *ngIf="item.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+                    title="edit" (click)="enableControl(i)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                      <button type="button" title="Save" name="Save" [disabled]="item.invalid"
+                          class="btn btn-default btn-sm" (click)="saveTDS(i)">
+                          <i class="fa fa-save"></i></button>
+
+                      <button type="button" name="delete" class="btn btn-default btn-sm" (click)="remove(i)">
+                          <i class="fa fa-trash"></i></button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</form>

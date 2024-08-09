@@ -1,0 +1,19 @@
+<form [formGroup]="partBForm">
+
+  <table class="table table-bordered" formArrayName="details">
+    <tbody *ngFor="let topic of detailsControl['controls']; let i=index">
+      <tr [formGroupName]="i">
+        <td class="col-md-6">
+          <input type="hidden" formControlName="id">
+          <textarea name="description" class="form-control" formControlName="description"
+            placeholder="Enter Description"></textarea>
+        </td>
+        <td>
+          <button (click)="downloadFile(i,topic)" mat-stroked-button color="primary" class="child-route-button"  >
+            <mat-icon>file_download</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

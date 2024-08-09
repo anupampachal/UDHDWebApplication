@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~font-awesome/css/font-awesome.css";
+/*@import '~material-design-icons/iconfont/material-icons.css';*/
+.fluid-component {
+  padding: 5px;
+}
+
+.child-card-material {
+  margin: 5px;
+  padding: 0px;
+}
+
+.child-route-button {
+  float: right;
+  transform: scale(0.7);
+}
+
+.mat-card-header-cls {
+  padding: 0%;
+}
+
+.mat-data-card {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.view-mat-card-content {
+  width: 50vw;
+}
+
+.status {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.header-info-view {
+  display: inline;
+  color: rgb(102, 100, 100);
+}
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.error {
+  color: red;
+}
+
+.danger {
+  color: red;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  padding: 6px;
+}
+
+.tab ul {
+  list-style: none;
+}
+
+.tablinks {
+  /* //display: inline-block; */
+  float: left;
+  /* background-color: #ccc; */
+  text-decoration: none;
+  color: #000;
+  margin: 0 12px;
+  padding: 10px;
+}
+
+.tablinks:hover {
+  background-color: #ddd;
+  text-decoration: none;
+}
+
+.tab .active {
+  background-color: #3c8fd8;
+  color: #fff;
+}
+/*
+.mat-column-srlno {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+
+} */
+
+.btn.btn-default {
+  text-align: left;
+}
+
+.mat-drawer-content {
+  overflow-x: hidden !important;
+}
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+
+.snackbar {
+  max-width: 90% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 1rem !important;
+  padding: 10px !important;
+  /* background-color: green; */
+  color: white;
+
+}
+
+::ng-deep .info {
+  background-color: #2196F3;
+}
+::ng-deep .success {
+  background-color: #1DE9B6;
+}
+::ng-deep .error {
+  background-color: #c328a9ab;
+}

@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-bordered table-striped table-responsive">
+        <thead>
+          <caption>
+            <h5>Liabilities</h5>
+          </caption>
+          <tr>
+            <!-- <th>Srl no.</th> -->
+            <!-- <th>Code</th> -->
+            <th>Alias</th>
+            <th>Current Amount</th>
+            <th>Previous Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let liability of detailsData; let i = index;">
+            <tr *ngIf="liability.assetOrLiabilityEnum == 'LIABILITY' ">
+              <!-- <td> {{ i+1 }} </td> -->
+              <!-- <td> {{ liability.code }} </td> -->
+              <td> {{ liability.code }} - {{ liability.alias }} </td>
+              <td> {{ liability.currentAmout | formatAmount}} </td>
+              <td> {{ liability.previousAmount | formatAmount}} </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered table-striped table-responsive">
+        <thead>
+          <caption>
+            <h5>Assets</h5>
+          </caption>
+          <tr>
+            <!-- <th>Srl no.</th> -->
+            <!-- <th>Code</th> -->
+            <th>Alias</th>
+            <th>Current Amount</th>
+            <th>Previous Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let liability of detailsData;">
+            <tr *ngIf="liability.assetOrLiabilityEnum == 'ASSET' ">
+              <!-- <td> {{ i+1 }} </td> -->
+              <!-- <td> {{ liability.code }} </td> -->
+              <td> {{ liability.code }} - {{ liability.alias }} </td>
+              <td> {{ liability.currentAmout | formatAmount}} </td>
+              <td> {{ liability.previousAmount | formatAmount}} </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

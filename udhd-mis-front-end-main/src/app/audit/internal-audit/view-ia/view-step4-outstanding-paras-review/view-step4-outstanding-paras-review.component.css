@@ -1,0 +1,30 @@
+/* .mat-data-card{
+  display: flex;
+  justify-content: center;
+}
+
+
+.mat-card-header-cls{
+  padding: 0%;
+} */
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+th,td {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #BCBCBC;
+  word-wrap: break-word;
+}
+input
+ {
+   width: 100%;
+ }
+ input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+}

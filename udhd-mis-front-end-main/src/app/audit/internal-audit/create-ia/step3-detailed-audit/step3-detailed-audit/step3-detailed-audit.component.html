@@ -1,0 +1,137 @@
+
+<form [formGroup]="step3Form">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">ADMINISTRATION:</legend>
+    <h4> The incumbency in the key administrative and executive positions was as under :-</h4>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td>
+            Name of Chairman/Mayor
+          </td>
+          <td> <textarea name="description" class="form-control" style="display: block"
+              formControlName="nameOfChairmanMayor"></textarea>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Period of Service
+          </td>
+          <td>
+            <textarea class="form-control" style="display: block" formControlName="periodOfServiceChairman"></textarea>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Name of Chief Municipal Officer
+          </td>
+          <td>
+            <textarea class="form-control" style="display: block" formControlName="nameOfCMO"></textarea>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Period of Service
+
+          </td>
+          <td>
+            <textarea class="form-control" style="display: block" formControlName="periodOfServiceCMO"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div align="right">
+      <button type="button" class="btn btn-primary btn-sm" title="Save Administration" [disabled]="!step3Form.valid||adminBtnDisabled"
+        (click)="onSubmit()">
+        Save Administration</button>
+    </div>
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form [formGroup]="adIntro">
+  <span style="float:right"><button type="button" class="btn btn-sm btn-primary" (click)="addNewMember()">
+      <span class="fa fa-plus" aria-hidden="false"></span>
+    </button></span>
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">INTRODUCTION:</legend>
+    <!-- <h4> </h4> -->
+    <table class="table table-bordered" formArrayName="member">
+      <!-- <ng-container *ngFor="let mem of memberArr.controls; let i=index;">
+     <ng-container [formGroupName]="i"> -->
+      <tbody *ngFor="let mem of memberArr.controls; let i=index;" [formGroupName]="i">
+        <tr>
+          <td>
+            Member Name
+          </td>
+          <td>
+            <input type="hidden" formControlName="id">
+            <input name="memberName" class="form-control" style="display: block" formControlName="name">
+          </td>
+        </tr>
+        <!-- </tbody> -->
+        <!-- <tbody> -->
+        <tr>
+          <td>
+            Member Type
+          </td>
+          <td>
+
+            <ng-container>
+              <mat-form-field appearance="fill">
+                <mat-select formControlName="type" placeholder="Member Type" required>
+                  <ng-container *ngFor="let member of memberType">
+                    <mat-option [value]="member">{{member}} </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+
+          </td>
+        </tr>
+        <!-- </tbody> -->
+        <!-- <tbody> -->
+        <tr>
+          <td></td>
+          <td align="right">
+            <button class="btn btn-primary" type="button" *ngIf="mem.disabled" (click)="enableAdIntro(i)"
+              style="margin-right: 12px;">Edit</button>
+
+            <button type="button" class="btn btn-primary btn-sm" title="Save Member" [disabled]="!mem.valid"
+              (click)="saveMember(i)">
+              Save Member</button>
+          </td>
+        </tr>
+      </tbody>
+      <!-- </ng-container>
+
+    </ng-container> -->
+    </table>
+
+  </fieldset>
+</form>
+

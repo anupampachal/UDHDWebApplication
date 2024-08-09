@@ -1,0 +1,154 @@
+
+<!-- Introduction -->
+<app-introduction></app-introduction>
+
+<!-- Strength -->
+
+<app-strength></app-strength>
+
+<!-- weakness -->
+
+<app-weakness></app-weakness>
+<!-- Opinion -->
+
+<app-opinion></app-opinion>
+
+<!-- Audit Recommendation -->
+<app-recommendation></app-recommendation>
+<!-- Comment From Management -->
+<app-comment-from-mngmnt></app-comment-from-mngmnt>
+
+<!-- Acknowledgement -->
+
+<app-acknowledgement></app-acknowledgement>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card class="mat-card mat-data-card container-fluid" *ngIf="step2Data$ | async as st2">
+  <mat-card-content class="view-mat-card-content">
+    <div class="row header-row">
+      <span class="col-md">
+        <h3 class="header-info-view">Executive Summary Report</h3>
+      </span>
+      <span class="col-md" style="text-align: right">
+        <button (click)="downloadFile(st2.id)" mat-stroked-button class="child-route-button" color="primary" *ngIf="st2.fileCommentFromMgt" >
+          <mat-icon>file_download</mat-icon>
+        </button>
+        <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']" mat-stroked-button class="child-route-button"
+          color="primary" [routerLink]="'../../edit/' + st2.id">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+      </span>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="id"> Id</label>
+          <input type="text" [value]="st2.id" mat-input class="form-control" id="id" [disabled]="'true'" />
+        </div>
+        <div class="form-group">
+          <label>Internal Audit Id</label>
+          <input type="text" [value]="st2.internalAuditId" mat-input class="form-control" [disabled]="'true'" />
+        </div>
+        <div class="form-group">
+          <label for="name"> Period Covered</label>
+          <input type="text" [value]="st2.periodCovered" mat-input class="form-control" [disabled]="'true'" />
+        </div>
+        <div class="form-group">
+          <label for="name"> Executive Officer Name </label>
+          <input type="text" [value]="st2.executiveOfficerNameForPeriod" mat-input class="form-control"
+            [disabled]="'true'" />
+        </div>
+        <div class="form-group" *ngIf="st2.overAllOpinion">
+          <label for="name"> Over All Opinion </label>
+          <input type="text" [value]="st2.overAllOpinion" mat-input class="form-control" [disabled]="'true'" />
+        </div>
+
+        <div class="form-group" *ngIf="st2.commentFromMgt">
+          <label for="name"> Comment From Management </label>
+          <input type="text" [value]="st2.commentFromMgt" mat-input class="form-control" [disabled]="'true'" />
+        </div>
+
+        <div class="form-group" *ngIf="st2.acknowledgement">
+          <label for="name"> Acknowledgement </label>
+          <input type="text" [value]="st2.acknowledgement" mat-input class="form-control" [disabled]="'true'" />
+        </div>
+
+        <div class="form-group" *ngIf="strengths.length > 0">
+          <label for="name"> Strengths </label>
+          <ng-container *ngFor="let strength of strengths">
+            <input type="text" [value]="strength.text" mat-input class="form-control swor" [disabled]="'true'" />
+          </ng-container>
+        </div>
+
+        <div class="form-group" *ngIf="weaknesses.length > 0">
+          <label for="name"> Weaknesses </label>
+          <ng-container *ngFor="let weakness of weaknesses">
+            <input type="text" [value]="weakness.text" mat-input class="form-control swor" [disabled]="'true'" />
+          </ng-container>
+        </div>
+
+
+        <div class="form-group" *ngIf="recommendations.length > 0">
+          <label for="name"> Recommendations </label>
+          <ng-container *ngFor="let recom of recommendations">
+
+            <input type="text" [value]="recom.text" mat-input class="form-control swor" [disabled]="'true'" />
+          </ng-container>
+        </div>
+
+        <table class="table table-bordered">
+          <input formControlName="id"  type="hidden" value="">
+          <tbody>
+            <tr>
+              <td>
+                <label for="">Internal Audit Id</label>
+              </td>
+              <td>
+                <input  [value]="st2.id" class="intro-text" placeholder="Enter Municipality Name" [disabled]="true"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="">Name of the Municipality</label>
+              </td>
+              <td>
+                <input  [value]="st2.id" class="intro-text" placeholder="Enter Municipality Name" [disabled]="true"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="">Period covered under current audit</label>
+              </td>
+              <td>
+                <input formControlName="periodCovered" class="intro-text" placeholder="Enter Period"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="">Name of Executive Officer for the period under Audit</label>
+              </td>
+              <td>
+                <input formControlName="executiveOfficerNameForPeriod" class="intro-text" placeholder="Enter Executive Officer Name"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card> -->

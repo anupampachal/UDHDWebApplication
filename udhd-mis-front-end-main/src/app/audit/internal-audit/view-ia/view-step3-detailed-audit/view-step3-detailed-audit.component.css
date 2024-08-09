@@ -1,0 +1,14 @@
+.mat-data-card{
+  display: flex;
+  justify-content: center;
+}
+
+
+.mat-card-header-cls{
+  padding: 0%;
+}
+
+
+mat-form-field{
+  width: 100%;
+}

@@ -1,0 +1,22 @@
+
+<form [formGroup]="auditRecommForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+      <legend class="hm-legend">Audit Recommendation:</legend>
+
+
+      <h4> <b>The recommendation of Audit Team on the observed weakness are as follows: </b>
+          </h4>
+      <table class="table table-bordered" formArrayName="descriptions">
+          <tbody *ngFor="let descrption of descriptions.controls; let i = index">
+              <tr [formGroupName]="i">
+              <td>
+              <textarea style="width: 100%;" formControlName="description" [disabled]="true"></textarea>
+
+              </td>
+
+
+              </tr>
+          </tbody>
+      </table>
+  </fieldset>
+</form>

@@ -1,0 +1,262 @@
+<form [formGroup]="adIntro">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Member Details:</legend>
+    <!-- <h4> </h4> -->
+    <table class="table table-bordered" formArrayName="member">
+
+      <tbody *ngFor="let mem of memberArr.controls; let i=index;" [formGroupName]="i">
+        <tr>
+          <td>
+            Member Name
+          </td>
+          <td>
+            <input type="hidden" formControlName="id">
+            <input name="memberName" class="form-control" style="display: block" [disabled]="true" formControlName="name">
+          </td>
+        </tr>
+
+        <tr>
+          <td style="margin: auto 0;">
+            Member Type
+          </td>
+          <td>
+            <input name="memberType" class="form-control" style="display: block" [disabled]="true" formControlName="type">
+
+            <!-- <ng-container>
+              <mat-form-field appearance="fill">
+                <mat-select formControlName="type" placeholder="Member Type" required>
+                  <ng-container *ngFor="let member of memberType">
+                    <mat-option [value]="member">{{member}} </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </ng-container> -->
+
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+<form [formGroup]="step3Form">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">ADMINISTRATION:</legend>
+    <h4> The incumbency in the key administrative and executive positions was as under :-</h4>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td>
+            Internal Audit id
+          </td>
+          <td> <input name="description" [disabled]="true" class="form-control" style="display: block"
+              formControlName="internalAuditId">
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Name of Chairman/Mayor
+          </td>
+          <td> <textarea name="description" [disabled]="true" class="form-control" style="display: block"
+              formControlName="nameOfChairmanMayor"></textarea>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Period of Service
+          </td>
+          <td>
+            <textarea class="form-control" style="display: block" formControlName="periodOfServiceChairman"></textarea>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Name of Chief Municipal Officer
+          </td>
+          <td>
+            <textarea class="form-control" style="display: block" formControlName="nameOfCMO" [disabled]="true"></textarea>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>
+            Period of Service
+
+          </td>
+          <td>
+            <textarea class="form-control" style="display: block" formControlName="periodOfServiceCMO" [disabled]="true"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <legend>ADMINISTRATION</legend>
+
+<h4> The incumbency in the key administrative and executive positions was as under :-</h4>
+
+<mat-card class="mat-card-data">
+  <form [formGroup]="step3Form" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Name of Chairman/Mayor<span class="required"> *</span></mat-label>
+            <input matInput formControlName="chairmanName" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Period of Service <span class="required"> *</span></mat-label>
+            <input matInput formControlName="chairmanPeriodOfService" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-md">
+        <mat-form-field appearance="fill">
+          <mat-label>Name of Chief Municipal Officer<span class="required"> *</span></mat-label>
+          <input matInput formControlName="chiefMunicipalOfficerName" />
+          <mat-error matErrorMessages></mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md">
+        <mat-form-field appearance="fill">
+          <mat-label>Period of Service <span class="required"> *</span></mat-label>
+          <input matInput formControlName="chiefMunicipalOfficerPeriodOfService" />
+          <mat-error matErrorMessages></mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!step3Form.valid">
+        Save Administration
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card class="mat-card mat-data-card container-fluid" *ngIf="step3Report$ | async as st3">
+  <mat-card-content class="view-mat-card-content">
+      <div class="row header-row">
+          <span class="col-md">
+              <h3 class="header-info-view">Administration</h3>
+          </span>
+          <span class="col-md" style="text-align: right"> -->
+<!-- <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']" [disabled]="st3.active==false"
+              mat-stroked-button class="child-route-button" color="warn" (click)="confirmDelete()">
+                  <mat-icon>delete</mat-icon>
+              </button> -->
+<!-- <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']"
+              mat-stroked-button class="child-route-button" color="primary"
+                  [routerLink]="'../../edit/' + st3.id">
+                  <mat-icon>mode_edit</mat-icon>
+              </button>
+          </span>
+          <hr>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                  <label for="id">Internal Audit Id</label>
+                  <input type="text" [value]="st3.internalAuditId" mat-input class="form-control" id="id"
+                      [disabled]="'true'" />
+              </div>
+              <div class="form-group">
+                  <label for="name"> Name Of CMO</label>
+                  <input type="text" [value]="st3.nameOfCMO" mat-input class="form-control" id="name"
+                      [disabled]="'true'" />
+              </div>
+              <div class="form-group">
+                <label for="name"> CMO Service Period</label>
+                <input type="text" [value]="st3.periodOfServiceCMO" mat-input class="form-control" id="name"
+                    [disabled]="'true'" />
+            </div>
+            <div class="form-group">
+              <label for="name"> Name Of Chairman/Mayor</label>
+              <input type="text" [value]="st3.nameOfChairmanMayor" mat-input class="form-control" id="name"
+                  [disabled]="'true'" />
+          </div>
+          <div class="form-group">
+            <label for="name"> Chairman Service Period</label>
+            <input type="text" [value]="st3.periodOfServiceChairman" mat-input class="form-control" id="name"
+                [disabled]="'true'" />
+        </div>
+          </div>
+      </div>
+  </mat-card-content>
+</mat-card>
+
+ -->

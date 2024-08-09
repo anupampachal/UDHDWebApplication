@@ -1,0 +1,6 @@
+<div [ngSwitch]="filter" class="container-fluid " style="padding:100px;margin:100px;">
+    <app-edit-ulb-user *ngSwitchCase="'ulb'" style="padding:10px;margin:10px;"></app-edit-ulb-user>
+    <app-edit-udhd-user *ngSwitchCase="'udhd'" style="padding:10px;margin:10px;"></app-edit-udhd-user>
+    <app-edit-other-user *ngSwitchCase="'other'" style="padding:10px;margin:10px;"></app-edit-other-user>
+    <app-edit-slpmu-user *ngSwitchCase="'slpmu'" style="padding:10px;margin:10px;"></app-edit-slpmu-user>
+</div>

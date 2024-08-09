@@ -1,0 +1,13 @@
+package com.scsinfinity.udhd.services.audit.internalaudit.dto;
+
+public enum IAPartAAuditObsTypeEnum {
+	//@formatter:off
+PROPERTY_HOLDING_TAX,
+DELAY_IN_TAX,
+MOBILE_TOWER_TAX,
+RENT_ON_MUNICIPAL_PROPERTIES,
+ADVERTISEMENT_TAX,
+EXCESS_PAYMENT_AGAINST_BILL,
+REPORT_ON_FINDINGS_OF_FIELD_SURVEYS,
+OTHERS
+}

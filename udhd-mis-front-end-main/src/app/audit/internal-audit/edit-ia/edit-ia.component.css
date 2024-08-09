@@ -1,0 +1,9 @@
+.example-button-row {
+  width: 214px;
+  float: right;
+}
+
+/*
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+} */

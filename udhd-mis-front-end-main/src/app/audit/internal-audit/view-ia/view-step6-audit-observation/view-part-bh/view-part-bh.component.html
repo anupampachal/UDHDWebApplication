@@ -1,0 +1,67 @@
+<form [formGroup]="grantUtilizationFormModel">
+
+  <div class="col-md-12" align="right">
+      <button type="button" class="btn btn-default btn-sm btn-primary" title="Add New Row" (click)="downloadFile()">
+        <mat-icon>file_download</mat-icon>
+      </button>
+
+  </div>
+
+  <div class="col-md-12 table-responsive" formArrayName="utilizations">
+      <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>S.No.</th>
+                  <th>Scheme/Project Name</th>
+                  <th>Fund Received</th>
+                  <th>Expenses (Amount utilized)</th>
+                  <th>Balance in PLA</th>
+                  <th>Pending Ulitization Certificate against Expenses</th>
+                  <th>Submitted Ulitization Certificate against Expenses</th>
+                  <th>Letter No. & Date</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of utilizationsControl.controls; let i=index;"
+                  [formGroupName]="i">
+                  <td>{{i+1}}</td>
+
+                  <td>
+                      <input type="hidden" formControlName="id">
+                      <input class="form-control" id="schemeName" formControlName="schemeName"></td>
+
+                  <td>
+                      <input type="number" class="form-control" id="fundReceived" formControlName="fundReceived"
+                          (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" id="expenses" formControlName="expenses"
+                          (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td>
+                      <input class="form-control" id="balanceInPLA" [disabled]=true formControlName="balanceInPLA"
+                          (keyup)="getTotalAmount(i, item)"
+                          [value]="item.value.fundReceived -item.value.expenses">
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" id="pendingUtilizationCertificate"
+                          formControlName="pendingUC" (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" id="submittedUtilizationCertificate"
+                          formControlName="submittedUC" (keyup)="getTotalAmount(i, item)">
+                  </td>
+                  <td> <input class="form-control" id="letterNoNDate" formControlName="letterNoNDate">
+                  </td>
+
+              </tr>
+
+          </tbody>
+
+
+      </table>
+  </div>
+
+
+</form>

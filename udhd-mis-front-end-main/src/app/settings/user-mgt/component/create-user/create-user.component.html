@@ -1,0 +1,6 @@
+<div [ngSwitch]="filter">
+    <app-create-ulb-user *ngSwitchCase="'ulb'"></app-create-ulb-user>
+    <app-create-udhd-user *ngSwitchCase="'udhd'"></app-create-udhd-user>
+    <app-create-other-user *ngSwitchCase="'other'"></app-create-other-user>
+    <app-create-slpmu-user *ngSwitchCase="'slpmu'"></app-create-slpmu-user>
+</div>

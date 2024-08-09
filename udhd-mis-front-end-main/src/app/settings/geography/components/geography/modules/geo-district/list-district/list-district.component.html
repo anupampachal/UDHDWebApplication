@@ -1,0 +1,59 @@
+<div class="container-fluid fluid-component">
+  <mat-card class="child-card-material mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+        <div class="example-button-container">
+          <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']" 
+            matTooltip="Create district"
+            mat-stroked-button [routerLink]="'../create'"
+            color="primary" class="child-route-button" 
+            aria-label="Create district">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="filterAndSort()" 
+            matTooltip="Filter to search"
+            color="primary" class="child-route-button"
+            aria-label="Filter to search">
+            <mat-icon>filter_alt</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="exportTableToPdf()" 
+            matTooltip="Export current list to pdf"
+            color="primary" class="child-route-button"
+            aria-label="Export current list to pdf">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="updatedExportToExcel()" 
+            matTooltip="Export current list to xls"
+            color="primary" class="child-route-button"
+            aria-label="Export current list to xls">
+            <mat-icon>border_outer</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <div class="row " *ngIf="showFilter">
+    <app-filter [sortOptions]="sortOptions" (clearDataEvent)="clearDataEvent($event)"
+      (filteredData)="filteredDataEvent($event)" (getSortedByEvent)="getSortedByEvent($event)"
+      (sortDirectionChange)="sortingDirectionChangeEvent($event)"></app-filter>
+  </div>
+
+  <div class="row">
+    <div class="col-md">
+      <mat-card class="child-card-material">
+        <app-dynamic-mat-table *ngIf="paginationTableData$ | async as page" [paginationTableData]="page"
+          (paginatorEvent)="changeDataForPagination($event)" (selectedToView)="showView($event)">
+        </app-dynamic-mat-table>
+      </mat-card>
+    </div>
+  </div>
+</div>

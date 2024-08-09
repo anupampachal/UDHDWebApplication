@@ -1,0 +1,19 @@
+<div class="container">
+
+  <div *ngIf="currentLevel == 'state'">
+    <app-state-level-cash-n-bank-balance></app-state-level-cash-n-bank-balance>
+  </div>
+
+  <div *ngIf=" currentLevel == 'division' ">
+    <app-division-level-cash-n-bank-balance></app-division-level-cash-n-bank-balance>
+  </div>
+
+  <div *ngIf="currentLevel == 'district'">
+    <app-district-level-cash-n-bank-balance></app-district-level-cash-n-bank-balance>
+  </div>
+
+  <div *ngIf="currentLevel == 'ulb'">
+    <app-ulb-level-cash-n-bank-balance></app-ulb-level-cash-n-bank-balance>
+  </div>
+
+</div>

@@ -1,0 +1,160 @@
+<form [formGroup]="revenueCapitalReceiptForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Revenue & Capital Receipts Information:</legend>
+    <div class="table-responsive pdfTable" >
+      <table border="1" class="table" formArrayName="financeYears">
+        <ng-container *ngFor="let item of receiptHeadingList;let i = index">
+          <tr  *ngIf="item ?  headingFix(item): false">
+            <!-- <th>{{serialNoList[i]}}</th> -->
+            <th
+
+            >
+            {{item}}
+          </th>
+
+            <td *ngFor="let data of revenueCapitalReceipt['controls']; let j=index;" [formGroupName]="j">
+
+          <tr *ngIf="item == 'Details'">
+            <td colspan="2">
+              <div class="form-group">
+                <label for="fy">F.Y:</label>
+                <input formControlName="financeYear" name="financeYear" id="financeYear" />
+              </div>
+            </td>
+          </tr>
+          <tr formArrayName="receipts">
+            <td *ngFor="let data of data.get('receipts').controls; let k=index;" [formGroupName]="k">
+              <span *ngIf="arrayOfKeys[i]==='id'">
+                <input type="hidden" [formControlName]=arrayOfKeys[i] class="form-control"></span>
+
+              <span *ngIf="arrayOfKeys[i+1]==='year'">
+                <div class="form-group">
+                  <label for="fy">F.Y:</label>
+                  <input type="text" [formControlName]=arrayOfKeys[i+1] class="form-control">
+                </div>
+
+              </span>
+
+              <!-- <span *ngIf="arrayOfKeys[i+1]==='total'">
+                <input type="text" [formControlName]=arrayOfKeys[i+1]
+                  [value]="data.value.revenueReceiptsAmount + data.value.capitalReceiptsAmount" [disabled]="true"
+                  class="form-control">
+              </span> -->
+              <!-- <span *ngIf="arrayOfKeys[i+1]==='revenueReceiptsAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='ownRevenueReceiptsAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='taxRevenueAmount'">
+
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnRevenueReceiptAmount(j,k)">
+
+              </span> -->
+              <span *ngIf="arrayOfKeys[i+1]==='propertyTaxAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnTaxRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='otherTaxAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnTaxRevenueReceiptAmount(j,k)">
+              </span>
+              <!-- <span *ngIf="arrayOfKeys[i+1]==='nontaxRevenueAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnRevenueReceiptAmount(j,k)">
+              </span> -->
+              <span *ngIf="arrayOfKeys[i+1]==='finesAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnNonTaxRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='userChargesAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnNonTaxRevenueReceiptAmount(j,k)">
+              </span>
+
+              <span *ngIf="arrayOfKeys[i+1]==='othersAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOwnNonTaxRevenueReceiptAmount(j,k)">
+              </span>
+              <!-- <span *ngIf="arrayOfKeys[i+1]==='otherRevenueReceiptsAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetRevenueReceiptAmount(j,k)">
+              </span> -->
+              <span *ngIf="arrayOfKeys[i+1]==='incomeFromInterestAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOtherRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='otherRevenueIncomeAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetOtherRevenueReceiptAmount(j,k)">
+              </span>
+
+              <!-- <span *ngIf="arrayOfKeys[i+1]==='assignedRevenuesAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetRevenueReceiptAmount(j,k)">
+              </span> -->
+              <span *ngIf="arrayOfKeys[i+1]==='stateAssignedRevenueAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='sFCGrantsAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='octroiCompensationAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='otherStateGovernmentTransfersAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='cFCGrantAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='otherCentralGovernmentTransfersAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='otherSalesAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetAssignedRevenueReceiptAmount(j,k)">
+              </span>
+
+              <!-- <span *ngIf="arrayOfKeys[i+1]==='capitalReceiptsAmount'">
+                <input type="number" [formControlName]="arrayOfKeys[i+1]" class="form-control">
+              </span> -->
+              <span *ngIf="arrayOfKeys[i+1]==='municipalLandAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control" (keyup)="onKeyUp(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='loanAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control" (keyup)="onKeyUp(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='stateCapitalAccountAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control" (keyup)="onKeyUp(j,k)">
+              </span>
+
+              <span *ngIf="arrayOfKeys[i+1]==='centralCapitalAccountAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control" (keyup)="onKeyUp(j,k)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='othersCapitalReceiptAmount'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control" (keyup)="onKeyUp(j,k)">
+              </span>
+            </td>
+          </tr>
+          </td>
+          </tr>
+        </ng-container>
+      </table>
+      <!-- <div class="row col-md-12" align="right">
+        <button (click)="save()" [disabled]="revenueCapitalReceiptForm.invalid || isDisabled"
+          class="btn btn-default">Save</button>
+      </div> -->
+    </div>
+
+
+  </fieldset>
+</form>

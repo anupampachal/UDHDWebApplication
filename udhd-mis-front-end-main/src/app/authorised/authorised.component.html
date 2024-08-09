@@ -1,0 +1,12 @@
+<app-header></app-header>
+
+<mat-sidenav-container autosize>
+  <mat-sidenav #appDrawer mode="side" [opened]="isOpen">
+    <mat-nav-list>
+      <app-sidenav *ngFor="let item of navItems" [item]="item"></app-sidenav>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

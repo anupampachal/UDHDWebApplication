@@ -1,0 +1,23 @@
+.mat-card-data{
+    margin-top:10px;
+    display: flex;
+    justify-content: center;
+    }
+    
+    .mat-card-header-cls{
+      padding: 0%;
+    }
+    mat-card{
+      margin:10px;
+    }
+    .mat-card-title{
+      padding:20px;
+    }
+    form,mat-form-field{
+      width: 60%;
+    }
+    
+    button{
+      transform: scale(0.7);
+    }
+  

@@ -1,0 +1,79 @@
+<form [formGroup]="auidtPartForm">
+  <span style="float:right"><button type="button" class="btn btn-sm btn-primary" (click)="pushHeadingPartDetailForm()">
+      <span class="fa fa-plus" aria-hidden="false"></span>
+    </button></span>
+  <table class="table table-bordered" formArrayName="headingDatas">
+    <thead>
+      <th>S.No.</th>
+      <th>Audit Para No.</th>
+      <th>Heading of the audit para</th>
+      <th>Amount involved</th>
+      <th>Recovery proposed</th>
+      <th>Recovery Completed</th>
+      <th>Action Taken or Not</th>
+      <th>Attachment</th>
+    </thead>
+    <tbody *ngFor="let auidtPart of auditParaDetail.controls; let j=index">
+      <tr [formGroupName]="j">
+
+        <td>{{j+1}}</td>
+
+        <td>
+          <input type="text" formControlName="auditParaNo" placeholder="Enter audit para number" class="form-control"
+            name="auditParaNo">
+        </td>
+        <td> <textarea name="description" id="auditParaPartDescription" class="form-control" style="display: block"
+            formControlName="auditParaHeading" placeholder="Enter Description"></textarea>
+
+        </td>
+        <td>
+          <input type="number" formControlName="amountInvolved" placeholder="Enter amount involved" class="form-control"
+            name="amountInvolved">
+        </td>
+        <td>
+          <input type="number" formControlName="recoveryProposed" placeholder="Enter recovery proposed"
+            class="form-control" name="recoveryProposed">
+        </td>
+        <td>
+          <input type="number" formControlName="recoveryCompleted" placeholder="Enter recovery completed"
+            class="form-control" name="recoveryCompleted">
+        </td>
+        <td>
+          <div class="form-group">
+            <select class="form-control" name="action" formControlName="actionStatus" >
+              <ng-container  *ngFor="let type of actions" >
+              <option [value]="type">
+                {{ type }}
+              </option>
+            </ng-container>
+            </select>
+          </div>
+        </td>
+        <td>
+          <div class="pull-left" style="display: inline-block">
+            <input type="file" formControlName="file" name="attachment{{j}}" id="attachment{{j}}" class="custome-file"
+               (change)="selectFile($event)">
+
+          </div>
+        </td>
+        <td>
+          <button *ngIf="auidtPart.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+          title="edit" (click)="enableControl(j)">
+          <mat-icon>edit</mat-icon>
+        </button>
+          <button type="button" title="{{buttonText}}" name="{{buttonText}}" [disabled]="!auidtPart.valid" class="btn btn-default btn-sm"
+            (click)="onSubmit(j,auidtPart)">
+            <i class="fa fa-save"></i>
+          </button>
+          <!-- <button type="button" title="edit" name="edit" class="btn btn-default btn-sm"
+                      *ngIf="auditParaHeadings[j]?.id!==null" [disabled]="auditParaHeadings[j].disableEditButton"
+                      (click)="onEdit(auditParaHeadings[j],j)">
+                      <i class="fa fa-pencil"></i></button> -->
+
+          <button type="button" name="delete" class="btn btn-default btn-sm" (click)="remove(j)">
+            <i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

@@ -1,0 +1,27 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  button{
+      margin-left:5px;
+      margin-right: 5px;
+  }
+
+  .input-search{
+    width: 60%;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .btn-image{
+   background-image: url('/assets/images/demo2.jpg');
+   background-size: contain;
+   color: transparent;
+  }
+  .header-user-avatar{
+    border-radius: 50%;
+  }
+  .expand{
+   vertical-align: middle;
+    color: white;
+  }
+

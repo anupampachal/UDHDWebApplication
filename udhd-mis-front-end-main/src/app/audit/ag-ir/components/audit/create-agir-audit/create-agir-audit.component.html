@@ -1,0 +1,110 @@
+<mat-card class="mat-card-header-cls">
+  <div class="row">
+    <div class="col-md">
+      <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+    </div>
+    <div class="col-md">
+      <div class="example-button-container">
+        <button mat-stroked-button class="route-button" [routerLink]="'../list'" color="primary" style="float: right"
+        matTooltip="List AGIR Audit"
+          aria-label="Example icon button with a plus one icon">
+          <mat-icon>list</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<mat-card class="mat-card-data">
+  <form [formGroup]="createAGIR" (submit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <mat-card-title class="mat-card-title">Add AGIR</mat-card-title>
+      </div>
+    </div>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError.Description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Title<span class="required"> *</span></mat-label>
+            <input matInput formControlName="title" />
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="createAGIR" [rangePicker]="picker">
+              <input matStartDate formControlName="startDate" placeholder="Start date">
+              <input matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <mat-error *ngIf="createAGIR.controls.startDate?.hasError('matStartDateInvalid')">Invalid start date
+            </mat-error>
+            <mat-error *ngIf="createAGIR.controls.endDate?.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!--<div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div-->
+
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rowCount=3></textarea>
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <ng-container *ngIf="ulbs">
+            <mat-form-field appearance="fill">
+              <mat-select formControlName="ulb" placeholder="ULB">
+                <!-- <ng-container *ngFor="let ulb of ulbs"> -->
+                <mat-option [value]="ulbs">{{ulbs.code}} - {{ulbs.name}} </mat-option>
+                <!-- </ng-container> -->
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!createAGIR.valid">
+        Submit
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

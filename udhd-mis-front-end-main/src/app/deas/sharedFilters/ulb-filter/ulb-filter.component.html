@@ -1,0 +1,139 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md">
+      <mat-card>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+          [(ngModel)]="displaySelectedFilter" style="display: flex; gap: 36px;">
+          <mat-radio-button class="example-radio-button" value="name">
+            Search By Name
+          </mat-radio-button>
+          <mat-radio-button class="example-radio-button" value="division">
+            Find By Hierarchy
+          </mat-radio-button>
+          <!-- <mat-radio-button class="example-radio-button" value="type">
+            Search By Ulb Type
+          </mat-radio-button> -->
+        </mat-radio-group>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="displaySelectedFilter == 'name'">
+      <mat-form-field class="full-width-field">
+        <mat-placeholder>Search </mat-placeholder>
+        <input matInput type="search" #searchString />
+        <button mat-button matSuffix mat-stroked-button aria-label="search" class="searchBtn"
+          [disabled]="!searchString.value" (click)="clearData();searchString.value=''">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <button mat-button matSuffix mat-stroked-button aria-label="search" class="searchBtn"
+          [disabled]="!searchString.value" (click)="onFilterData(searchString.value)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <form [formGroup]="ulbFilterForm" *ngIf="displaySelectedFilter == 'division'" style="margin-top: 24px;">
+      <div style="display: flex; gap: 24px;">
+        <button style="height: 3.5rem; width: 56px; background-color: #f5f5f5;" (click)="navigateState()">
+          Bihar
+        </button>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="division" placeholder="Division" (selectionChange)="getDistricts()">
+              <ng-container *ngFor="let division of divisions">
+                <mat-option [value]="division">{{division.name}} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="districts">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="district" placeholder="District" (selectionChange)="getUlbType()">
+              <ng-container *ngFor="let district of districts">
+                <mat-option [value]="district">{{district.name}} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="ulbType.length">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="ulbType" placeholder="ULB Type" (selectionChange)="getUlbList()">
+              <ng-container *ngFor="let ulb of ulbType">
+                <mat-option [value]="ulb">{{ulb}} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="ulbList">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="ulb" placeholder="Ulb List">
+              <ng-container *ngFor="let ulb of ulbList">
+                <mat-option [value]="ulb">{{ ulb.name }} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-1" style="margin-top: 12px;">
+
+
+            <div class="example-button-container">
+              <button mat-stroked-button (click)="initializeForm()" color="primary" class="child-route-button"
+                aria-label="Example icon button with a plus one icon">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-container">
+            <button mat-stroked-button  (click)="filterByDivision()" color="primary" class="child-route-button"
+              aria-label="Example icon button with a plus one icon">
+                <mat-icon>search</mat-icon>
+            </button>
+          </div>
+
+
+
+          <!-- <button [disabled]="!ulbFilterForm.valid" matSuffix mat-stroked-button aria-label="search" class="searchBtn"
+            type="button" (click)="filterByDivision()">
+            <mat-icon>search</mat-icon>
+          </button> -->
+        </div>
+      </div>
+
+    </form>
+
+    <form [formGroup]="ulbTypeForm" *ngIf="displaySelectedFilter == 'type'" style="margin-top: 24px; display: flex; ">
+      <div class="row" *ngIf="displaySelectedFilter == 'type'">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-select formControlName="utype" placeholder="Select Ulb Type">
+              <ng-container *ngFor="let ut of ulbFilterTypes">
+                <mat-option [value]="ut"> {{ut}} </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md" style="margin-top: 12px;">
+          <button matSuffix mat-stroked-button aria-label="search" class="searchBtn" type="button"
+            (click)="searchByUlbType()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<!--
+<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+  [(ngModel)]="ulbTypeFilter" style="display: flex; gap: 36px;" *ngIf="displaySelectedFilter == 'type'">
+  <mat-radio-button class="example-radio-button" value="ut" *ngFor="let ut of ulbFilterTypes">
+    {{ut}}
+  </mat-radio-button>
+
+</mat-radio-group> -->

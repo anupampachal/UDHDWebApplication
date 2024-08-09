@@ -1,0 +1,75 @@
+<div class="container-fluid fluid-component">
+    <mat-card class="child-card-material mat-card-header-cls">
+        <div class="row">
+            <div class="col-md">
+                <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+            </div>
+            <div class="col-md">
+                <div class="example-button-container ">
+                    <button mat-stroked-button [routerLink]="'../../list'" 
+                        matTooltip="List districts"
+                        color="primary" class="child-route-button"
+                        aria-label="Example icon button with a plus one icon">
+                        <mat-icon>list</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="mat-card mat-data-card container-fluid" *ngIf="district$ | async as district">
+        <mat-card-content class="view-mat-card-content">
+            <div class="row header-row">
+                <span class="col-md">
+                    <h3 class="header-info-view">District</h3>
+                </span>
+                <span class="col-md" style="text-align: right">
+                    <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']"
+                        matTooltip="Delete district"
+                        [disabled]="district.active==false"
+                        mat-stroked-button class="child-route-button" color="warn" (click)="confirmDelete()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button *scsHasAnyAuthority="['ROLE_SLPMU_IT', 'ROLE_UDHD_IT']" 
+                        matTooltip="Edit division"
+                        mat-stroked-button class="child-route-button" color="primary"
+                        [routerLink]="'../../edit/' + district.id">
+                        <mat-icon>mode_edit</mat-icon>
+                    </button>
+                </span>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="id"> Id</label>
+                        <input type="text" [value]="district.id" mat-input class="form-control" id="id"
+                            [disabled]="'true'" />
+                    </div>
+                    <div class="form-group">
+                        <label for="name"> Name</label>
+                        <input type="text" [value]="district.name" mat-input class="form-control" id="name"
+                            [disabled]="'true'" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Code</label>
+                        <input type="text" [value]="district.code" mat-input class="form-control" id="description"
+                            [disabled]="'true'" />
+                    </div>
+                    <div class="form-group">
+                      <label for="description">Division</label>
+                      <input type="text" [value]="district.division.code + ' - ' + district.division.name" mat-input class="form-control" id="description"
+                          [disabled]="'true'" />
+                  </div>
+
+                    <div class="form-group status" >
+                        <label for="information">Status</label>
+                        <mat-slide-toggle class="example-margin status" color="primary" [checked]="district.active" [disabled]="true">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</div>

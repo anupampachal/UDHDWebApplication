@@ -1,0 +1,30 @@
+<div class="row filter" >
+    <div class="col-md-3">
+        <mat-form-field class="full-width-field">
+            <mat-label>Sort By</mat-label>
+            <mat-select (selectionChange)="getSortedBy($event.value)">
+                <mat-option *ngFor="let sortOption of sortOptions" [value]="sortOption.value">{{sortOption.displayName}}</mat-option>
+            </mat-select>
+            <button mat-button mat-raised-button matSuffix aria-label="search" class="searchBtn"
+                [disabled]="currentlySelectedVal == ''" (click)="onToggleSortDirection($event)">
+                <mat-icon>{{
+                    sortingDirection ? "arrow_upward" : "arrow_downward"
+                    }}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="col-md-9"> 
+        <mat-form-field class="full-width-field">
+            <mat-placeholder>Search </mat-placeholder>
+            <input matInput type="search" #searchString />
+            <button mat-button matSuffix mat-stroked-button aria-label="search" class="searchBtn"
+                [disabled]="!searchString.value" (click)="clearData();searchString.value=''">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button mat-button matSuffix mat-stroked-button aria-label="search" class="searchBtn"
+                [disabled]="!searchString.value" (click)="onFilterData(searchString.value)">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+</div>

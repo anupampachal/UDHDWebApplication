@@ -1,0 +1,31 @@
+<table class="table table-bordered table-striped table-responsive">
+  <thead>
+    <!-- <caption>
+      <h5>Income</h5>
+    </caption> -->
+    <tr>
+      <th>Srl no.</th>
+      <!-- <th scope="col">id</th> -->
+      <th scope="col">Division </th>
+      <th scope="col">As On Current</th>
+      <th scope="col">As On Previous</th>
+      <th scope="col">Latest Assets</th>
+      <th scope="col">Latest Liabilities</th>
+      <th scope="col">Previous Assets</th>
+      <th scope="col">Previous Liabilities</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <!-- <td> {{ dataToDisplay.id }} </td> -->
+      <td> {{ dataToDisplay.particulars }} </td>
+      <td> {{ dataToDisplay.asCurrentOn | formatDate }} </td>
+      <td> {{ dataToDisplay.asPreviousOn | formatDate }} </td>
+      <td> {{ dataToDisplay.latestAssets | formatAmount }} </td>
+      <td> {{ dataToDisplay.latestLiabilities | formatAmount }} </td>
+      <td> {{ dataToDisplay.previousAssets | formatAmount }} </td>
+      <td> {{ dataToDisplay.previousLiabilities | formatAmount }} </td>
+    </tr>
+  </tbody>
+</table>

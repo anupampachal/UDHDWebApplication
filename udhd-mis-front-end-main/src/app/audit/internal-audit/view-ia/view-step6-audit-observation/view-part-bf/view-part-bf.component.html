@@ -1,0 +1,31 @@
+<form [formGroup]="tdsForm">
+
+  <div class="col-md-12 table-responsive">
+      <table class="table table-bordered" formArrayName="tds">
+          <tbody *ngFor="let item of tdsControl.controls; let i=index">
+              <tr [formGroupName]="i">
+                  <td *ngIf="tdsFormDescriptions[i]">{{tdsFormDescriptions[i]}}</td>
+                  <td *ngIf="!tdsFormDescriptions[i]">
+                    <input required placeholder="Enter Name" class="form-control" style="display: block"
+                    formControlName="name">
+                  </td>
+
+                  <td>
+                      <input type="hidden" formControlName="id">
+                      <textarea placeholder="DESCRIPTION" class="form-control" style="display: block"
+                          formControlName="description"></textarea>
+                  </td>
+                  <td>
+                      <input type="number" placeholder="AMOUNT INVOLVED" class="form-control" style="display: block"
+                          formControlName="amountInvolved" />
+                  </td>
+
+                  <td>
+                      <button type="button" name="delete" mat-stroked-button color="primary" class="btn btn-default btn-sm" (click)="downloadFile(i)">
+                         <mat-icon>file_download</mat-icon></button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</form>

@@ -1,0 +1,74 @@
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+        <div class="col-md">
+            <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+        </div>
+        <div class="col-md">
+            <div class="example-button-container">
+                <button mat-stroked-button class="route-button" 
+                    matTooltip="List districts"
+                    [routerLink]="'../list'" color="primary"
+                    style="float: right" aria-label="List districts">
+                    <mat-icon>list</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-card-data">
+    <form [formGroup]="createGeoDistrict" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-md">
+                <mat-card-title class="mat-card-title">Add District</mat-card-title>
+            </div>
+        </div>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md">
+                    <div *ngIf="showFormError">
+                        <p>{{ showFormError.Description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name<span class="required"> *</span></mat-label>
+                        <input matInput formControlName="name"  minlength="3"
+                            maxlength="50" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Code<span class="required"> *</span></mat-label>
+                        <input type="text" matInput formControlName="code" minlength="2" maxlength="10" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-select formControlName="division" placeholder="Division">
+                          <ng-container *ngFor="let division of divisions">
+                            <mat-option [value]="division">{{division.code}} - {{division.name}} </mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+            
+            <input type="hidden" formControlName="active" >
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="createGeoDistrict.invalid" type="submit">
+                Submit
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>
+ 

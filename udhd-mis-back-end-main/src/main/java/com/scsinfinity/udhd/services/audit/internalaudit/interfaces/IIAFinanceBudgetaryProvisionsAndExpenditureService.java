@@ -1,0 +1,13 @@
+package com.scsinfinity.udhd.services.audit.internalaudit.interfaces;
+
+import com.scsinfinity.udhd.services.audit.internalaudit.dto.IAFinanceBudgetaryProvisionsAndExpenditureRequestDTO;
+import com.scsinfinity.udhd.services.audit.internalaudit.dto.IAFinanceBudgetaryProvisionsAndExpenditureResponseDTO;
+
+public interface IIAFinanceBudgetaryProvisionsAndExpenditureService {
+
+	IAFinanceBudgetaryProvisionsAndExpenditureResponseDTO createUpdateBudgetaryProvisionsAndExpenditure(
+			IAFinanceBudgetaryProvisionsAndExpenditureRequestDTO request);
+
+	IAFinanceBudgetaryProvisionsAndExpenditureResponseDTO findBudgetaryProvisionsAndExpenditureByIAId(Long iaId);
+
+}

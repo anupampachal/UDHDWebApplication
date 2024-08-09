@@ -1,0 +1,26 @@
+mat-table {
+  margin-top:10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+mat-header-cell{
+  font-weight: 900;
+  font-size: larger;
+  color: white;
+  background-color: #3f51b5;
+}
+.mat-paginator {
+  display: flex;
+  margin:5px;
+  justify-content: center;
+}
+::ng-deep .mat-sort-header-arrow {
+  color: #fff;
+}
+
+button{
+  transform: scale(0.7);
+}

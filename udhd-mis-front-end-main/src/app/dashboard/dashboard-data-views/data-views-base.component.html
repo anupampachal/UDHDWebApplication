@@ -1,0 +1,57 @@
+<div class="container-fluid fluid-component">
+
+  <mat-card class="child-card-material mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="ulbFilter()" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+              <mat-icon>public</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="dateFilter()" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+            <mat-icon>date_range</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="dateFilter()" color="primary" style="margin-top: 4px; position: relative; right: 20%;"
+          aria-label="Example icon button with a plus one icon">
+          <span> {{ currentDateRange.startDate }} - {{ currentDateRange.endDate }}  </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="displayDateFilter || displayUlbFilter">
+    <div class="row " *ngIf="displayDateFilter">
+      <app-date-filter (dateRangeValue)="getDateRangeValue($event)"></app-date-filter>
+    </div>
+
+    <div class="row " *ngIf="displayUlbFilter">
+      <app-ulb-filter (clearDataEvent)="clearDataEvent($event)" (filteredData)="filteredDataEvent($event)"
+        (searchByDivision)="filterByDivision($event)" >
+      </app-ulb-filter>
+    </div>
+  </mat-card>
+</div>
+
+
+
+<nav mat-tab-nav-bar ngClass="tabs">
+  <a mat-tab-link *ngFor="let tabItem of tabs" [routerLink]="tabItem.route" routerLinkActive="active-link">
+    <mat-icon *ngIf="tabItem.iconType" class="mr-8">{{tabItem.iconName}}</mat-icon>
+    <mat-icon fontSet="fontawesome" *ngIf="!tabItem.iconType" class="fa-lg" fontIcon="{{tabItem.iconName}}"></mat-icon>
+    {{tabItem.displayName}}
+  </a>
+</nav>
+
+
+
+<router-outlet></router-outlet>

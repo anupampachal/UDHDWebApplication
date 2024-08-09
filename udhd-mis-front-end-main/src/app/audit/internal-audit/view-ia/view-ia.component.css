@@ -1,0 +1,26 @@
+.mat-data-card{
+  display: flex;
+  justify-content: center;
+}
+
+
+.mat-card-header-cls{
+  padding: 0%;
+}
+/*
+    ::ng-deep .mat-horizontal-stepper-header{
+      pointer-events: none !important;
+    } */
+
+.pointerNull {
+  pointer-events: none !important;
+}
+
+.mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+.example-button-row {
+  width: 214px;
+  float: right;
+}
+

@@ -1,0 +1,30 @@
+
+<form [formGroup]="step2resultsnfindingsForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Results & Finding:</legend>
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td>
+            <h4>a. Strengths observed during audit engagement :</h4>
+            <!-- <div> -->
+
+            <table formArrayName="descriptions" style="width: 100%;">
+              <tbody *ngFor="let descrption of descriptions.controls; let i = index">
+                <tr>
+                  <td [formGroupName]="i">
+                    <textarea class="form-control" formControlName="description" placeholder="Enter Description"
+                      style="display: block"></textarea>
+
+
+                </tr>
+              </tbody>
+            </table>
+            <!-- </div> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </fieldset>
+</form>

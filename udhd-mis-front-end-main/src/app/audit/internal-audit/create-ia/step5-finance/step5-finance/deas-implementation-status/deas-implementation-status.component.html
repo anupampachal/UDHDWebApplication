@@ -1,0 +1,273 @@
+<fieldset class="hm-fieldset col-md-12 ">
+  <legend class="hm-legend">Status of Implementation of DEAS:</legend>
+  <form [formGroup]="descForm">
+    <div class="row">
+      <div class="col-md-12"></div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <textarea id="desc" class="form-control" formControlName="description"></textarea>
+        </div>
+      </div>
+    </div>
+    <div align="right" class="mt-2">
+      <button class="btn btn-primary" type="button" *ngIf="descForm.disabled" (click)="enableForm()"
+        style="margin-right: 12px;">Edit</button>
+
+      <button class="btn btn-primary create-btn" [disabled]="!descForm.valid" type="button" (click)="saveDescription()">
+        Save
+      </button>
+    </div>
+  </form>
+  <form [formGroup]="doubleEntryAccountingSystemForm">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="" class="col-md-4">Name of Agency : <span style="color: red;">*</span></label>
+        <span class="col-md-8">
+          <input type="text" class="form-control" formControlName="nameOfImplAgency">
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+
+        <mat-form-field appearance="fill" style="width: 75vw;">
+          <mat-label>Enter Period:</mat-label>
+          <mat-date-range-input [formGroup]="doubleEntryAccountingSystemForm" [rangePicker]="picker">
+            <input matStartDate formControlName="startDate" placeholder="Start date">
+            <input matEndDate formControlName="endDate" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="doubleEntryAccountingSystemForm.controls.startDate?.hasError('matStartDateInvalid')">
+            Invalid start date
+          </mat-error>
+          <mat-error *ngIf="doubleEntryAccountingSystemForm.controls.endDate?.hasError('matEndDateInvalid')">Invalid
+            end date</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="" class="col-md-4">Tally Serial No. : <span style="color: red;">*</span></label>
+        <span class="col-md-8">
+          <input type="text" class="form-control" formControlName="tallySerialNo">
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="" class="col-md-4">Tally Id : <span style="color: red;">*</span></label>
+        <span class="col-md-8">
+          <input type="text" class="form-control" formControlName="tallyId">
+        </span>
+      </div>
+    </div>
+    <div align="right" class="mt-2">
+      <button class="btn btn-primary" type="button" *ngIf="doubleEntryAccountingSystemForm.disabled"
+        (click)="enableDeasForm()" style="margin-right: 12px;">Edit</button>
+      <button [disabled]="!doubleEntryAccountingSystemForm.valid" class="btn btn-primary create-btn" (click)="saveDeas()">
+        Save
+      </button>
+    </div>
+  </form>
+
+  <form [formGroup]="deasArrayForm">
+    <div style="display: flex;justify-content: end; margin-top: 24px;">
+      <button type="button" (click)="pushNew()">
+        <mat-icon color="primary">add</mat-icon>
+      </button>
+    </div>
+    <table class="table col-md-12" border="1">
+      <thead>
+        <tr>
+          <th>PARTICULARS</th>
+          <td>
+            <label for="" style="float: inherit;">F.Y.</label>
+            <input type="text" class="form-control" formControlName="financeYear">
+          </td>
+        </tr>
+      </thead>
+      <tbody formArrayName="details">
+        <tr *ngFor="let data of deasFormArrayDetails.controls;let i = index" [formGroupName]="i">
+          <th *ngIf="data && data.value.description.length > 1 && budgetaryList.includes(data.value.description)">
+            {{data.value.description}}
+
+          </th>
+          <th *ngIf="!budgetaryList[i]">
+
+            <input type="text" formControlName="description" class="form-control">
+          </th>
+          <td class="extra">
+            <input type="text" class="form-control" formControlName="annualFinancialStatement">
+          </td>
+          <td *ngIf="i>3">
+              <button *ngIf="data.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+                title="edit" (click)="enableControl(i)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button [disabled]="!data.valid" class="btn btn-default btn-sm" name="save"
+                type="button" title="Save" (click)="onSubmit(i)">
+                <mat-icon>save</mat-icon>
+              </button>
+              <button class="btn btn-default btn-sm" name="delete" type="button" (click)="deleteControl(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+          </td>
+      </tbody>
+    </table>
+    <div align="right" class="mt-2">
+      <button class="btn btn-primary" type="button" *ngIf="deasArrayForm.disabled" (click)="enableDeasArrayForm()"
+        style="margin-right: 12px;">Edit</button>
+      <button [disabled]="isDisable" class="btn btn-primary create-btn" (click)="saveDEASRegister()">
+        Save
+      </button>
+    </div>
+  </form>
+</fieldset>
+
+
+
+
+
+
+
+
+
+<!-- <fieldset class="hm-fieldset col-md-12 "> -->
+<!-- <legend class="hm-legend">Status of Implementation of DEAS:</legend> -->
+<!-- <mat-card class="mat-card-data"> -->
+<!--
+    <form [formGroup]="doubleEntryAccountingSystemForm">
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError.Description }}</p>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" formControlName="id">
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Name of Agency :<span class="required"> *</span></mat-label>
+            <input matInput formControlName="nameOfImplAgency" class="form-control" id="desc">
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter Period:</mat-label>
+            <mat-date-range-input [formGroup]="doubleEntryAccountingSystemForm" [rangePicker]="picker">
+              <input matStartDate formControlName="startDate" placeholder="Start date">
+              <input matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-error *ngIf="doubleEntryAccountingSystemForm.controls.startDate?.hasError('matStartDateInvalid')">
+              Invalid start date
+            </mat-error>
+            <mat-error *ngIf="doubleEntryAccountingSystemForm.controls.endDate?.hasError('matEndDateInvalid')">Invalid
+              end date</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Tally Serial No. :<span class="required"> *</span></mat-label>
+            <input matInput formControlName="tallySerialNo" class="form-control" id="desc">
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <mat-form-field appearance="fill">
+            <mat-label>Tally Id :<span class="required"> *</span></mat-label>
+            <input matInput formControlName="tallyId" class="form-control" id="desc">
+            <mat-error matErrorMessages></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveDeas()" [disabled]="!doubleEntryAccountingSystemForm.valid"
+            >save</button>
+      </mat-card-actions>
+    </form> -->
+
+<!-- <form [formGroup]="descForm" (submit)="saveDescription()">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md">
+            <div *ngIf="showFormError">
+              <p>{{ showFormError.Description }}</p>
+            </div>
+          </div>
+        </div> -->
+<!-- <div class="row">
+          <div class="col-md">
+            <mat-form-field appearance="fill">
+              <mat-label>Description<span class="required"> *</span></mat-label>
+              <textarea matInput formControlName="description" class="form-control" id="desc">
+              </textarea>
+              <mat-error matErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+        </div> -->
+<!-- <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!descForm.valid">save </button>
+        </mat-card-actions> -->
+<!-- </mat-card-content>
+    </form> -->
+<!-- </mat-card> -->
+<!-- <form [formGroup]="deasArrayForm">
+    <div class="col-md-12" align="right">
+      <button type="button" class="btn btn-default" title="Add New Row" (click)="pushNew()">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
+    <table border="1" class="table col-md-12">
+      <ng-container>
+        <thead>
+          <tr>
+            <th>PARTICULARS</th>
+            <td>
+              <label style="float:inherit"> F.Y</label>
+              <input type="hidden" formControlName="financeYearId">
+              <input type="text" formControlName="financeYear" class="form-control">
+            </td>
+          </tr>
+        </thead>
+        <tbody formArrayName="details">
+          <tr *ngFor="let data of deasFormArrayDetails.controls;let i = index" [formGroupName]="i">
+
+              <th>
+              <input type="text" formControlName="description" class="form-control">
+            </th>
+            <td>
+              <input type="hidden" formControlName="deasRegisterId">
+              <input  type="hidden" formControlName="id">
+
+              <span *ngIf="data.value.description!=='PARTICULARS'">
+                <input type="text" formControlName="annualFinancialStatement" class="form-control">
+              </span>
+
+            </td>
+          </tr>
+        </tbody>
+      </ng-container>
+    </table>
+
+    <div class="row">
+      <div class="col-md-12" align="right">
+        <button (click)="saveDEASRegister()" [disabled]="deasArrayForm.invalid" class="btn btn-default">Save</button>
+      </div>
+
+    </div>
+
+  </form> -->
+
+<!-- </fieldset> -->

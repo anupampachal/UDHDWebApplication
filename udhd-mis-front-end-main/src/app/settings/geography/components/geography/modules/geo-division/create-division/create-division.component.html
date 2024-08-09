@@ -1,0 +1,58 @@
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+        <div class="col-md">
+            <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+        </div>
+        <div class="col-md">
+            <div class="example-button-container">
+                <button mat-stroked-button   matTooltip="List divisions" class="route-button" [routerLink]="'../list'" color="primary"
+                    style="float: right" aria-label="Example icon button with a plus one icon">
+                    <mat-icon>list</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-card-data">
+    <form [formGroup]="createGeoDivision" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-md">
+                <mat-card-title class="mat-card-title">Add Division</mat-card-title>
+            </div>
+        </div>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md">
+                    <div *ngIf="showFormError">
+                        <p>{{ showFormError.Description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name<span class="required"> *</span></mat-label>
+                        <input matInput formControlName="name" minlength="3" maxlength="50" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Code<span class="required"> *</span></mat-label>
+                        <input type="text" matInput formControlName="code" minlength="2" maxlength="10" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <input type="hidden" formControlName="active" value="true">
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="createGeoDivision.invalid||clicked" (click)="onSubmit(); clicked = true;" type="submit">
+                Submit
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>

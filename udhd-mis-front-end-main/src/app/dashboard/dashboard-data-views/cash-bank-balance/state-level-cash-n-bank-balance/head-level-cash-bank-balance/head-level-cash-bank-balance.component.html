@@ -1,0 +1,31 @@
+<div class="col-lg-12 col-md-12 table-responsive" style="margin-top: 24px;">
+  <h5>Cash And Bank Balance Info</h5>
+  <table class="table table-bordered table-striped">
+    <thead>
+
+      <tr>
+        <!-- <th scope="col">Account Code</th> -->
+        <th scope="col">Srl No.</th>
+        <th scope="col">Particulars </th>
+        <th scope="col">Opening Balance</th>
+        <th scope="col">Debit Amount</th>
+        <th scope="col">Credit Amount</th>
+        <th scope="col">Closing Balance</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="detailsData">
+      <tr *ngFor="let data of detailsData.cashAndBankBalanceInfo; let i = index">
+        <td> {{ i+1 }} </td>
+        <!-- <td> {{ data.accountCode }} </td> -->
+        <td>
+          {{ data.accountCode }} -  {{ data.particulars }}
+        </td>
+        <td> {{ data.openingBalance | formatAmount }} </td>
+        <td> {{ data.debitAmt | formatAmount }} </td>
+        <td> {{ data.creditAmt | formatAmount }} </td>
+        <td> {{ data.closingBalance | formatAmount }} </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

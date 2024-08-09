@@ -1,0 +1,17 @@
+<div class="container">
+  <div *ngIf="currentLevel == 'state'">
+    <app-state-levl-income-expense></app-state-levl-income-expense>
+  </div>
+
+  <div *ngIf="currentLevel == 'division'">
+    <app-division-level-income-expense></app-division-level-income-expense>
+  </div>
+
+  <div *ngIf="currentLevel == 'district'">
+    <app-district-level-income-expense></app-district-level-income-expense>
+  </div>
+
+  <div *ngIf="currentLevel == 'ulb'">
+    <app-ulb-level-income-expense></app-ulb-level-income-expense>
+  </div>
+</div>

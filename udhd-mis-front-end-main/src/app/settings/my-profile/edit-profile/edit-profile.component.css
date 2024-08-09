@@ -1,0 +1,10 @@
+
+.mat-card-header-cls{
+    padding: 0%;
+    background-color: #E8E8E8;
+  }
+.view-mat-card-content{
+   --margin: auto;
+   --width:80%;
+    
+}  

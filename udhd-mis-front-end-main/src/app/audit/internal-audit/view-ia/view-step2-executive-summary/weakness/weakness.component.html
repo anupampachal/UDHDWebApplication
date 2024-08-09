@@ -1,0 +1,25 @@
+
+<form [formGroup]="step2resultsnfindingsForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td>
+                <h4>b. Weaknesses observed in the functioning of office, maintenance of records etc. observed during the audit engagement :</h4>
+
+                  <table formArrayName="descriptions" style="width: 100%;">
+                    <tbody *ngFor="let descrption of descriptions.controls; let i = index">
+                      <tr>
+                        <td   [formGroupName]="i">
+                          <textarea  class="form-control"  formControlName="description" placeholder="Enter Description" style="display: block"></textarea>
+
+                      </tr>
+                    </tbody>
+                  </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+  </fieldset>
+</form>

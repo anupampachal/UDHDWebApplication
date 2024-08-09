@@ -1,0 +1,93 @@
+<form [formGroup]="auditRecommForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+      <legend class="hm-legend">Audit Recommendation:</legend>
+
+
+      <h4> <b>The recommendation of Audit Team on the observed weakness are as follows: </b>
+          <span style="float:right"><button type="button" (click)="addDescription('')" mat-raised-button>
+                  <i class="fa fa-plus"></i>
+              </button></span></h4>
+      <table class="table table-bordered" formArrayName="descriptions">
+          <tbody *ngFor="let descrption of descriptions.controls; let i = index">
+              <tr [formGroupName]="i">
+              <td>
+              <textarea style="width: 100%;" formControlName="description" ></textarea>
+
+              </td>
+                  <td>
+                    <button *ngIf="descrption.disabled" class="btn btn-default btn-sm" name="edit" type="button"
+                      title="edit" (click)="enableControl(i)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                      <button type="button" title="Save" name="Save"
+                          class="btn btn-default btn-sm"
+                          [disabled]="!descrption.valid"
+                          (click)="onSubmit(i)">
+                        <mat-icon>save</mat-icon></button>
+
+
+                      <button type="button" name="delete" class="btn btn-default btn-sm" (click)="deleteDescription(i)">
+                       <mat-icon> delete_forever</mat-icon></button>
+                  </td>
+
+              </tr>
+          </tbody>
+      </table>
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+<h4>Audit Recommendation:</h4>
+<mat-card style="display: flex; justify-content: space-between;">
+  <mat-card-header>The recommendation of Audit Team on the observed weakness are as follows :</mat-card-header>
+  <button mat-mini-fab (click)="addDescription()">
+    <mat-icon class="add-course-btn">add</mat-icon>
+  </button>
+</mat-card>
+<mat-card class="mat-card-data">
+
+  <form [formGroup]="auditRecommForm" (submit)="onSubmit()">
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md">
+          <div *ngIf="showFormError">
+            <p>{{ showFormError }}</p>
+          </div>
+        </div>
+      </div>
+      <ng-container formArrayName="descriptions">
+        <ng-container *ngFor="let descrption of descriptions.controls; let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter Description</mat-label>
+              <textarea matInput formControlName="description" rowCount=3></textarea>
+                <mat-error matErrorMessages></mat-error>
+            </mat-form-field>
+          </div>
+          <mat-icon class="delete-btn" style="cursor: pointer;" (click)="deleteDescription(i)">
+            delete_forever</mat-icon>
+        </ng-container>
+      </ng-container>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="!auditRecommForm.valid">Save</button>
+    </mat-card-actions>
+  </form>
+</mat-card> -->

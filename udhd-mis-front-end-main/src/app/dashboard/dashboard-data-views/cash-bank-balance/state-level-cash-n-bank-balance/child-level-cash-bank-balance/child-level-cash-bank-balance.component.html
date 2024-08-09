@@ -1,0 +1,29 @@
+<div class="col-lg-12 col-md-12 table-responsive">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <!-- <th scope="col">Account Code</th> -->
+        <th scope="col">Srl no.</th>
+        <th scope="col">Division </th>
+        <th scope="col">Opening Balance</th>
+        <th scope="col">Debit Amount</th>
+        <th scope="col">Credit Amount</th>
+        <th scope="col">Closing Balance</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="dataToDisplay">
+      <tr *ngFor="let data of dataToDisplay; let i = index">
+        <td> {{ i+1 }} </td>
+        <!-- <td> {{ data.accountCode }} </td> -->
+        <td (click)="goToDivision(data.accountCode, data.particulars)">
+          <span class="link"> {{ data.particulars }}</span>
+        </td>
+        <td> {{ data.openingBalance | formatAmount }} </td>
+        <td> {{ data.debitAmt | formatAmount }} </td>
+        <td> {{ data.creditAmt | formatAmount }} </td>
+        <td> {{ data.closingBalance | formatAmount }} </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

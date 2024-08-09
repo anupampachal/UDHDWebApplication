@@ -1,0 +1,269 @@
+<mat-card class="mat-card mat-data-card container-fluid" *ngIf="step5BudgetReport$| async as st5">
+  <div class="row header-row">
+    <span class="col-md">
+      <h3 class="header-info-view">Budget Provision</h3>
+    </span>
+    <hr>
+  </div>
+
+  <table class="table bpdfTable">
+    <tbody>
+      <tr>
+        <th> Period</th>
+        <td>
+          <span> <label style="float:inherit"> F.Y</label>
+            <input [disabled]="'true'" type="text" [value]="st5.fy1" class="form-control">
+          </span>
+        <td>
+          <span> <label style="float:inherit"> F.Y</label>
+            <input [disabled]="'true'" type="text" [value]="st5.fy2" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span> <label style="float:inherit"> F.Y</label>
+            <input [disabled]="'true'" type="text" [value]="st5.fy3" class="form-control">
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th>Final/Revised Budget Data</th>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="st5.finalBudgetData.fy1" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="st5.finalBudgetData.fy2" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="st5.finalBudgetData.fy3" class="form-control">
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th>Actual Expenditure Data </th>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="st5.actualExpenditureData.fy1" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="st5.actualExpenditureData.fy2" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="st5.actualExpenditureData.fy3" class="form-control">
+          </span>
+        </td>
+      </tr>
+    </tbody>
+
+
+  </table>
+</mat-card>
+
+
+
+<mat-card class="mat-card mat-data-card container-fluid" *ngIf="step5VolOfTrnx$ | async as vot">
+  <div class="row header-row">
+    <span class="col-md">
+      <h3 class="header-info-view">Volume of Transaction</h3>
+    </span>
+    <hr>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Period</th>
+        <td>
+          <label>Budgeted<br /> F.Y<br><br /></label>
+          <input [disabled]="'true'" type="text" class="form-control" [value]="vot.budgetFY">
+
+        </td>
+        <td>
+          <label>Previous Year
+            <br>(For one year)<br> F.Y</label>
+            <input [disabled]="'true'" type="text" class="form-control" [value]="vot.previousYearFY">
+
+        </td>
+        <td>
+          <label>Corresponding Period Previous Year
+            <br>F.Y</label>
+            <input [disabled]="'true'" type="text" class="form-control" [value]="vot.correspondingPrevYearFY">
+
+        </td>
+        <td>
+          <label>Current Period
+            <br>F.Y<br><br></label>
+            <input [disabled]="'true'" type="text" class="form-control" [value]="vot.currentYearFY">
+        </td>
+        <td>
+          <label>Cumulative <br>for the <br>current<br> period</label>
+
+        </td>
+      </tr>
+
+      <tr>
+        <th>  Opening Balance</th>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.openingBalance.budgetFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.openingBalance.previousYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.openingBalance.correspondingPrevYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.openingBalance.currentYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.openingBalance.cumulativeForCurrentPeriod" class="form-control">
+          </span>
+        </td>
+      </tr>
+
+      <tr>
+        <th>  Receipts</th>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.receipts.budgetFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.receipts.previousYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.receipts.correspondingPrevYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.receipts.currentYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.receipts.cumulativeForCurrentPeriod" class="form-control">
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th>  Net Expenditure</th>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.netExpenditure.budgetFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.netExpenditure.previousYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.netExpenditure.correspondingPrevYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.netExpenditure.currentYearFY" class="form-control">
+          </span>
+        </td>
+        <td>
+          <span>
+            <input [disabled]="'true'" type="number" [value]="vot.netExpenditure.cumulativeForCurrentPeriod" class="form-control">
+          </span>
+        </td>
+      </tr>
+    </tbody>
+
+
+  </table>
+</mat-card>
+
+<mat-card class="container-fluid" *ngIf="bankRecon$ | async as obs">
+  <div class="row header-row">
+    <span class="col-md">
+      <h3 class="header-info-view">Bank Reconciliation</h3>
+    </span>
+    <span class="col-md" style="text-align: right">
+    </span>
+    <hr>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <th>Id</th>
+      <th>Ia Id</th>
+      <th>Bank Name</th>
+      <th>Project / Scheme Name</th>
+      <th>
+        Account No.
+      </th>
+      <th>
+        Bank Balance As Per PassBook(a)
+      </th>
+      <th>
+        Cash Balance as per CashBook(B)
+      </th>
+      <th>Amount Reconciled/ Un-reconciled</th>
+      <th>BRS Status(Prepared/Not Prepared)</th>
+    </thead>
+    <tbody *ngFor="let auditObs of obs; let i=index">
+      <tr>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="auditObs.id" [disabled]="'true'">
+        </td>
+        <td>
+          <input [disabled]="'true'" type="text" [value]="auditObs.iaId">
+        </td>
+        <td>
+          <textarea class="form-control" style="display: block;" [disabled]="'true'" type="text" [value]="auditObs.bankName"></textarea>
+        </td>
+        <td>
+          <textarea class="form-control" style="display: block;" [disabled]="'true'" [value]="auditObs.projectSchemeName" name="totalNoOfAuditpara"></textarea>
+        </td>
+
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.accountNumber">
+        </td>
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.bankBalancePerPassbook">
+        </td>
+        <td>
+          <input [disabled]="'true'" id="totalNoOfAuditParaWhereRecoveryMade" [value]="auditObs.cashBalancePerCashbook">
+        </td>
+        <td>
+          <input [disabled]="'true'" id="totalNoOfRecovery" [value]="auditObs.amountReconciled">
+        </td>
+        <td>
+          <input [disabled]="'true'" [value]="auditObs.brsstatus">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>
+
+
+<app-view-rev-cap-receipt></app-view-rev-cap-receipt>
+
+<app-view-cap-exp-receipt></app-view-cap-exp-receipt>
+
+<app-view-deas></app-view-deas>

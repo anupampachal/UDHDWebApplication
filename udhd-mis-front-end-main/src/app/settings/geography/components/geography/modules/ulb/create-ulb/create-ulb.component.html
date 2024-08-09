@@ -1,0 +1,102 @@
+<mat-card class="mat-card-header-cls">
+    <div class="row">
+        <div class="col-md">
+            <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+        </div>
+        <div class="col-md">
+            <div class="example-button-container">
+                <button mat-stroked-button class="route-button" 
+                    matTooltip="List ULBs"
+                    [routerLink]="'../list'" color="primary"
+                    style="float: right" aria-label="List ULBs">
+                    <mat-icon>list</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<mat-card class="mat-card-data">
+    <form [formGroup]="createULB" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-md">
+                <mat-card-title class="mat-card-title">Add ULB</mat-card-title>
+            </div>
+        </div>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md">
+                    <div *ngIf="showFormError">
+                        <p>{{ showFormError.Description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name<span class="required"> *</span></mat-label>
+                        <input matInput formControlName="name" minlength="3" maxlength="50" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Code<span class="required"> *</span></mat-label>
+                        <input type="text" matInput formControlName="code" minlength="2" maxlength="10" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Alias Name<span class="required"> *</span></mat-label>
+                        <input type="text" matInput formControlName="aliasName" minlength="2" />
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Type of municipal body<span class="required">*</span></mat-label>
+                        <mat-select formControlName="type" placeholder="ULB-TYPE">
+                            <mat-option [value]="'MUNICIPAL_CORPORATION'">Municipal Corporation</mat-option>
+                            <mat-option [value]="'MUNICIPAL_COUNCIL'">Municipal Council</mat-option>
+                            <mat-option [value]="'NAGAR_PANCHAYAT'">Nagar Panchayat</mat-option>
+                        </mat-select>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <mat-form-field appearance="fill">
+                        <mat-label>District<span class="required">*</span></mat-label>
+                        <mat-select formControlName="district" placeholder="District">
+                            <ng-container *ngFor="let district of districts">
+                                <mat-option [value]="district">{{district.code}} - {{district.name}} </mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error matErrorMessages></mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+           <input type="hidden" formControlName="active" >
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="createULB.invalid" type="submit">
+                Submit
+            </button>
+        </mat-card-actions>
+    </form>
+</mat-card>

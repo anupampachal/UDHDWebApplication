@@ -1,0 +1,113 @@
+<div class="container-fluid fluid-component">
+    <div class="row " *ngIf="showFilter">
+        <app-filter [sortOptions]="sortOptions" (clearDataEvent)="clearDataEvent($event)"
+            (filteredData)="filteredDataEvent($event)" (getSortedByEvent)="getSortedByEvent($event)"
+            (sortDirectionChange)="sortingDirectionChangeEvent($event)"></app-filter>
+    </div>
+    <div *ngIf="paginationTableData$|async as pageData">
+        <mat-accordion *ngFor="let criteria of pageData.data.data" class="paginated-accordion">
+            <!--div *ngIf="criteria!=null"-->
+            <mat-expansion-panel #matExpansionPanel hideToggle (opened)="onPanelExpand(criteria.id||-1)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="bold">
+                        {{"id. "+criteria.id+" ,Title:"+criteria.title}}
+                    </mat-panel-title>
+                    <mat-panel-description class="bold">
+                        {{"Status="+criteria.status +", Amount=" +criteria.amount}}
+                        <button *ngIf="parent==='edit'  && criteria && criteria.id && status=='DRAFT'" mat-button
+                            (click)="editCriteriaClicked(criteria.id)">
+                            <mat-icon>mode_edit</mat-icon>
+                        </button>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <hr>
+                <!--app-edit-agir-audit-criteria *ngIf="currentCriteriaView==='edit'" (showListCriteriaEvent)="onCurrentCriteriaViewChange($event)"
+                        [parent]="parent" [criteriaId]="id"
+                    ></app-edit-agir-audit-criteria-->
+                <!--div *ngIf="currentCriteriaView==='list'"-->
+                <div class="row">
+                    <div class="col-md">
+                        Risk: {{criteria.associatedRisk}}
+                    </div>
+                    <div class="col-md">
+                        Audit Para : {{criteria.auditPara}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        Description: {{criteria.description}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row" *ngIf=" criteria && criteria.id">
+                    <div class="col-md-6">
+                        <ng-container *ngIf="complianceView==='list' &&  complianceList">
+                            <app-list-agir-audit-compliances [criteriaId]="criteria.id"
+                                [auditStatus]="status"
+                                (addCompliancesEvent)="changeToCreateCompliance($event)"
+                                (viewCompliancesEvent)="changeView($event)" [openedAccordion]="openedAccordion"
+                                [pageDataFromParent]="complianceList" [random]="random" [parent]="parent">
+                            </app-list-agir-audit-compliances>
+                        </ng-container>
+                        <ng-container *ngIf="complianceView==='view' && complianceId">
+                            <app-view-agir-audit-compliances [complianceId]="complianceId"
+                                (listComplianceEvent)="changeToList(criteria.id)"
+                                (editComplianceEvent)="editCompliances($event)" [parent]="parent">
+                            </app-view-agir-audit-compliances>
+                        </ng-container>
+
+                        <ng-container *ngIf="complianceView==='create'">
+                            <app-create-agir-audit-compliances [auditCriteriaId]="criteria.id"
+                                (listOfComplianceEvent)="changeToList(criteria.id)">
+                            </app-create-agir-audit-compliances>
+                        </ng-container>
+                        <ng-container *ngIf="complianceView==='edit' && complianceId">
+                            <app-edit-agir-audit-compliances [auditCriteriaId]="criteria.id"
+                                [complianceId]="complianceId" (listOfComplianceEvent)="changeToList(criteria.id)">
+                            </app-edit-agir-audit-compliances>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-6">
+                            <div *ngIf="commentView==='list' && commentList">
+                                <app-list-agir-audit-comments [criteriaId]="criteria.id"
+                                    [openedAccordion]="openedAccordion"
+                                    (addCommentsEvent)="changeToCreateComments($event)"
+                                    (viewCommentsEvent)="changetoViewComment($event)"
+                                    [pageDataFromParent]="commentList"
+                                    [openedAccordion]="openedAccordion" [parent]="parent">
+                                </app-list-agir-audit-comments>
+                            </div>
+                            <div *ngIf="commentView==='view'">
+                                <app-view-agir-audit-comments [criteriaId]="criteria.id" [commentId]="commentId"
+                                    (listCommentEvent)="listComment($event)" (editCommentEvent)="editComment($event)"
+                                    [parent]="parent">
+                                </app-view-agir-audit-comments>
+                            </div>
+                            <div *ngIf="commentView==='create'">
+                                <app-create-agir-audit-comments [criteriaId]="criteria.id"
+                                    (listCommentEvent)="listComment($event)" [parent]="parent">
+                                </app-create-agir-audit-comments>
+                            </div>
+                            <ng-container *ngIf="commentView==='edit' && commentId">
+                                <app-edit-agir-audit-comments [auditCriteriaId]="criteria.id"
+                                    [commentId]="commentId" (listCommentEvent)="listComment(criteria.id)">
+                                </app-edit-agir-audit-comments>
+                            </ng-container>
+                        </div>
+                </div>
+                <!--/div-->
+            </mat-expansion-panel>
+            <!--/div-->
+        </mat-accordion>
+
+        <mat-paginator [pageSizeOptions]="pageData.pageSizeOptions" [pageIndex]="pageData.currentPage"
+            [pageSize]="pageData.pageSize" [length]="pageData.dataTotLength" (page)="getServerData($event)"
+            showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+
+
+
+
+</div>

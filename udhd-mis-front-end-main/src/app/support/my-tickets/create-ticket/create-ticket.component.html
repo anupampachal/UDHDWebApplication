@@ -1,0 +1,78 @@
+<mat-card class="mat-card-header-cls">
+  <div class="row">
+      <div class="col-md">
+          <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+          <div class="example-button-container">
+              <button mat-stroked-button class="route-button" [routerLink]="'../list'" color="primary"
+                  style="float: right" aria-label="Example icon button with a plus one icon">
+                  <mat-icon>list</mat-icon>
+              </button>
+          </div>
+      </div>
+  </div>
+</mat-card>
+<mat-card class="mat-card-data">
+  <form [formGroup]="createTicket" (submit)="onSubmit()">
+      <div class="row">
+          <div class="col-md">
+              <mat-card-title class="mat-card-title">Raise a Ticket</mat-card-title>
+          </div>
+      </div>
+      <mat-card-content>
+          <div class="row">
+              <div class="col-md">
+                  <div *ngIf="showFormError">
+                      <p>{{ showFormError.Description }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md">
+                  <mat-form-field appearance="fill">
+                      <mat-label>Title<span class="required"> *</span></mat-label>
+                      <input matInput formControlName="title" minlength="3" maxlength="50" />
+                      <mat-error matErrorMessages></mat-error>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md">
+                  <mat-form-field appearance="fill">
+                      <mat-label>Assign To Team<span class="required"> *</span></mat-label>
+                      <mat-select formControlName="assignToTeam" placeholder="select team">
+                        <ng-container *ngFor="let team of allTeams">
+                          <mat-option [value]="team"> {{team}} </mat-option>
+                        </ng-container>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+          </div>
+
+          <div class="row" style="margin-top:4px;">
+            <div style="height:150px;width:150px;" *ngIf="fileName && isFile">
+              <img [src]="fileName|safe" style="width:100%;height:100%;">
+            </div>
+            <p *ngIf="this.selectedFile==null">Please select a pdf file of size less than 3 mb to proceed.</p>
+            <input type="file" class="btn btn-default" [disabled]="!isEdit?true:false" (change)="onSelected($event)">
+          </div>
+
+
+          <div class="row">
+            <div class="col-md">
+                <mat-form-field appearance="fill">
+                    <mat-label>Description<span class="required"> *</span></mat-label>
+                    <input matInput formControlName="description" minlength="3" maxlength="50" />
+                    <mat-error matErrorMessages></mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="createTicket.invalid" type="submit">
+              Submit
+          </button>
+      </mat-card-actions>
+  </form>
+</mat-card>

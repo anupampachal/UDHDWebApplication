@@ -1,0 +1,45 @@
+<mat-card class="mat-card-header-cls">
+  <div class="row">
+      <div class="col-md">
+          <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+          <div class="example-button-container">
+              <button mat-stroked-button class="route-button" [routerLink]="'../../ia-list'" color="primary"
+                  style="float: right" aria-label="Example icon button with a plus one icon">
+                  <mat-icon>list</mat-icon>
+              </button>
+          </div>
+      </div>
+  </div>
+</mat-card>
+
+<section id="body" class="col-md-12">
+  <mat-card class="mat-card-data">
+      <mat-horizontal-stepper linear #stepper (selectionChange)="selectionChange($event)">
+          <mat-step label="Report">
+              <step1-report (nextStep)="goToNextStep($event)"></step1-report>
+          </mat-step>
+
+          <mat-step label="Executive Summary">
+              <step2-executive-summary *ngIf="currentStep=='Executive Summary'"></step2-executive-summary>
+          </mat-step>
+          <mat-step label="Administration">
+              <step3-detailed-audit (nextStep)="stepper.next()" *ngIf="currentStep=='Administration'"></step3-detailed-audit>
+          </mat-step>
+          <mat-step label="Audit Details">
+              <step4-review-of-outstanding-paras *ngIf="currentStep=='Audit Details'"></step4-review-of-outstanding-paras>
+          </mat-step>
+          <mat-step label="Finance">
+            <step5-finance *ngIf="currentStep=='Finance'"></step5-finance>
+          </mat-step>
+          <mat-step label="Audit Observation">
+              <step6-audit-observation *ngIf="currentStep=='Audit Observation'"></step6-audit-observation>
+          </mat-step>
+      </mat-horizontal-stepper>
+  </mat-card>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="stepper.previous()">Back</button>
+    <button mat-raised-button color="accent" (click)="stepper.next()" style="margin-left: 12px;">Next</button>
+    </div>
+</section>

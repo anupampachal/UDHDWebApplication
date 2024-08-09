@@ -1,0 +1,90 @@
+<section id="deas-implementation" *ngIf="statusOfDeasObs$|async as statusOfDeas">
+  <h3>Status of Implementation of DEAS:</h3>
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Status of Implementation of DEAS:</legend>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group" *ngIf="statusOfDeas.description">
+          <label for="desc">Description</label>
+          <textarea class="form-control" id="desc">{{getDescription(statusOfDeas.description)}}</textarea>
+        </div>
+      </div>
+    </div>
+    <h6 style="margin-top: 24px;">Tally Details</h6>
+    <input type="hidden" [value]="statusOfDeas.tallyDetails?.id">
+    <input type="hidden" [value]="statusOfDeas.tallyDetails?.iaId">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="" class="col-md-4">Tally Id : <span style="color: red;">*</span></label>
+        <span class="col-md-8">
+          <input type="text" class="form-control" [value]="statusOfDeas.tallyDetails?.tallyId">
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label for="" class="col-md-4">Tally Serial No. : <span style="color: red;">*</span></label>
+        <span class="col-md-8">
+          <input type="text" class="form-control" [value]="statusOfDeas.tallyDetails?.tallySerialNo">
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <label>Period</label>
+        <div>
+          <span class="col-md-3" style="padding:10px;">From</span>
+          <span class="col-md-3" style="padding:10px;">{{statusOfDeas.tallyDetails?.periodFrom}}</span>
+          <span class="col-md-3" style="padding:10px;">To</span>
+          <span class="col-md-3" style="padding:10px;">{{statusOfDeas.tallyDetails?.periodTo}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pdfTable">
+      <table class="table col-md-12 table-bordered" border="1">
+        <tr>
+          <td>Particulars</td>
+          <td>{{statusOfDeas.financeStatementStatus.particulars}}</td>
+        </tr>
+        <tr>
+          <td>Property Tax Register</td>
+          <td>{{statusOfDeas.financeStatementStatus.propertyTaxRegister}}</td>
+        </tr>
+        <tr>
+          <td>Fixed Assets Register</td>
+          <td>{{statusOfDeas.financeStatementStatus.fixedAssetsRegister}}</td>
+        </tr>
+        <tr>
+          <td>Opening Balance Sheet</td>
+          <td>{{statusOfDeas.financeStatementStatus.openingBalanceRegister}}</td>
+        </tr>
+        <tr>
+          <td>Annual Finance Statement</td>
+          <td>{{statusOfDeas.financeStatementStatus.annualFinanceStatement}}</td>
+        </tr>
+        <tr *ngIf="statusOfDeas.particularsWithFinanceStatus">
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+
+  <fieldset class="hm-fieldset col-md-12 ">
+    <legend class="hm-legend">Status of Municipal Accounts Committee; if meeting is held :</legend>
+    <div style="display: flex;justify-content: end;" *ngIf="statusOfDeas.statusOfMunicipalAccCommitteeFileId">
+      <button mat-button class="btn" color="primary" (click)="downloadFile()"
+        style="background-color: rgb(200, 200, 200);">
+        <mat-icon>file_download</mat-icon>
+      </button>
+    </div>
+    <div class="form-group" *ngIf="statusOfDeas.statusOfMunicipalAccountsCommittee">
+      <label for="commentDescription">
+        Description
+      </label>
+      <textarea readonly
+        class="form-control">{{getDataInString(statusOfDeas.statusOfMunicipalAccountsCommittee)}}</textarea>
+    </div>
+  </fieldset>
+</section>

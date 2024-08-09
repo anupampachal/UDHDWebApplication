@@ -1,0 +1,28 @@
+<section>
+
+  <div class="row" *ngIf="dashboardDTO$ |async as dashboardData">
+    <div class="col-md-5">
+      <h3 style="text-align: center;"> <a class="link" (click)="deas()" [routerLink]="'/deas/deas/data-views/'"
+          title="goto deas">DEAS</a> </h3>
+      <app-deas-audit-cahrt [data]="dashboardData.deasDashboardDTO"></app-deas-audit-cahrt>
+      <h3 style="text-align: center;"> <a class="link" (click)="financeAudit()"
+          [routerLink]=" '/audit/audit/cagpac/cagpac/list' " title="goto finance audit">CAG/PAC Audit</a></h3>
+      <app-pac-audit-cahrt [data]="dashboardData.cagPacAuditDashboardDTO"></app-pac-audit-cahrt>
+    </div>
+    <div class="col-md-5">
+      <h3 style="text-align: center;"> <a class="link" (click)="internalAudit()"
+          [routerLink]="'/audit/ia-audit/ia/ia-list'" title="goto internal audit">Internal Audit</a></h3>
+      <app-internal-audit-cahrt [data]="dashboardData.iaAuditDashboardDTO"></app-internal-audit-cahrt>
+      <h3 style="text-align: center;"> <a class="link" [routerLink]=" '/audit/audit/ag-ir/ag-ir/list' "
+          (click)="agAudit()" title="goto ag audit">AG Audit</a></h3>
+      <app-ag-audit-cahrt [data]="dashboardData.agirDashboardDTO"></app-ag-audit-cahrt>
+    </div>
+    <!-- <div class="col-md-4">
+      <h3 style="text-align: center;"> <a (click)="utilizationCertificate()" title="goto uc">Utilization Certificate</a>
+      </h3>
+      <app-ucchart [dashbordInfo]='dashboardInfo'></app-ucchart>
+      <h3 style="text-align: center;"> <a (click)="pacAudit()" title="goto pac audit">PAC Audit</a> </h3>
+      <app-pacchart [dashbordInfo]='dashboardInfo'></app-pacchart>
+    </div> -->
+  </div>
+</section>

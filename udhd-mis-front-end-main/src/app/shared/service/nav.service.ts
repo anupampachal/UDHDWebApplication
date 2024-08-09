@@ -1,0 +1,795 @@
+import { Injectable } from '@angular/core';
+import { Event, NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AuthorityConstants } from 'src/app/authority-constants';
+import { NavItem } from '../model/nav-item.model';
+
+@Injectable()
+export class NavService {
+  public appDrawer: any;
+  public currentUrl = new BehaviorSubject<string>('');
+  private navItems: NavItem[] = [];
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl.next(event.urlAfterRedirects);
+      }
+    });
+  }
+
+  public closeNav() {
+    if (!!this.appDrawer) this.appDrawer.close();
+  }
+
+  public openNav() {
+    if (!!this.appDrawer) this.appDrawer.open();
+  }
+  public getNavItemForCustomer() {
+    this.navItems = [
+      {
+        displayName: 'Dashboard',
+        iconName: 'space_dashboard',
+        route: 'home',
+        iconType: true,
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [],
+      } /* , {
+        displayName: 'Activities',
+        iconName: ' fa-calendar-plus-o',
+        route: 'activities',
+        iconType: false,
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [
+         /* {
+            displayName: 'ToDo List',
+            iconName: 'fa-list',
+            route: 'activities/todo-list',
+            iconType: false,
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          },
+          {
+            displayName: 'Holiday Calendar',
+            iconName: ' fa-calendar',
+            route: 'activities/holiday-calender',
+            iconType: false,
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          },
+          {
+            displayName: 'Events & Meetings',
+            iconName: ' fa-calendar-o',
+            route: 'activities/events-and-meetings',
+            iconType: false,
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          }, {
+            displayName: 'Notifications',
+            iconName: ' fa-bullhorn',
+            route: 'activities/notifications',
+            iconType: false,
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          }
+        ],
+      } */,
+      {
+        displayName: 'Financial Data Upload  and View ',
+        iconName: 'fa-file',
+        iconType: false,
+        route: 'deas',
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [
+          {
+            displayName: 'Financial Data Uploads',
+            iconName: 'fa-file-word-o',
+            route: 'deas/deas/financial-data-uploads',
+            iconType: false,
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              //AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+            children: [
+              {
+                displayName: 'Trial Balance Upload',
+                iconName: 'fa-file-code-o',
+                route: 'deas/deas/financial-data-uploads/deascomp/periodic-uploads',
+                iconType: false,
+                authorities: [
+                  AuthorityConstants.ROLE_FLIA,
+                  AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+                  AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+                  AuthorityConstants.ROLE_ULB_CMO,
+                  AuthorityConstants.ROLE_SLPMU_ADMIN,
+                  AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+                  AuthorityConstants.ROLE_SLPMU_AUDIT,
+                  AuthorityConstants.ROLE_SLPMU_UC,
+                  AuthorityConstants.ROLE_SLPMU_IT,
+                  AuthorityConstants.ROLE_UDHD_PSEC,
+                  AuthorityConstants.ROLE_UDHD_SEC,
+                  AuthorityConstants.ROLE_UDHD_SO,
+                  AuthorityConstants.ROLE_UDHD_IT
+                ],
+              },
+              {
+                displayName: 'Annual Financial Upload',
+                iconName: 'fa-file-word-o',
+                route: '/deas/deas/financial-data-uploads/deascomp/annual-financial-statement',
+                iconType: false,
+                authorities: [
+                  AuthorityConstants.ROLE_FLIA,
+                  AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+                  AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+                  AuthorityConstants.ROLE_ULB_CMO,
+                  AuthorityConstants.ROLE_SLPMU_ADMIN,
+                  AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+                  AuthorityConstants.ROLE_SLPMU_AUDIT,
+                  AuthorityConstants.ROLE_SLPMU_UC,
+                  AuthorityConstants.ROLE_SLPMU_IT,
+                  AuthorityConstants.ROLE_UDHD_PSEC,
+                  AuthorityConstants.ROLE_UDHD_SEC,
+                  AuthorityConstants.ROLE_UDHD_SO,
+                  AuthorityConstants.ROLE_UDHD_IT
+                ],
+              },
+              {
+                displayName: 'Historical Data Upload',
+                iconName: 'fa-file-text',
+                route: 'deas/deas/financial-data-uploads/deascomp/historical-data-uploads',
+                iconType: false,
+                authorities: [
+                  AuthorityConstants.ROLE_FLIA,
+                  AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+                  AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+                  AuthorityConstants.ROLE_ULB_CMO,
+                  AuthorityConstants.ROLE_SLPMU_ADMIN,
+                  AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+                  AuthorityConstants.ROLE_SLPMU_AUDIT,
+                  AuthorityConstants.ROLE_SLPMU_UC,
+                  //AuthorityConstants.ROLE_SLPMU_IT,
+                  AuthorityConstants.ROLE_UDHD_PSEC,
+                  AuthorityConstants.ROLE_UDHD_SEC,
+                  AuthorityConstants.ROLE_UDHD_SO,
+                  AuthorityConstants.ROLE_UDHD_IT
+                ],
+              },
+            ]
+          },
+          {
+            displayName: 'Data Views',
+            iconName: 'grid_view',
+            route: 'deas/deas/data-views',
+            iconType: true,
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ]
+          },
+
+        ],
+      },
+      {
+        displayName: 'Audit',
+        iconName: 'manage_accounts',
+        iconType: true,
+        route: 'audit',
+        authorities: [
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          //AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [
+          {
+            displayName: 'Internal Audit',
+            iconName: 'fa-file-text',
+            route: 'audit/ia-audit/ia/ia-list',
+            iconType: false,
+            authorities: [
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+            ],
+          },
+          {
+            displayName: 'AG - IR',
+            iconName: 'engineering',
+            route: 'audit/audit/ag-ir/ag-ir',
+            iconType: true,
+            authorities: [
+             // AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+            ],
+          },
+          {
+            displayName: 'PAC & CAG',
+            iconName: 'interpreter_mode',
+            route: 'audit/audit/cagpac/cagpac',
+            iconType: true,
+            authorities: [
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+            ],
+          },
+          {
+            displayName: 'AC/DC',
+            iconName: 'approval',
+            iconType: true,
+            route: 'uc/uc-home/ac-dc',
+            authorities: [
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+            ],
+            children: [],
+          }
+          /*{
+            displayName: 'Finance Audit',
+            iconName: 'monetization_on',
+            route: 'audit/audit/finance/finance',
+            iconType: true,
+            authorities: [
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+            ],
+          },*/
+          // {
+          //   displayName: 'Report',
+          //   iconName: 'fa-file-pdf-o',
+          //   route: 'activities',
+          //   iconType: false,
+          //   authorities: [
+          //     AuthorityConstants.ROLE_FLIA,
+          //     AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          //     AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          //     AuthorityConstants.ROLE_ULB_CMO,
+          //     AuthorityConstants.ROLE_SLPMU_ADMIN,
+          //     AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          //     AuthorityConstants.ROLE_SLPMU_AUDIT,
+          //     AuthorityConstants.ROLE_SLPMU_UC,
+          //     AuthorityConstants.ROLE_SLPMU_IT,
+          //     AuthorityConstants.ROLE_UDHD_PSEC,
+          //     AuthorityConstants.ROLE_UDHD_SEC,
+          //     AuthorityConstants.ROLE_UDHD_SO,
+          //     AuthorityConstants.ROLE_UDHD_IT
+          //   ],
+          // }
+        ],
+      },
+      {
+        displayName: 'Utilization Certificate',
+        iconName: 'approval',
+        iconType: true,
+        route: 'uc',
+        authorities: [
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+        ],
+        children: [{
+          displayName: 'Utilization Certificate',
+          iconName: 'approval',
+          iconType: true,
+          route: 'uc',
+          authorities: [
+            AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+            AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+            AuthorityConstants.ROLE_ULB_CMO,
+            AuthorityConstants.ROLE_SLPMU_ADMIN,
+            AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+            AuthorityConstants.ROLE_SLPMU_AUDIT,
+            AuthorityConstants.ROLE_SLPMU_UC,
+            AuthorityConstants.ROLE_UDHD_PSEC,
+            AuthorityConstants.ROLE_UDHD_SEC,
+            AuthorityConstants.ROLE_UDHD_SO,
+          ]
+        }],
+      },
+      /*{
+        displayName: 'KM',
+        iconName: 'auto_stories',
+        iconType: true,
+        route: 'km',
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [
+
+        ],
+      },
+      {
+        displayName: 'Reports',
+        iconName: 'fa-file-pdf-o',
+        iconType: false,
+        route: 'reports',
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [{
+          displayName: 'Internal Audit',
+          iconName: 'fa-file-text',
+          route: 'reports/internalAudit',
+          iconType: false,
+          authorities: [
+            AuthorityConstants.ROLE_FLIA,
+            AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+            AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+            AuthorityConstants.ROLE_ULB_CMO,
+            AuthorityConstants.ROLE_SLPMU_ADMIN,
+            AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+            AuthorityConstants.ROLE_SLPMU_AUDIT,
+            AuthorityConstants.ROLE_SLPMU_UC,
+            AuthorityConstants.ROLE_SLPMU_IT,
+            AuthorityConstants.ROLE_UDHD_PSEC,
+            AuthorityConstants.ROLE_UDHD_SEC,
+            AuthorityConstants.ROLE_UDHD_SO,
+            AuthorityConstants.ROLE_UDHD_IT
+          ],
+        }
+          , {
+          displayName: 'AG - IR',
+          iconName: 'engineering',
+          route: 'reports/ag-ir',
+          iconType: true,
+          authorities: [
+            AuthorityConstants.ROLE_FLIA,
+            AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+            AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+            AuthorityConstants.ROLE_ULB_CMO,
+            AuthorityConstants.ROLE_SLPMU_ADMIN,
+            AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+            AuthorityConstants.ROLE_SLPMU_AUDIT,
+            AuthorityConstants.ROLE_SLPMU_UC,
+            AuthorityConstants.ROLE_SLPMU_IT,
+            AuthorityConstants.ROLE_UDHD_PSEC,
+            AuthorityConstants.ROLE_UDHD_SEC,
+            AuthorityConstants.ROLE_UDHD_SO,
+            AuthorityConstants.ROLE_UDHD_IT
+          ],
+        }, {
+          displayName: 'CAG/PAC',
+          iconName: 'interpreter_mode',
+          route: 'reports/cagPac',
+          iconType: true,
+          authorities: [
+            AuthorityConstants.ROLE_FLIA,
+            AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+            AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+            AuthorityConstants.ROLE_ULB_CMO,
+            AuthorityConstants.ROLE_SLPMU_ADMIN,
+            AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+            AuthorityConstants.ROLE_SLPMU_AUDIT,
+            AuthorityConstants.ROLE_SLPMU_UC,
+            AuthorityConstants.ROLE_SLPMU_IT,
+            AuthorityConstants.ROLE_UDHD_PSEC,
+            AuthorityConstants.ROLE_UDHD_SEC,
+            AuthorityConstants.ROLE_UDHD_SO,
+            AuthorityConstants.ROLE_UDHD_IT
+          ],
+        }, {
+          displayName: 'Finance Audit',
+          iconName: 'monetization_on',
+          route: 'reports/financeAudit',
+          iconType: true,
+          authorities: [
+            AuthorityConstants.ROLE_FLIA,
+            AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+            AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+            AuthorityConstants.ROLE_ULB_CMO,
+            AuthorityConstants.ROLE_SLPMU_ADMIN,
+            AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+            AuthorityConstants.ROLE_SLPMU_AUDIT,
+            AuthorityConstants.ROLE_SLPMU_UC,
+            AuthorityConstants.ROLE_SLPMU_IT,
+            AuthorityConstants.ROLE_UDHD_PSEC,
+            AuthorityConstants.ROLE_UDHD_SEC,
+            AuthorityConstants.ROLE_UDHD_SO,
+            AuthorityConstants.ROLE_UDHD_IT
+          ],
+        }, {
+          displayName: 'UC',
+          iconName: 'approval',
+          iconType: true,
+          route: 'reports/uc',
+          authorities: [
+            AuthorityConstants.ROLE_FLIA,
+            AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+            AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+            AuthorityConstants.ROLE_ULB_CMO,
+            AuthorityConstants.ROLE_SLPMU_ADMIN,
+            AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+            AuthorityConstants.ROLE_SLPMU_AUDIT,
+            AuthorityConstants.ROLE_SLPMU_UC,
+            AuthorityConstants.ROLE_SLPMU_IT,
+            AuthorityConstants.ROLE_UDHD_PSEC,
+            AuthorityConstants.ROLE_UDHD_SEC,
+            AuthorityConstants.ROLE_UDHD_SO,
+            AuthorityConstants.ROLE_UDHD_IT
+          ],
+        }],
+      },
+      {
+        displayName: 'Support',
+        iconName: 'phone',
+        iconType: true,
+        route: 'support',
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [
+          {
+            displayName: 'Assigned Tickets',
+            iconName: 'fa-ticket',
+            iconType: false,
+            route: 'support/support/assigned-tickets',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          }, {
+            displayName: 'Unassigned Tickets',
+            iconName: 'fa-tags',
+            iconType: false,
+            route: 'support/support/unassigned-tickets',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          }, {
+            displayName: 'My Tickets',
+            iconName: 'fa-tag',
+            iconType: false,
+            route: 'support/support/myTickets',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          }],
+      },*/
+      {
+        displayName: 'Settings',
+        iconName: 'settings',
+        iconType: true,
+        route: 'settings',
+        authorities: [
+          AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+        ],
+        children: [
+          {
+            displayName: 'ULB Managemet',
+            iconName: 'map',
+            iconType: true,
+            route: 'settings/settings-home/geography/geography',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+
+          }, {
+            displayName: 'User Management',
+            iconName: 'person',
+            iconType: true,
+            route: 'settings/settings-home/user-mgt/usermgt',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          },/* {
+            displayName: 'User Group Mgt.',
+            iconName: 'groups',
+            iconType: true,
+            route: 'settings/settings-home/user-group/userGrp',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+          AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+          AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+          AuthorityConstants.ROLE_ULB_CMO,
+          AuthorityConstants.ROLE_SLPMU_ADMIN,
+          AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+          AuthorityConstants.ROLE_SLPMU_AUDIT,
+          AuthorityConstants.ROLE_SLPMU_UC,
+          AuthorityConstants.ROLE_SLPMU_IT,
+          AuthorityConstants.ROLE_UDHD_PSEC,
+          AuthorityConstants.ROLE_UDHD_SEC,
+          AuthorityConstants.ROLE_UDHD_SO,
+          AuthorityConstants.ROLE_UDHD_IT
+            ],
+          },*/
+          {
+            displayName: 'My Profile',
+            iconName: 'photo_camera_front',
+            iconType: true,
+            route: 'settings/settings-home/my-profile',
+            authorities: [
+              AuthorityConstants.ROLE_FLIA,
+              AuthorityConstants.ROLE_INTERNAL_AUDITOR,
+              AuthorityConstants.ROLE_ULB_ACCOUNTANT,
+              AuthorityConstants.ROLE_ULB_CMO,
+              AuthorityConstants.ROLE_SLPMU_ADMIN,
+              AuthorityConstants.ROLE_SLPMU_ACCOUNT,
+              AuthorityConstants.ROLE_SLPMU_AUDIT,
+              AuthorityConstants.ROLE_SLPMU_UC,
+              AuthorityConstants.ROLE_SLPMU_IT,
+              AuthorityConstants.ROLE_UDHD_PSEC,
+              AuthorityConstants.ROLE_UDHD_SEC,
+              AuthorityConstants.ROLE_UDHD_SO,
+              AuthorityConstants.ROLE_UDHD_IT
+            ],
+          }
+        ],
+      },
+    ];
+    return this.navItems;
+  }
+}

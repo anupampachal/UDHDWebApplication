@@ -1,0 +1,20 @@
+<a *scsHasAnyAuthority="item.authorities" mat-list-item [ngStyle]="{'padding-left': (depth * 16) + 'px'}" (click)="onItemSelected(item)"
+  [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"
+  class="menu-list-item">
+  <mat-icon class="routeIcon" color="primary" *ngIf="item.iconType">{{item.iconName}}</mat-icon>
+  <span *ngIf="!item.iconType">
+    <mat-icon fontSet="fontawesome" class="fa-lg" color="primary" fontIcon="{{item.iconName}}"></mat-icon>
+  </span>
+
+  <span *ngIf="!(isToggled$|async)">&nbsp;{{item.displayName}}</span>
+  <span fxFlex *ngIf="item.children && item.children.length">
+    <span fxFlex></span>
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+      expand_more
+    </mat-icon>
+  </span>
+</a>
+<div *ngIf="expanded" >
+  <app-sidenav  *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
+  </app-sidenav>
+</div>

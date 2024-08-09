@@ -1,0 +1,42 @@
+<form [formGroup]="budgetaryProvisionAndExpenditureForm">
+  <fieldset class="hm-fieldset col-md-12">
+    <legend class="hm-legend">Budgetary provisions and expenditure for the last three years:</legend>
+    <div>
+      <table border="1" class="table" formArrayName="budgetary">
+        <ng-container *ngFor="let item of budgetaryList;let i = index">
+          <tr>
+            <th> {{item}}</th>
+            <td *ngFor="let data of budgetaryProvision.controls; let j=index;" [formGroupName]="j">
+              <span *ngIf="arrayOfKeys[i]==='id'">
+                <input type="hidden" [formControlName]=arrayOfKeys[i] class="form-control"></span>
+              <span *ngIf="arrayOfKeys[i+1]==='periodOfYear'"> <label style="float:inherit"> F.Y</label>
+                <input type="text" [formControlName]=arrayOfKeys[i+1] class="form-control">
+              </span>
+
+              <span *ngIf="arrayOfKeys[i+1]==='finalOrRevisedData'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetCloseExpenditureAmount(j)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='actualExpenditureData'">
+                <input type="number" [formControlName]=arrayOfKeys[i+1] class="form-control"
+                  (keyup)="onKeyUpSetCloseExpenditureAmount(j)">
+              </span>
+              <span *ngIf="arrayOfKeys[i+1]==='totalSavingData'">
+                <input readonly type="number" [formControlName]=arrayOfKeys[i+1]
+                  value="{{(data.value.finalOrRevisedData -data.value.actualExpenditureData)|currency:'₹ '}}"
+                  class="form-control">
+              </span>
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+      <div style="float: right; margin-right: 24px;">
+        <button class="btn btn-primary" type="button" *ngIf="budgetaryProvisionAndExpenditureForm.disabled"
+          (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+
+        <button (click)="save()" [disabled]="budgetaryProvisionAndExpenditureForm.invalid || isDisabled"
+          class="btn btn-default">Save</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -1,0 +1,38 @@
+<form [formGroup]="municipalAccountCommitteeStatusForm">
+  <fieldset class="hm-fieldset col-md-12 ">
+      <legend class="hm-legend">Status of Municipal Accounts Committee; if meeting is held :</legend>
+      <div class="form-group">
+          <input type="hidden" formControlName="id">
+          <label for="commentDescription">
+          </label><span class="danger">*</span>
+          <textarea class="form-control" name="commentDescription" formControlName="commentDescription"></textarea>
+          <p class="danger">Maximum 10,000 characters. </p>
+      </div>
+      <section class="form-group">
+        <p *ngIf="showFormError" class="danger">{{showFormError}}</p>
+        <label for="upload">Upload File
+        </label>
+        <div style="padding-left: 0">
+            <span style="padding: 0">
+                <input type="file" (change)="onSelected($event)" class="btn btn-default btn-file pull-left" [disabled]="fileUpload">
+            </span>
+            <button mat-button color="primary" [disabled]="!isFile || iconDis" (click)="uploadFile()">
+              <mat-icon>file_upload</mat-icon><span>Upload</span>
+            </button>
+            <button mat-button color="primary" *ngIf="iconDis" (click)="iconDis = false;">Edit File</button>
+        </div>
+
+    </section>
+      <div align="right">
+      <button class="btn btn-primary" type="button" *ngIf="municipalAccountCommitteeStatusForm.disabled" (click)="enableForm()" style="margin-right: 12px;">Edit</button>
+
+          <button type="submit" class="btn btn-primary create-btn"
+              [disabled]="municipalAccountCommitteeStatusForm.invalid" (click)="save()">
+              Save</button>
+
+      </div>
+  </fieldset>
+</form>
+
+
+

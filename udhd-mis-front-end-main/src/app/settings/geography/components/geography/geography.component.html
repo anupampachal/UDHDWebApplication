@@ -1,0 +1,16 @@
+<nav mat-tab-nav-bar ngClass="tabs" class="primary">
+    <!--a  mat-tab-link *ngFor="let tabItem of tabs" [routerLink]="tabItem.route"  routerLinkActive="active-link">
+        <mat-icon *ngIf="tabItem.iconType" class="mr-8">{{tabItem.iconName}}</mat-icon>
+        <mat-icon fontSet="fontawesome" *ngIf="!tabItem.iconType" class="fa-lg" fontIcon="{{tabItem.iconName}}"></mat-icon>
+         &nbsp;{{tabItem.displayName}}
+    </a-->
+    <ng-container *ngFor="let tabItem of tabs">
+        <a  mat-tab-link [routerLink]="tabItem.route" *scsHasAnyAuthority="tabItem.authorities" routerLinkActive="active-link">
+            <mat-icon *ngIf="tabItem.iconType" class="mr-8">{{tabItem.iconName}}</mat-icon>
+            <mat-icon fontSet="fontawesome" *ngIf="!tabItem.iconType" class="fa-lg" fontIcon="{{tabItem.iconName}}"></mat-icon>
+             &nbsp;{{tabItem.displayName}}
+        </a>
+    </ng-container>
+    
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,45 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.container-fluid{
+  min-height: 100vh;
+}
+mat-sidenav-container{
+  min-height: 100vh;
+}
+
+mat-sidenav{
+  max-width: 300px;
+}
+/*
+app-top-toolbar {
+  height: 64px;
+  position: fixed;
+  z-index: 100;
+  width: 100% !important;
+}
+*/
+
+.header{
+  /* margin-left: 12%; */
+  height: 40px;
+ width: 468px;
+}
+
+.corosoul{
+  /* margin-left: 15%; */
+  height: 150px;
+ background-color: darkgrey;
+}
+@media screen and (max-width: 800px) {
+  .left, .main, .right {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+}

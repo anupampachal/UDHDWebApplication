@@ -1,0 +1,42 @@
+<div class="container-fluid fluid-component">
+  <mat-card class="child-card-material mat-card-header-cls">
+    <div class="row">
+      <div class="col-md">
+        <app-breadcrumb [routeArr]="routeArray"></app-breadcrumb>
+      </div>
+      <div class="col-md">
+        <div class="example-button-container">
+          <button mat-stroked-button [routerLink]="'../create'" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="exportTableToPdf()" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-stroked-button (click)="updatedExportToExcel()" color="primary" class="child-route-button"
+            aria-label="Example icon button with a plus one icon">
+            <mat-icon>border_outer</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  </div>
+
+
+  <div class="row" >
+    <div class="col-md">
+      <mat-card class="child-card-material">
+        <app-dynamic-mat-table *ngIf="paginationTableData$ | async as page" [paginationTableData]="page"
+          (paginatorEvent)="changeDataForPagination($event)" (selectedToView)="showView($event)">
+        </app-dynamic-mat-table>
+      </mat-card>
+    </div>
+  </div>
+
